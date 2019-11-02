@@ -14,7 +14,12 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
-  }
+  },
+  { path: 'slider', loadChildren: './slider/slider.module#SliderPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'registration', loadChildren: './registration/registration.module#RegistrationPageModule' },
+  { path: 'searchevent', loadChildren: './searchevent/searchevent.module#SearcheventPageModule' },
+  { path: 'searchresult', loadChildren: './searchresult/searchresult.module#SearchresultPageModule' }
 ];
 
 @NgModule({

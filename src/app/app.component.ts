@@ -17,9 +17,64 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
+      title: 'All Events',
       url: '/list',
-      icon: 'list'
+      icon: 'apps'
+    },
+    {
+      title: 'All Training',
+      url: '/list',
+      icon: 'walk'
+    },
+    {
+      title: 'Joined Events/Trainings',
+      url: '/list',
+      icon: 'contract'
+    },
+    {
+      title: 'My Events/Trainings',
+      url: '/home',
+      icon: 'archive'
+    },
+    {
+      title: 'Add Event/Training',
+      url: '/list',
+      icon: 'add'
+    },
+    {
+      title: 'View My Friends',
+      url: '/list',
+      icon: 'contacts'
+    },
+    {
+      title: 'Add Friends',
+      url: '/list',
+      icon: 'person-add'
+    },
+    {
+      title: 'All Users',
+      url: '/home',
+      icon: 'contact'
+    },
+    {
+      title: 'Account Settings',
+      url: '/list',
+      icon: 'settings'
+    },
+    {
+      title: 'Notifications',
+      url: '/list',
+      icon: 'notifications-outline'
+    },
+    {
+      title: 'Tribes',
+      url: '/list',
+      icon: 'briefcase'
+    },
+    {
+      title: 'Support',
+      url: '/list',
+      icon: 'help-circle-outline'
     }
   ];
 
