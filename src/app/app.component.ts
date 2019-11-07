@@ -18,37 +18,37 @@ export class AppComponent {
     },
     {
       title: 'All Events',
-      url: '/list',
+      url: '/home',
       icon: 'apps'
     },
     {
       title: 'All Training',
-      url: '/list',
+      url: '/all-training',
       icon: 'walk'
     },
     {
       title: 'Joined Events/Trainings',
-      url: '/list',
+      url: '/joinedevents',
       icon: 'contract'
     },
     {
       title: 'My Events/Trainings',
-      url: '/home',
+      url: '/myevents',
       icon: 'archive'
     },
     {
       title: 'Add Event/Training',
-      url: '/list',
+      url: '/addevent',
       icon: 'add'
     },
     {
       title: 'View My Friends',
-      url: '/list',
+      url: '/viewfriends',
       icon: 'contacts'
     },
     {
       title: 'Add Friends',
-      url: '/list',
+      url: '/addfriends',
       icon: 'person-add'
     },
     {

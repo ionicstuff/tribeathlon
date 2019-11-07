@@ -1,22 +1,47 @@
 <ion-content>
   <form #form="ngForm" (ngSubmit)="login(form)">
     <ion-grid>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div text-center>
-            <img src="assets/images/logo.jpg">
-          </div>
-          <div padding>
-            <ion-item>
-              <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
-            </ion-item>
-          </div>
-          <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
-          </div>
+      <ion-row color="primary" class="ion-justify-content-center">
+        <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="logo">
+                    <a href="#!">
+                        <img class="img-responsive" src="assets/images/logo.jpg" alt="logo" /></a>
+                </div>
+                <div class="">
+                <form class="register-box">
+                    <div class="form-group">
+                        <label>EMAIL</label>
+                        <input type="text" class="form-control" placeholder="example@example.com" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label>PASSWORD</label>
+                        <input type="password" class="form-control" placeholder="***********" name="last_name">
+                    </div>
+                    <div class="forgotpass"><a href="#!">Forgot Password?</a></div>
+                    <ion-button expand="block">Sign In</ion-button>
+                </form>
+
+                <div class="or">
+                    <abbr>Or</abbr>
+                    <span></span>
+                </div>
+
+                <div class="facbook-button">
+                    <a href="#!">
+                        <img src="assets/images/facbookicon.jpg" />
+                        Continue with facebook</a>
+                </div>
+                <div class="google-button">
+                    <a href="#!">
+                        <img src="assets/images/googleicon.jpg" />
+                        Continue with google</a>
+                </div>
+                
+                <div class="al-account"><a href="#!">Don't have an account?</a></div>
+                </div>
+
+            </div>
         </ion-col>
       </ion-row>
     </ion-grid>
