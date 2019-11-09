@@ -76,6 +76,11 @@ export class AppComponent {
       url: '/list',
       icon: 'help-circle-outline'
     }
+    ,{
+      title: 'Register',
+      url: '/registration',
+      icon: 'person'
+    }
   ];
 
   constructor(

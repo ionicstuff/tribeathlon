@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { StorageService } from './storage.service';
 import { AuthConstants } from '../config/auth-constants';
+import { promise } from 'protractor';
 
 @Injectable({
     providedIn: 'root'
@@ -15,13 +16,13 @@ export class AuthService {
         private router: Router
     ) { }
 
-    login(postData: any): Observable<any> {
+    login(postData: any) {
         //console.log(postData);
         return this.httpService.post('login', postData);
     }
 
-    signup(postData: any): Observable<any> {
-        return this.httpService.post('signup', postData);
+    signup(postData: any){
+        return this.httpService.post('register', postData);
     }
 
     logout() {

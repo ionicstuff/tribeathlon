@@ -38,22 +38,28 @@ export class LoginPage implements OnInit {
 
   loginAction() {
     if (this.validateInputs()) {
-      this.authServices.login(this.postData).subscribe(
+      
+      this.authServices.login(this.postData).then(
         (res: any) => {
-          if (res.userData) {
+          console.log(res)
+          if (typeof res.data == "string") {
+            res.data = JSON.parse(res.data);
+          }
+          if (res.data.success=="1") {
             // Storing the User data.
             this.storageSevice.store(AuthConstants.AUTH, res.userData);
             this.router.navigate(['home']);
           } else {
-            console.log('incorrect password.');
+            alert('incorrect password.');
           }
         },
         (error: any) => {
-          console.log('Network Issue.');
+          console.error(error);
+          alert('Network Issue.');
         }
       );
     } else {
-      console.log('Please enter email/username or password.');
+      alert('Please enter email/username or password.');
     }
   }
 
