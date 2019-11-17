@@ -38,6 +38,7 @@ export class LoginPage implements OnInit {
 
   loginAction() {
     if (this.validateInputs()) {
+<<<<<<< HEAD
 
       this.authServices.login(this.postData).then(
         (res: any) => {
@@ -46,6 +47,16 @@ export class LoginPage implements OnInit {
             res.data = JSON.parse(res.data);
           }
           if (res.data.success === '1') {
+=======
+      
+      this.authServices.login(this.postData).then(
+        (res: any) => {
+          console.log(res)
+          if (typeof res.data == "string") {
+            res.data = JSON.parse(res.data);
+          }
+          if (res.data.success=="1") {
+>>>>>>> 480c295f67330c100e00bbc9c57745dc98035af6
             // Storing the User data.
             AuthConstants.authenticateData = res;
             AuthConstants.authenticateData['isAuth'] = true;

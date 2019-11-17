@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 480c295f67330c100e00bbc9c57745dc98035af6
 
 @NgModule({
   declarations: [AppComponent],

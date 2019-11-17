@@ -80,7 +80,15 @@ export class AppComponent {
       url: '/list',
       icon: 'help-circle-outline'
     }
+<<<<<<< HEAD
     
+=======
+    ,{
+      title: 'Register',
+      url: '/registration',
+      icon: 'person'
+    }
+>>>>>>> 480c295f67330c100e00bbc9c57745dc98035af6
   ];
   public LogTitle = "Login";
   public isAuth = false;
