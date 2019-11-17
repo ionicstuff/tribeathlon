@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { StorageService } from './services/storage.service';
+import { AuthConstants } from './config/auth-constants';
+import { Router } from '@angular/router';
+import { AuthService } from './services/auth.service';
+
 
 @Component({
   selector: 'app-root',
@@ -76,16 +80,45 @@ export class AppComponent {
       url: '/list',
       icon: 'help-circle-outline'
     }
+    
   ];
-
+  public LogTitle = "Login";
+  public isAuth = false;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private storageSevice: StorageService,
+    private router: Router,
+    private authService: AuthService
   ) {
-    this.initializeApp();
-  }
 
+    this.initializeApp();
+
+    this.storageSevice.get(AuthConstants.AUTH).then(res => {
+      if (typeof res === 'string') {
+        res = JSON.parse(res);
+      }
+      if (typeof res.token !== 'undefined') {
+        AuthConstants.authenticateData = res;
+        AuthConstants.authenticateData['isAuth'] = true;
+        this.LogTitle = "Logout";
+        this.isAuth = true;
+
+      } else {
+        AuthConstants.authenticateData['isAuth'] = false;
+        this.router.navigateByUrl('/login');
+        this.isAuth = false;
+      }
+    });
+  }
+  doLogoutService(isLogin) {
+    if (isLogin) {
+      this.authService.logout();
+    } else {
+      this.router.navigateByUrl('/login');
+    }
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

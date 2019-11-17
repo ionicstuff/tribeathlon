@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HTTP } from '@ionic-native/http/ngx';
 import { environment } from 'src/environments/environment';
+import { AuthConstants } from '../config/auth-constants';
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 
 
 
@@ -9,15 +11,24 @@ import { environment } from 'src/environments/environment';
 })
 export class HttpService {
 
-  constructor(private http: HttpClient) { }
+  public isAuthnicated: boolean;
+  constructor(private http: HTTP) {
+  }
 
-  post(serviceName: string, data: any) {  
-    
+  post(serviceName: string, data: any) {
     console.log(data);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Client-Service': 'frontend-client',
+      'Auth-Key': 'restapi2-2019'
+    };
+    if (serviceName === 'event' && typeof AuthConstants.authenticateData['token'] !== "undefined") {
+      headers['UserID'] = AuthConstants.authenticateData['id'];
+      headers['AuthorizationToken'] = AuthConstants.authenticateData['token'];
 
-    const headers = new HttpHeaders();    
-    const options = { headers: headers, withCredintials: false };
-    const url = environment.apiUrl + serviceName;   
-    return this.http.post(url, data, options);  
+    }
+    this.http.setDataSerializer('urlencoded');
+    const url = environment.apiUrl + serviceName;
+    return this.http.post(url, data, headers);
   }
 }

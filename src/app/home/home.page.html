@@ -1,62 +1,64 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      All Events
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            All Events
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="cycling-runners">
-        <a href="#!"><img class="img-responsive" src="assets/images/cycling-runners.jpg" alt="" /></a>
-        <div class="Race">
-            <span>Race 20km</span> <a href="#!">View</a>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div *ngFor="let event of events">
+            <div class="cycling-runners">
+                <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" /></a>
+                <div class="Race">
+                    <span>{{event.Title}}</span> <a href="#!">View</a>
+                </div>
+            </div>
+            <div class="shadow-box">
+                <ion-row>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> {{event.Date | date: 'dd,MMMM yyyy'}}</a></div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"><i class="far fa-clock"></i> {{event.StartTime}}</a></div>
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar">
+                                <a href="#!">
+                                    <i class="fas fa-map-marker-alt"></i> {{event.Location}}
+                                </a>
+                            </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <div class="clearfix"></div>
+                <hr />
+                <ion-row>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!">2k joined already!</a></div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"> 1k interested</a></div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <div class="clearfix"></div>
+            </div>
         </div>
     </div>
-    <div class="shadow-box">
-      <ion-row>
-        <ion-col>
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> 05, March 2019</a></div>
-         </div>
-        </ion-col>
-        <ion-col>
-          <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="calendar"><a href="#!"><i class="far fa-clock"></i> 07:00 PM</a></div>
-        </div>
-        </ion-col>
-       
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-              <div class="calendar">
-                <a href="#!">
-                  <i class="fas fa-map-marker-alt"></i> 9 Street, Avon, UK
-                </a>
-              </div>
-          </div>
-          </ion-col>
-        </ion-row>
-        <div class="clearfix"></div>
-        <hr />
-        <ion-row>
-          <ion-col>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-              <div class="calendar"><a href="#!">2k joined already!</a></div>
-           </div>
-          </ion-col>
-          <ion-col>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-              <div class="calendar"><a href="#!"> 1k interested</a></div>
-          </div>
-          </ion-col>
-        </ion-row>
-        <div class="clearfix"></div>
-    </div>
-</div> 
 </ion-content>

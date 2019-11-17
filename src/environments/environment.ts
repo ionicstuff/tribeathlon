@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl:'https://api2.tribeathlon.co.uk/auth/'
+  apiUrl:'https://api2.tribeathlon.co.uk/'
 };
 
 /*

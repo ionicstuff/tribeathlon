@@ -1,9 +1,88 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>registration</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+    <ion-grid>
+        <ion-row color="primary" class="ion-justify-content-center">
+            <ion-col class="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo">
+                        <a href="#!">
+                            <img class="img-responsive" src="assets/images/logo.jpg" alt="logo" /></a>
+                    </div>
 
+                    <div class="">
+                        <div class="facbook-button">
+                            <a href="#!">
+                                <img src="assets/images/facbookicon.jpg" /> Continue with facebook</a>
+                        </div>
+                        <div class="google-button">
+                            <a href="#!">
+                                <img src="assets/images/googleicon.jpg" /> Continue with google</a>
+                        </div>
+                        <div class="or">
+                            <abbr>Or</abbr>
+                            <span></span>
+                        </div>
+
+                        <form class="register-box">
+                            <div class="form-group">
+                                <label>FULL NAME</label>
+                                <input type="text" class="form-control" [(ngModel)]='postData.fullname' placeholder="John Doe" name="first_name">
+                            </div>
+                            <div class="form-group">
+                                <label>EMAIL</label>
+                                <input type="text" class="form-control" [(ngModel)]='postData.email' placeholder="example@example.com" name="last_name">
+                            </div>
+                            <div class="form-group">
+                                <label>PASSWORD</label>
+                                <input type="password" class="form-control" placeholder="***********" [(ngModel)]='postData.password' name="last_name">
+                            </div>
+                            <ion-button expand="block" (click)='registerAction()'>Sign Up</ion-button>
+
+                            <div class="al-account" [routerLink]="['/login']"><a href="#!">Already have an account?</a></div>
+                        </form>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <!-- <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="logo">
+                <a href="#!">
+                    <img class="img-responsive" src="assets/images/logo.jpg" alt="logo" /></a>
+            </div>
+
+            <div class="">
+                <div class="facbook-button">
+                    <a href="#!">
+                        <img src="images/facbookicon.jpg" /> Continue with facebook</a>
+                </div>
+                <div class="google-button">
+                    <a href="#!">
+                        <img src="images/googleicon.jpg" /> Continue with google</a>
+                </div>
+                <div class="or">
+                    <abbr>Or</abbr>
+                    <span></span>
+                </div>
+
+                <form class="register-box">
+                    <div class="form-group">
+                        <label>FULL NAME</label>
+                        <input type="text" class="form-control" [(ngModel)]='postData.full_name' placeholder="John Doe" name="first_name">
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL</label>
+                        <input type="text" class="form-control" [(ngModel)]='postData.email' placeholder="example@example.com" name="last_name">
+                    </div>
+                    <div class="form-group">
+                        <label>PASSWORD</label>
+                        <input type="password" class="form-control" placeholder="***********" [(ngModel)]='postData.password' name="last_name">
+                    </div>
+                    <button type="submit" class="btn btn-defaults"><a href="login.html">Create an Account</a></button>
+                    <div class="al-account"><a href="#!">Already have an account?</a></div>
+                </form>
+            </div>
+
+        </div>
+    </div> -->
 </ion-content>

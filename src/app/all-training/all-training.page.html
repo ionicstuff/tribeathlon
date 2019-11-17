@@ -11,22 +11,23 @@
 
 <ion-content>
   <div class="col-md-12 col-sm-12 col-xs-12">
+    <div *ngFor="let t of trainings">
     <div class="cycling-runners">
-        <a href="#!"><img class="img-responsive" src="assets/images/cycling-runners.jpg" alt="" /></a>
+        <a href="#!"><img class="img-responsive" [src]="t.Image" alt="" /></a>
         <div class="Race">
-            <span>Race 20km</span> <a href="#!">View</a>
+            <span>{{t.Title}}</span> <a href="#!">View</a>
         </div>
     </div>
     <div class="shadow-box">
       <ion-row>
         <ion-col>
           <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> 05, March 2019</a></div>
+            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> {{t.Date | date: 'dd,MMMM yyyy'}}</a></div>
          </div>
         </ion-col>
         <ion-col>
           <div class="col-md-6 col-sm-6 col-xs-6">
-            <div class="calendar"><a href="#!"><i class="far fa-clock"></i> 07:00 PM</a></div>
+            <div class="calendar"><a href="#!"><i class="far fa-clock"></i> {{t.EndTime}}</a></div>
         </div>
         </ion-col>
        
@@ -36,7 +37,7 @@
             <div class="col-md-6 col-sm-6 col-xs-6">
               <div class="calendar">
                 <a href="#!">
-                  <i class="fas fa-map-marker-alt"></i> 9 Street, Avon, UK
+                  <i class="fas fa-map-marker-alt"></i>{{t.Location}}
                 </a>
               </div>
           </div>
@@ -58,5 +59,6 @@
         </ion-row>
         <div class="clearfix"></div>
     </div>
+  </div>
 </div> 
 </ion-content>
