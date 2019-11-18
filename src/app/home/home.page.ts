@@ -3,26 +3,31 @@ import { AuthConstants } from './../config/auth-constants';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../services/data-service.service';
-
+import { OnDestroy, OnInit} from '@angular/core';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   public events = [];
   constructor(
     public router: Router,
     public dataService: DataServiceService,
     public platform: Platform
   ) {
-    setTimeout(() => {
-      this.getevents();
-
-    }, 1000);
+    
   }
+ngOnInit(){
+  
+}
+  ionViewWillEnter(){
+  console.log("inithome");
 
-
+  this.platform.ready().then(() => {
+    this.getevents();
+  });
+}
 
   public getevents() {
     if (typeof AuthConstants.authenticateData['token'] === "undefined") {

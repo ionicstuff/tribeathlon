@@ -19,7 +19,8 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private authServices: AuthService,
-    private storageSevice: StorageService
+    private storageSevice: StorageService,
+
   ) { }
 
   ngOnInit() {
@@ -47,11 +48,11 @@ export class LoginPage implements OnInit {
           }
           if (res.data.success === '1') {
             // Storing the User data.
-            AuthConstants.authenticateData = res;
+            AuthConstants.authenticateData = res.data.data;
             AuthConstants.authenticateData['isAuth'] = true;
             this.storageSevice.store(AuthConstants.AUTH, JSON.stringify(res.data.data));
 
-            this.router.navigateByUrl('/home');
+            this.router.navigate(['home'], { skipLocationChange: true});
           } else {
             alert('incorrect password.');
           }
