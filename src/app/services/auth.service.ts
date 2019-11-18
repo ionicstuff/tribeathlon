@@ -25,11 +25,7 @@ export class AuthService {
     }
 
     signup(postData: any){
-<<<<<<< HEAD
         return this.httpService.post('auth/register', postData);
-=======
-        return this.httpService.post('register', postData);
->>>>>>> 480c295f67330c100e00bbc9c57745dc98035af6
     }
 
     logout() {
