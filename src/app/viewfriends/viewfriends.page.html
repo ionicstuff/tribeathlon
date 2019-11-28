@@ -1,63 +1,22 @@
 <ion-header>
     <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        View Friends
-      </ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            View Friends
+        </ion-title>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
 
 <ion-content>
-<ion-row>
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="John-Deo">
-            <a href="#!"><img src="assets/images/John-Deo.png" alt="" /></a>
-            <h5><a href="#!">John Deo</a></h5>
+    <ion-row>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="John-Deo" *ngFor="let friend of friends">
+                <img [src]="friend.UserImage" alt="" />
+                <h5>{{friend.UserName}}</h5>
+            </div>
         </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="John-Deo">
-            <a href="#!"><img src="assets/images/John-Deo.png" alt="" /></a>
-            <h5><a href="#!">John Deo</a></h5>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="John-Deo">
-            <a href="#!"><img src="assets/images/John-Deo.png" alt="" /></a>
-            <h5><a href="#!">John Deo</a></h5>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="John-Deo">
-            <a href="#!"><img src="assets/images/John-Deo.png" alt="" /></a>
-            <h5><a href="#!">John Deo</a></h5>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="John-Deo">
-            <a href="#!"><img src="assets/images/John-Deo.png" alt="" /></a>
-            <h5><a href="#!">John Deo</a></h5>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="John-Deo">
-            <a href="#!"><img src="assets/images/John-Deo.png" alt="" /></a>
-            <h5><a href="#!">John Deo</a></h5>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="John-Deo">
-            <a href="#!"><img src="assets/images/John-Deo.png" alt="" /></a>
-            <h5><a href="#!">John Deo</a></h5>
-        </div>
-    </div>
-    <div class="col-md-6 col-sm-6 col-xs-6">
-        <div class="John-Deo">
-            <a href="#!"><img src="assets/images/John-Deo.png" alt="" /></a>
-            <h5><a href="#!">John Deo</a></h5>
-        </div>
-    </div>
-</ion-row>
+
+    </ion-row>
 </ion-content>

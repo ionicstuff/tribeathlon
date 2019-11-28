@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-slider',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SliderPage implements OnInit {
 
-  constructor() { }
+  constructor(public router:Router) { }
 
   ngOnInit() {
   }
+  complete(){
+    localStorage.slideInto="done";
+    this.router.navigateByUrl('/landing');
 
+  }
 }

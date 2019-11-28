@@ -1,3 +1,5 @@
+import { UiserviceService } from './../services/uiservice.service';
+import { AppComponent } from './../app.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -20,8 +22,14 @@ export class LoginPage implements OnInit {
     private router: Router,
     private authServices: AuthService,
     private storageSevice: StorageService,
-
-  ) { }
+    private app: AppComponent,
+    public Ui: UiserviceService
+  ) {
+    if ("forgotPass" in localStorage) {
+      this.postData.password = localStorage.forgotPass;
+      delete localStorage.forgetPass;
+    }
+  }
 
   ngOnInit() {
   }
@@ -51,15 +59,20 @@ export class LoginPage implements OnInit {
             AuthConstants.authenticateData = res.data.data;
             AuthConstants.authenticateData['isAuth'] = true;
             this.storageSevice.store(AuthConstants.AUTH, JSON.stringify(res.data.data));
-
-            this.router.navigate(['home'], { skipLocationChange: true});
+            this.app.isAuth = true;
+            this.app.userImage = res.data.data.Image;
+            this.app.username = res.data.data.Name;
+            this.router.navigate(['home'], { skipLocationChange: true });
           } else {
             alert('incorrect password.');
+            this.Ui.showAlert("incorrect password", 0);
           }
         },
         (error: any) => {
           console.error(error);
           alert('Network Issue.');
+          this.app.isAuth = false;
+
         }
       );
     } else {

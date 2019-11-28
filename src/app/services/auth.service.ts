@@ -27,6 +27,9 @@ export class AuthService {
     signup(postData: any){
         return this.httpService.post('auth/register', postData);
     }
+    forgot(postData: any){
+        return this.httpService.post('auth/forgotpassword', postData);
+    }
 
     logout() {
         this.storageService.removeStorageItem(AuthConstants.AUTH).then(res => {

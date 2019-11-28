@@ -1,91 +1,233 @@
 <ion-header>
     <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        Add Events
-      </ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Add Events
+        </ion-title>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
 
 <ion-content>
-<ion-row>
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="middle-box">
+    <ion-row>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="middle-box">
 
-            <div class="stap_1">
-                <ul class="stap_1_box">
-                    <li class="active"><a href="create-new-event.html">1</a></li>
-                    <li><a href="create-new-event2.html">2</a></li>
-                    <li><a href="create-new-event3.html">3</a></li>
-                </ul>
-                <div class="borders"></div>
-            </div>
+                <div class="stap_1">
+                    <ul class="stap_1_box" style="position: relative;
+                    z-index: 1;">
+                        <li [class]="step==1?'active':''" (click)="step=1">1</li>
+                        <li [class]="step==2?'active':''" (click)="step=2">2</li>
+                        <li [class]="step==3?'active':''" (click)="step=3">3</li>
 
-            <form class="register-box">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Session Name" name="first_name">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Location" name="first_name">
+                    </ul>
+                    <div class="borders" style="z-index: 0;"></div>
                 </div>
 
-                <select class="mdb-select md-form colorful-select dropdown-primary2">
-                    <option value="1">Select Region</option>
-                    <option value="2">Select Region</option>
-                    <option value="3">Select Region</option>
-                    <option value="4">Select Region</option>
-                </select>
-                <select class="mdb-select md-form colorful-select dropdown-primary2">
-                    <option value="1">Discipline</option>
-                    <option value="2">Discipline</option>
-                    <option value="3">Discipline</option>
-                    <option value="4">Discipline</option>
-                </select>
-                <select class="mdb-select md-form colorful-select dropdown-primary2">
-                    <option value="1">Event Type</option>
-                    <option value="2">Event Type</option>
-                    <option value="3">Event Type</option>
-                    <option value="4">Event Type</option>
-                </select>
-                <select class="mdb-select md-form colorful-select dropdown-primary2">
-                    <option value="1">Distance</option>
-                    <option value="2">Distance</option>
-                    <option value="3">Distance</option>
-                    <option value="4">Distance</option>
-                </select>
+                <div class="register-box">
+                    <div *ngIf="step==1">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Session Name*" [(ngModel)]="commonData.Title" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Description*" [(ngModel)]="commonData.Description" [ngModelOptions]="{standalone: true}">
+                        </div>
 
-                <div class="clearder">
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' class="form-control" placeholder="Start Date" />
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        <!-- <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Location id" name="first_name">
+                    </div> -->
+                        <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Event Types" [(ngModel)]="commonData.EventType" [ngModelOptions]="{standalone: true}" (change)=" getParentTypes(commonData.EventType) ">
+                            <option value="-1" selected>Please Select Event type</option>
+                            <option *ngFor="let eventType of eventTypes " value="{{eventType.value}}">{{eventType.name}}
+                            </option>
+                        </select>
+                        <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Parent Category" [(ngModel)]="commonData.ParentTypeID" [ngModelOptions]="{standalone: true}" (change)=" getchildTypes(commonData.ParentTypeID) ">
+                            <option value="-1" selected>Please Select Parent Category</option>
+                            <option *ngFor="let parentType of parentTypes " value="{{parentType.TypeID}}">
+                                {{parentType.TypeName}}</option>
+
+                        </select>
+                        <select class="mdb-select md-form colorful-select dropdown-primary2 " placeholder="Child Category" [(ngModel)]="commonData.ChildTypeID" [ngModelOptions]="{standalone: true}">
+                            <option value="-1" selected>Please Select child Category</option>
+
+                            <option *ngFor="let childType of childTypes " value="{{childType.TypeID}}">
+                                {{childType.TypeName}}</option>
+
+                        </select>
+                        <select class="mdb-select md-form colorful-select dropdown-primary2 " placeholder="Region*" [(ngModel)]="commonData.RegionID" [ngModelOptions]="{standalone: true}">
+                            <option value="-1" selected>Please Select region</option>
+
+                            <option *ngFor="let region of regions " value="{{region.TypeID}}">
+                                {{region.TypeName}}</option>
+
+                        </select>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Location*" [(ngModel)]="commonData.Location" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <ion-button expand="block" color="orange" (click)="verify(1)">Next</ion-button>
+                    </div>
+                    <div *ngIf="step==2">
+                        <div class="form-group ">
+                            <input type="text " class="form-control " placeholder="Distance* " [(ngModel)]="commonData.Distance" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="clearder ">
+                            <div class="form-group ">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='date' class="form-control " placeholder="Start Date " [(ngModel)]="commonData.StartDate" [ngModelOptions]="{standalone: true}" />
+                                    <span class="input-group-addon "><span class="glyphicon glyphicon-calendar "></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='time' class="form-control " placeholder="Start Time * " [(ngModel)]="commonData.StartTime" (change)="calcTime()" [ngModelOptions]="{standalone: true}" />
+                                <span class="input-group-addon ">
+                                    <span class="glyphicon glyphicon-time "></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='time' class="form-control " placeholder="End Time *" [(ngModel)]="commonData.EndTime" (change)="calcTime()" [ngModelOptions]="{standalone: true}" />
+                                <span class="input-group-addon ">
+                                    <span class="glyphicon glyphicon-time "></span>
+                                </span>
+                            </div>
+                        </div>
+                        <select class="mdb-select md-form colorful-select dropdown-primary2 " [(ngModel)]="commonData.Visibility" [ngModelOptions]="{standalone: true}">
+                            <option value="O"> Public</option>
+                            <option value="P"> Private</option>
+
+                        </select>
+                        <div class="upload_img">
+                            <label for="file-input">
+                                            <img [src]="MapImg" alt="" width="120" height="120" (click)="selectPhoto('Map')" />
+                                            <h4>Upload Map Image</h4>
+                                        </label>
+
+                        </div>
+                        <ion-button expand="block" color="orange" (click)="verify(2)">Next</ion-button>
+
+
+                    </div>
+                    <div *ngIf="step==3">
+                        <div class="upload_img">
+                            <label for="file-input">
+                                        <img [src]="UrlImg" alt="" width="120" height="120" (click)="selectPhoto('banner')" />
+                                        <h4>Upload Banner Image</h4>
+                                    </label>
+
+                        </div>
+                        <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Invitation to* " [(ngModel)]="commonData.InvitationType" [ngModelOptions]="{standalone: true}" (change)="selectinviteData(commonData.InvitationType)">
+                            <option value="-1">Invitation to </option>
+                            <option value="F">Friends </option>
+                            <option value="T">Tribes </option>
+                        </select>
+                        <div *ngIf="commonData.EventType=='E'">
+                            <div class="form-group ">
+                                <input type="text " class="form-control " placeholder="Total Distance (Meters)* " [(ngModel)]="eventData.TotalDistance" [ngModelOptions]="{standalone: true}">
+                            </div>
+
+                            <div class="form-group ">
+                                <input type="text " class="form-control " placeholder="Duration* " [(ngModel)]="eventData.Duration" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <div class="form-group ">
+
+                                <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Competitor Type*  " *ngIf="commonData.ParentTypeID ==='1' || commonData.ParentTypeID ==='2'" [(ngModel)]="eventData.CompetitorType" [ngModelOptions]="{standalone: true}">
+                                    <option value="">-Select Competitor Type-</option>
+                                    <option value="Amatuer">Amatuer</option>
+                                    <option value="Professional">Professional</option>
+                                    <option value="Family Friendly">Family Friendly</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+
+                                <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Ride type*   " *ngIf="commonData.ParentTypeID ==='2'" [(ngModel)]="eventData.RideType" [ngModelOptions]="{standalone: true}">
+                                    <option value="">-select-</option>
+                                    <option value="Beginner or Family Ride">Beginner or Family Ride</option>
+                                    <option value="Campaigning Event">Campaigning Event</option>
+                                    <option value="Road">Road</option>
+                                    <option value="Mixed Road">Mixed Road</option>
+                                    <option value="Off-road">Off-road</option>
+                                    <option value="Skill session">Skill session</option>
+                                    <option value="Women only?">Women only?</option>
+                                    <option value="Kids Only">Kids Only</option>
+                                    <option value="Mens Only">Mens Only</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+
+
+                                <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Wet suit*  " *ngIf="commonData.ParentTypeID ==3" [(ngModel)]="eventData.Wetsuit" [ngModelOptions]="{standalone: true}">
+                                    <option value="">-select-</option>
+                                    <option value="Compulsory">Compulsory</option>
+                                    <option value="Optional">Optional</option>
+                                    <option value="Prohibited">Prohibited</option>
+                                    <option value="Temperature Dependant">Temperature Dependant</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div *ngIf="commonData.EventType=='T'">
+                            <div class="form-group ">
+                                <input type="text " class="form-control " placeholder="Approx Speed (Time Per 100 Meters)* " [(ngModel)]="trainingData.Speed" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="FoodStop* " [(ngModel)]="trainingData.FoodStop" [ngModelOptions]="{standalone: true}">
+                                <option value="Y">Yes </option>
+                                <option value="N">NO </option>
+                            </select>
+                            <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="CanICome* " [(ngModel)]="trainingData.CanICome" [ngModelOptions]="{standalone: true}">
+                                <option value="Y">Yes </option>
+                                <option value="N">NO </option>
+                                <option value="R">REQUEST </option>
+                            </select>
+
+                        </div>
+                        <ion-button expand="block" color="orange" (click)="verify(3)">Add event
+                        </ion-button>
+                    </div>
+                    <!-- <div *ngIf="step==4">
+                        <img [src]="UrlImg" (click)="selectPhoto()" />
+                        <ion-button expand="block" shape="round" fill="outline" (click)="uploadImage()">upload by file</ion-button>
+                        <ion-button expand="block" shape="round" fill="outline" (click)="upload()">upload</ion-button>
+
+                    </div> -->
+
+                    <!--    
+                    <div class="clearder ">
+                        <div class="form-group ">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control " placeholder="Start Date " />
+                                <span class="input-group-addon "><span class="glyphicon glyphicon-calendar "></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <div class='input-group date' id='datetimepicker3'>
+                            <input type='text' class="form-control " placeholder="Start Time " />
+                            <span class="input-group-addon ">
+                                <span class="glyphicon glyphicon-time "></span>
                             </span>
                         </div>
                     </div>
+                    <div class="form-group ">
+                        <div class='input-group date' id='datetimepicker3'>
+                            <input type='text' class="form-control " placeholder="End Time " />
+                            <span class="input-group-addon ">
+                                <span class="glyphicon glyphicon-time "></span>
+                            </span>
+                        </div>
+                    </div> -->
+                    <!-- <button type="submit" class="btn btn-defaults "><a href="create-new-event2.html ">Next</a></button> -->
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class='input-group date' id='datetimepicker3'>
-                        <input type='text' class="form-control" placeholder="Start Time" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-time"></span>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class='input-group date' id='datetimepicker3'>
-                        <input type='text' class="form-control" placeholder="End Time" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-time"></span>
-                        </span>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-defaults"><a href="create-new-event2.html">Next</a></button>
-            </form>
         </div>
-
-    </div>
-</ion-row>
+    </ion-row>
 </ion-content>

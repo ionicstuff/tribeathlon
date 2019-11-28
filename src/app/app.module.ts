@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,9 +26,9 @@ import { HTTP } from '@ionic-native/http/ngx';
   ],
   providers: [
     StatusBar,
-    SplashScreen,HTTP,
+    SplashScreen, HTTP, ImagePicker, WebView, AndroidPermissions,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

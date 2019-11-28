@@ -1,0 +1,99 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Events
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div>
+            <div class="cycling-runners">
+                <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" /></a>
+                <div class="Race">
+                    <span>{{event.Title}}</span> <b (click)="joinEvent('J')">Join</b> <b (click)="joinEvent('I')">INRESTED</b>
+
+                </div>
+            </div>
+            <div class="shadow-box">
+                <ion-row>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> {{event.Date | date: 'dd,MMMM yyyy'}}</a></div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"><i class="far fa-clock"></i> {{event.StartTime}}</a></div>
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar">
+                                <a href="#!">
+                                    <i class="fas fa-map-marker-alt"></i> {{event.Location}}
+                                </a>
+                            </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <div class="clearfix"></div>
+                <hr />
+                <ion-row>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!">{{event.TotalJoined}} joined already!</a></div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"> {{event.TotalInterested}} interested</a></div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar">
+                                <div class="Race">
+                                    <b (click)="joinEvent('J')">Join</b>
+
+                                </div>
+                            </div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar">
+                                <div class="Race">
+
+                                    <b (click)="joinEvent('I')">INRESTED</b>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <h4>
+            Intrested
+        </h4>
+        <ion-list>
+            <ion-item *ngFor="let item of participates">
+
+                {{item.UserName}}
+                <div class="item-note" slot="end">
+                    <button ion-button expand="block" (click)="Addfriend(item.UserID)">{{item.IsFriend == "1"?'friends':'Add Friend'}}</button>
+                </div>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>

@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'landing',
     pathMatch: 'full'
   },
   {
@@ -25,7 +25,17 @@ const routes: Routes = [
   { path: 'myevents', loadChildren: './myevents/myevents.module#MyeventsPageModule' },
   { path: 'addevent', loadChildren: './addevent/addevent.module#AddeventPageModule' },
   { path: 'viewfriends', loadChildren: './viewfriends/viewfriends.module#ViewfriendsPageModule' },
-  { path: 'addfriends', loadChildren: './addfriends/addfriends.module#AddfriendsPageModule' }
+  { path: 'addfriends', loadChildren: './addfriends/addfriends.module#AddfriendsPageModule' },
+  { path: 'slider', loadChildren: './slider/slider.module#SliderPageModule' },
+  { path: 'tribes', loadChildren: './tribes/tribes.module#TribesPageModule' },
+  { path: 'notifications', loadChildren: './notifications/notifications.module#NotificationsPageModule' },
+  { path: 'event-details/:id', loadChildren: './event-details/event-details.module#EventDetailsPageModule' },
+  { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
+  { path: 'addtribe', loadChildren: './addtribe/addtribe.module#AddtribePageModule' },
+  { path: 'forgotpassword', loadChildren: './forgotpassword/forgotpassword.module#ForgotpasswordPageModule' },
+  { path: 'landing', loadChildren: './landing/landing.module#LandingPageModule' },
+  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
+  { path: 'support-page', loadChildren: './support-page/support-page.module#SupportPagePageModule' },  { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordPageModule' },
 
 ];
 

@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar color="purple">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col> </ion-col>
+            <ion-col> <img [src]="User.Image" /> </ion-col>
+            <ion-col> </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col> </ion-col>
+            <ion-col> <span>{{User.Name}} </span> </ion-col>
+            <ion-col> </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col> </ion-col>
+            <ion-col> <span>{{User.Email}} </span> </ion-col>
+            <ion-col> </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

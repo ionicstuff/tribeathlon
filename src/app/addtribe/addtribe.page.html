@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+            <ion-buttons slot="start">
+                    <ion-back-button></ion-back-button>
+                  </ion-buttons>
+        <ion-title>Add Tribe</ion-title>
+
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+        <div class="space10"></div>
+
+        <ion-item>
+            <ion-label position="floating">Tribe Name</ion-label>
+            <ion-input [(ngModel)]="tribesData.Name"></ion-input>
+        </ion-item>
+        <div class="space10"></div>
+        <!-- <ion-button shape="round" ion-button expand="block" fill="outline" (click)="selectInviteData()"> Select Friends
+            <ion-icon slot="end" color="success" [name]="frndlist.length==0?'':'checkmark'"></ion-icon>
+        </ion-button> -->
+        <div class="space10"></div>
+        <ion-list>
+                <ion-list-header>
+                        <ion-label>Select Friends</ion-label>
+                      </ion-list-header>
+                     <ion-item *ngFor="let frnd of frndlist">
+                            <ion-label>{{frnd.UserName}}</ion-label>
+                            <ion-checkbox slot="end" [(ngModel)]="frnd.isChecked"></ion-checkbox>
+                     </ion-item> 
+        </ion-list>
+    </div>
+
+
+</ion-content>
+
+<ion-footer>
+        <ion-toolbar color="purple" (click)="AddTribe()">
+          <ion-title>Create</ion-title>
+        </ion-toolbar>
+      </ion-footer>

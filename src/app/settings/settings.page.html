@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+            <ion-buttons slot="start">
+                    <ion-menu-button></ion-menu-button>
+                  </ion-buttons>
+        <ion-title>Settings</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item (click)="gotoChangePassword()">
+
+            Change Password
+            <ion-icon [name]="'arrow-dropright'" slot="end"></ion-icon>
+
+        </ion-item>
+        <ion-item>
+
+            Notification
+            
+          
+            <div class="item-note" slot="end">
+                    <ion-toggle></ion-toggle>
+                  </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

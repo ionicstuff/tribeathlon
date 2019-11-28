@@ -1,7 +1,26 @@
 <ion-content>
-  <ion-slides>
-    <ion-slide>
-      <h1>Hello world</h1>
-    </ion-slide>
-  </ion-slides>
+    <ion-slides pager=true>
+
+        <ion-slide style="background: url('assets/images/banner1.jpg');height: 100vh;background-position: center;background-size:cover ;">
+            <div class="title">
+                Find <br /> Events <br /> Easily
+            </div>
+            <div class="skip" (click)="complete()"><a style="color: white!important">Skip</a></div>
+
+        </ion-slide>
+
+        <ion-slide style="background: url('assets/images/banner2.jpg');height: 100vh;background-position: center;background-size:cover ;">
+            <div class="title">
+                Find <br /> Events <br /> Easily
+            </div>
+            <div class="skip" (click)="complete()"><a style="color: white!important">Skip</a></div>
+        </ion-slide>
+
+
+
+
+
+        <!-- <div class="skip" (click)="complete()"><b>Skip</b></div> -->
+
+    </ion-slides>
 </ion-content>

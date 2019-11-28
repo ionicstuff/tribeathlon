@@ -6,6 +6,11 @@
         <ion-title>
             All Events
         </ion-title>
+        <ion-buttons slot="end" (click)="openFilter()">
+            <ion-button fill="clear" color="light">
+                <ion-icon name="options"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
@@ -15,14 +20,14 @@
             <div class="cycling-runners">
                 <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" /></a>
                 <div class="Race">
-                    <span>{{event.Title}}</span> <a href="#!">View</a>
+                    <span>{{event.Title}}</span> <b (click)="getDetails(event.EventID)"> View</b>
                 </div>
             </div>
             <div class="shadow-box">
-                <ion-row>
+                <ion-row class="topMargin">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> {{event.Date | date: 'dd,MMMM yyyy'}}</a></div>
+                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> {{event.Date | date: 'dd, MMMM yyyy'}}</a></div>
                         </div>
                     </ion-col>
                     <ion-col>
@@ -32,7 +37,7 @@
                     </ion-col>
 
                 </ion-row>
-                <ion-row>
+                <ion-row class="topMargin">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="calendar">
@@ -44,16 +49,16 @@
                     </ion-col>
                 </ion-row>
                 <div class="clearfix"></div>
-                <hr />
-                <ion-row>
+                <hr style="margin-top: 0px !important; height: 0.2px !important;"/>
+                <ion-row class="topMargin">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!">2k joined already!</a></div>
+                            <div class="calendar"><a href="#!">{{event.TotalJoined}} joined already!</a></div>
                         </div>
                     </ion-col>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"> 1k interested</a></div>
+                            <div class="calendar"><a href="#!"> {{event.TotalInterested}} interested</a></div>
                         </div>
                     </ion-col>
                 </ion-row>
@@ -61,4 +66,75 @@
             </div>
         </div>
     </div>
+
+    <div style="margin-top:35vh">
+        <h4 class="msg" *ngIf="events.length==0 && !loading">No Events Available At The Moment</h4>
+        <h4 class="msg" *ngIf="loading">
+            <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
+        </h4>
+
+
+    </div>
 </ion-content>
+
+<div class="filterPane slideInRight animated" *ngIf="filterPane">
+    <ion-grid padding="10">
+        <ion-row align-items-center>
+            <ion-col size="2"></ion-col>
+
+            <ion-col style="text-align: center;color:white">
+                <h6 color="light">Filter</h6>
+            </ion-col>
+            <ion-col size="2">
+                <ion-button fill="clear" (click)="openFilter()" color="light">
+                    <ion-icon name="close"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row style="margin-top:20px ">
+            <span style="color: white;
+            padding: 5px;">Category</span>
+            <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Parent Category" [(ngModel)]="filterData.parentType" [ngModelOptions]="{standalone: true}">
+                <option value="-1" selected="selected">Please Select Parent Category</option>
+                <option *ngFor="let parentType of parentTypes " value="{{parentType.TypeID}}">
+                    {{parentType.TypeName}}</option>
+
+            </select>
+        </ion-row>
+        <ion-row style="margin-top: 20px;">
+            <ion-item color="purple" style="width:100%">
+                <ion-label position="floating">Start Date</ion-label>
+                <ion-input type="date" [(ngModel)]="filterData.StartDate"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row>
+
+        </ion-row>
+        <ion-row align-items-center style="margin-top: 20px;">
+            <ion-col></ion-col>
+            <ion-col style="text-align: center;color:white">
+                <h5>TO</h5>
+            </ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+
+        <ion-row>
+
+        </ion-row>
+        <ion-row>
+            <ion-item color="purple" style="width:100%">
+                <ion-label position="floating">End Date</ion-label>
+                <ion-input type="date" [(ngModel)]="filterData.EndDate"></ion-input>
+            </ion-item>
+        </ion-row>
+        <ion-row style="margin-top: 20px;">
+            <ion-col size="6">
+                <ion-button color="light" fill="outline" expand="block" (click)="getFilter('clear')">Clear</ion-button>
+            </ion-col>
+            <ion-col size="6">
+                <ion-button color="light" expand="block" (click)="getFilter('filter')">Apply</ion-button>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</div>

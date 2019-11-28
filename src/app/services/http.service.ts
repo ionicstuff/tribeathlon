@@ -14,7 +14,46 @@ export class HttpService {
   public isAuthnicated: boolean;
   constructor(private http: HTTP) {
   }
+  get(serviceName: string) {
 
+    const headers = {
+      'Content-Type': 'application/json',
+      'Client-Service': 'frontend-client',
+      'Auth-Key': 'restapi2-2019'
+    };
+    if (typeof AuthConstants.authenticateData['token'] !== 'undefined') {
+      headers['UserID'] = AuthConstants.authenticateData['id'];
+      headers['AuthorizationToken'] = AuthConstants.authenticateData['token'];
+    }
+    // switch (serviceName) {
+    //   case 'myevent':
+    //     serviceName = 'event/myevents';
+    //     break;
+    // }
+    this.http.setDataSerializer('urlencoded');
+    const url = environment.apiUrl + serviceName;
+    return this.http.get(url, {}, headers);
+  }
+  upload(serviceName: string, data: any, filepaths: any, names: any) {
+    console.log(data);
+    const headers = {
+      'Content-Type': 'application/json',
+      'Client-Service': 'frontend-client',
+      'Auth-Key': 'restapi2-2019'
+    };
+    if (typeof AuthConstants.authenticateData['token'] !== 'undefined') {
+      headers['UserID'] = AuthConstants.authenticateData['id'];
+      headers['AuthorizationToken'] = AuthConstants.authenticateData['token'];
+    }
+    switch (serviceName) {
+      case 'myevent':
+        serviceName = 'event/myevents';
+        break;
+    }
+    this.http.setDataSerializer('urlencoded');
+    const url = environment.apiUrl + serviceName;
+    return this.http.uploadFile(url, data, headers, filepaths, names);
+  }
   post(serviceName: string, data: any) {
     console.log(data);
     const headers = {
@@ -22,10 +61,14 @@ export class HttpService {
       'Client-Service': 'frontend-client',
       'Auth-Key': 'restapi2-2019'
     };
-    if (serviceName === 'event' && typeof AuthConstants.authenticateData['token'] !== "undefined") {
+    if (typeof AuthConstants.authenticateData['token'] !== 'undefined') {
       headers['UserID'] = AuthConstants.authenticateData['id'];
       headers['AuthorizationToken'] = AuthConstants.authenticateData['token'];
-
+    }
+    switch (serviceName) {
+      case 'myevent':
+        serviceName = 'event/myevents';
+        break;
     }
     this.http.setDataSerializer('urlencoded');
     const url = environment.apiUrl + serviceName;

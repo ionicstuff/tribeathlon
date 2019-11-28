@@ -6,8 +6,6 @@ import { StorageService } from './services/storage.service';
 import { AuthConstants } from './config/auth-constants';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
-
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -50,40 +48,33 @@ export class AppComponent {
       url: '/viewfriends',
       icon: 'contacts'
     },
-    {
-      title: 'Add Friends',
-      url: '/addfriends',
-      icon: 'person-add'
-    },
-    {
-      title: 'All Users',
-      url: '/home',
-      icon: 'contact'
-    },
+
     {
       title: 'Account Settings',
-      url: '/list',
+      url: '/settings',
       icon: 'settings'
     },
     {
       title: 'Notifications',
-      url: '/list',
+      url: '/notifications',
       icon: 'notifications-outline'
     },
     {
       title: 'Tribes',
-      url: '/list',
+      url: '/tribes',
       icon: 'briefcase'
     },
     {
       title: 'Support',
-      url: '/list',
+      url: '/support-page',
       icon: 'help-circle-outline'
     }
-    
+
   ];
-  public LogTitle = "Login";
+  public LogTitle = 'Login';
   public isAuth = false;
+  public username = 'John Doe';
+  public userImage = "assets/images/john_name.jpg"
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -95,22 +86,7 @@ export class AppComponent {
 
     this.initializeApp();
 
-    this.storageSevice.get(AuthConstants.AUTH).then(res => {
-      if (typeof res === 'string') {
-        res = JSON.parse(res);
-      }
-      if (typeof res.token !== 'undefined') {
-        AuthConstants.authenticateData = res;
-        AuthConstants.authenticateData['isAuth'] = true;
-        this.LogTitle = "Logout";
-        this.isAuth = true;
 
-      } else {
-        AuthConstants.authenticateData['isAuth'] = false;
-        this.router.navigateByUrl('/login');
-        this.isAuth = false;
-      }
-    });
   }
   doLogoutService(isLogin) {
     if (isLogin) {
@@ -121,8 +97,51 @@ export class AppComponent {
   }
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+
+      this.statusBar.styleBlackTranslucent();
+
+      // set status bar to white
+      this.statusBar.backgroundColorByHexString('#767be5');
       this.splashScreen.hide();
+
+      this.storageSevice.get(AuthConstants.AUTH).then(res => {
+        if (typeof res === 'string') {
+          res = JSON.parse(res);
+        }
+        if (typeof res.token !== 'undefined') {
+          AuthConstants.authenticateData = res;
+          AuthConstants.authenticateData['isAuth'] = true;
+          this.username = AuthConstants.authenticateData['Name'];
+          this.userImage = AuthConstants.authenticateData['Image'];
+          this.LogTitle = 'Logout';
+          this.isAuth = true;
+
+        } else {
+          AuthConstants.authenticateData['isAuth'] = false;
+          this.LogTitle = 'Login';
+
+          if ('slideInto' in localStorage) {
+            this.router.navigateByUrl('/login');
+
+          } else {
+            this.router.navigateByUrl('/slider');
+
+          }
+          this.isAuth = false;
+        }
+      })
+        .catch(err => {
+          if ('slideInto' in localStorage) {
+            this.router.navigateByUrl('/login');
+
+          } else {
+            this.router.navigateByUrl('/slider');
+
+          }
+          this.LogTitle = 'Login';
+
+          this.isAuth = false;
+        })
     });
   }
 }
