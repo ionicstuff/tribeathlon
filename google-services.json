@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "740145430537",
+    "firebase_url": "https://tribeathlon-a52ea.firebaseio.com",
+    "project_id": "tribeathlon-a52ea",
+    "storage_bucket": "tribeathlon-a52ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740145430537:android:51bebad2a3a53caabe38d8",
+        "android_client_info": {
+          "package_name": "com.tribeathlon.co.uk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740145430537-39o7prliou4k303ah3vibi3a0iq8psmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgRK7S1mGxrYP_mAoBrzy_diFizzog19c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740145430537-39o7prliou4k303ah3vibi3a0iq8psmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

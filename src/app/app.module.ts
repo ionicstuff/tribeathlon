@@ -15,6 +15,8 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
+import { FCM } from '@ionic-native/fcm/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,6 +29,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
   providers: [
     StatusBar,
     SplashScreen, HTTP, ImagePicker, WebView, AndroidPermissions,
+    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
