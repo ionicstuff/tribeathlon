@@ -2,6 +2,7 @@ import { Platform } from '@ionic/angular';
 import { AuthConstants } from './../config/auth-constants';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FCM } from '@ionic-native/fcm/ngx';
 import { DataServiceService } from '../services/data-service.service';
 import { OnDestroy, OnInit } from '@angular/core';
 @Component({
@@ -19,8 +20,27 @@ export class HomePage implements OnInit {
   constructor(
     public router: Router,
     public dataService: DataServiceService,
-    public platform: Platform
+    public platform: Platform,
+    private fcm: FCM
   ) {
+
+    //
+    this.platform.ready()
+      .then(() => {
+        this.fcm.onNotification().subscribe(data => {
+          if (data.wasTapped) {
+            console.log("Received in background");
+          } else {
+            console.log("Received in foreground");
+          };
+        });
+
+        this.fcm.onTokenRefresh().subscribe(token => {
+          // Register your new token in your back-end if you want
+          // backend.registerToken(token);
+        });
+      })
+    //
     this.getParentTypes('E');
     this.filterData = {
       parentType: undefined,
@@ -28,6 +48,21 @@ export class HomePage implements OnInit {
       EndDate: undefined
     }
   }
+
+  //PUSH notificatins functions
+  subscribeToTopic() {
+    this.fcm.subscribeToTopic('enappd');
+  }
+  getToken() {
+    this.fcm.getToken().then(token => {
+      // Register your new token in your back-end if you want
+      // backend.registerToken(token);
+    });
+  }
+  unsubscribeFromTopic() {
+    this.fcm.unsubscribeFromTopic('enappd');
+  }
+  //
   openFilter() {
     if (this.filterPane) {
       this.filterPane = false;
