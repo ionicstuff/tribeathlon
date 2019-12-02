@@ -20,7 +20,7 @@ export class LandingPage implements OnInit {
   }
   gotoEvents(command){
     if(command === "view"){
-      this.router.navigateByUrl("/home");
+      this.router.navigateByUrl("/search-page");
 
     }else{
       this.router.navigateByUrl("/addevent");

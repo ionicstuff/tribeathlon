@@ -1,0 +1,279 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title style="text-align: left !important">
+            Add Events
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-row>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="middle-box">
+
+                <div class="stap_1">
+                    <ul class="stap_1_box" style="position: relative;
+                  z-index: 1;">
+                        <li [class]="step==1?'active':''" (click)="step=1">1</li>
+                        <li [class]="step==2?'active':''" (click)="step=2">2</li>
+                        <li [class]="step==3?'active':''" (click)="step=3">3</li>
+
+                    </ul>
+                    <div class="borders" style="z-index: 0;"></div>
+                </div>
+
+                <div class="register-box">
+                    <div *ngIf="step==1">
+
+                        <ion-item>
+
+                            <ion-input type="text" placeholder="Session Name*" [(ngModel)]="commonData.Title" [ngModelOptions]="{standalone: true}"></ion-input>
+                        </ion-item>
+                        <!-- <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Description*" [(ngModel)]="commonData.Description" [ngModelOptions]="{standalone: true}">
+                        </div> -->
+                        <ion-item>
+
+                            <ion-input type="text" placeholder="Location*" [(ngModel)]="commonData.Description" [ngModelOptions]="{standalone: true}"></ion-input>
+                        </ion-item>
+                        <!-- <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Location id" name="first_name">
+                  </div> -->
+
+
+                        <ion-item>
+                            <ion-label>Event Types</ion-label>
+                            <ion-select okText="Okay" [value]="" cancelText="Dismiss" [(ngModel)]="commonData.EventType" [ngModelOptions]="{standalone: true}" (ionChange)=" getParentTypes(commonData.EventType) ">
+                                <ion-select-option *ngFor="let eventType of eventTypes" [value]="eventType.value">{{eventType.name}}</ion-select-option>
+
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Parent Category</ion-label>
+                            <ion-select okText="Okay" [value]="" cancelText="Dismiss" [(ngModel)]="commonData.ParentTypeID" [ngModelOptions]="{standalone: true}" (ionChange)=" getchildTypes(commonData.ParentTypeID) ">
+                                <ion-select-option *ngFor="let parentType of parentTypes " [value]="parentType.TypeID">{{parentType.TypeName}}</ion-select-option>
+
+                            </ion-select>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label>Child Category</ion-label>
+                            <ion-select okText="Okay" [value]="" cancelText="Dismiss" [(ngModel)]="commonData.ChildTypeID" [ngModelOptions]="{standalone: true}">
+                                <ion-select-option *ngFor="let childType of childTypes " [value]="childType.TypeID">{{ childType.TypeName}}</ion-select-option>
+
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label>Region*</ion-label>
+                            <ion-select okText="Okay" [value]="" cancelText="Dismiss" [(ngModel)]="commonData.RegionID" [ngModelOptions]="{standalone: true}">
+                                <ion-select-option *ngFor="let region of regions " [value]="region.TypeID">{{region.TypeName}}</ion-select-option>
+
+                            </ion-select>
+                        </ion-item>
+
+
+                        <ion-item>
+
+                            <ion-input type="text" placeholder="Location*" [(ngModel)]="commonData.Location" [ngModelOptions]="{standalone: true}"></ion-input>
+                        </ion-item>
+
+
+                        <ion-button expand="block" color="orange" (click)="verify(1)">Next</ion-button>
+                    </div>
+                    <div *ngIf="step==2">
+                        <ion-item>
+
+                            <ion-input type="text" placeholder="Distance*" [(ngModel)]="commonData.Distance" [ngModelOptions]="{standalone: true}"></ion-input>
+                        </ion-item>
+
+
+                        <div class="clearder ">
+                            <div class="form-group ">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='date' class="form-control " placeholder="Start Date " [(ngModel)]="commonData.StartDate" [ngModelOptions]="{standalone: true}" />
+                                    <span class="input-group-addon "><span class="glyphicon glyphicon-calendar "></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='time' class="form-control " placeholder="Start Time * " [(ngModel)]="commonData.StartTime" (change)="calcTime()" [ngModelOptions]="{standalone: true}" />
+                                <span class="input-group-addon ">
+                                  <span class="glyphicon glyphicon-time "></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='time' class="form-control " placeholder="End Time *" [(ngModel)]="commonData.EndTime" (change)="calcTime()" [ngModelOptions]="{standalone: true}" />
+                                <span class="input-group-addon ">
+                                  <span class="glyphicon glyphicon-time "></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <ion-item>
+                            <ion-label>Visibillity *</ion-label>
+                            <ion-select okText="Okay" [value]="" cancelText="Dismiss" [(ngModel)]="commonData.Visibility" [ngModelOptions]="{standalone: true}">
+                                <ion-select-option value="O">Public</ion-select-option>
+                                <ion-select-option value="P">Private</ion-select-option>
+
+                            </ion-select>
+                        </ion-item>
+
+                        <div class="upload_img">
+                            <label for="file-input">
+                                          <img [src]="MapImg" alt="" width="120" height="120" (click)="selectPhoto('Map')" />
+                                          <h4>Upload Map Image</h4>
+                                      </label>
+
+                        </div>
+                        <ion-button expand="block" color="orange" (click)="verify(2)">Next</ion-button>
+
+
+                    </div>
+                    <div *ngIf="step==3">
+                        <div class="upload_img">
+                            <label for="file-input">
+                                      <img [src]="UrlImg" alt="" width="120" height="120" (click)="selectPhoto('banner')" />
+                                      <h4>Upload Banner Image</h4>
+                                  </label>
+
+                        </div>
+
+                        <ion-item>
+                            <ion-label>Invitation to *</ion-label>
+                            <ion-select okText="Okay" [value]="" cancelText="Dismiss" [(ngModel)]="commonData.InvitationType" [ngModelOptions]="{standalone: true}" (ionChange)="selectinviteData(commonData.InvitationType)">
+                                <ion-select-option value="F">Friends</ion-select-option>
+                                <ion-select-option value="T">Tribes</ion-select-option>
+
+                            </ion-select>
+                        </ion-item>
+
+                        <div *ngIf="commonData.EventType=='E'">
+                            <ion-item>
+
+                                <ion-input type="text" placeholder="Total Distance (Meters)*" [(ngModel)]="eventData.TotalDistance" [ngModelOptions]="{standalone: true}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+
+                                <ion-input type="text" placeholder="Duration*" [(ngModel)]="eventData.Duration" [ngModelOptions]="{standalone: true}"></ion-input>
+                            </ion-item>
+
+                            <ion-item *ngIf="commonData.ParentTypeID ==='1' || commonData.ParentTypeID ==='2'">
+                                <ion-label>Competitor Type*</ion-label>
+                                <ion-select okText="Okay" [value]="" cancelText="Dismiss" *ngIf="commonData.ParentTypeID ==='1' || commonData.ParentTypeID ==='2'" [(ngModel)]="eventData.CompetitorType" [ngModelOptions]="{standalone: true}">
+
+
+                                    <ion-select-option value="Amatuer">Amatuer</ion-select-option>
+                                    <ion-select-option value="Professional">Professional</ion-select-option>
+                                    <ion-select-option value="Family Friendly">Family Friendly</ion-select-option>
+
+                                </ion-select>
+                            </ion-item>
+                            <ion-item *ngIf="commonData.ParentTypeID ==='2'">
+                                <ion-label>Ride type* </ion-label>
+                                <ion-select okText="Okay" [value]="" cancelText="Dismiss" *ngIf="commonData.ParentTypeID ==='2'" [(ngModel)]="eventData.RideType" [ngModelOptions]="{standalone: true}">
+
+
+
+                                    <ion-select-option value="Beginner or Family Ride">Beginner or Family Ride</ion-select-option>
+                                    <ion-select-option value="Campaigning Event">Campaigning Event</ion-select-option>
+                                    <ion-select-option value="Road">Road</ion-select-option>
+                                    <ion-select-option value="Mixed Road">Mixed Road</ion-select-option>
+                                    <ion-select-option value="Off-road">Off-road</ion-select-option>
+                                    <ion-select-option value="Skill session">Skill session</ion-select-option>
+                                    <ion-select-option value="Women only?">Women only?</ion-select-option>
+                                    <ion-select-option value="Kids Only">Kids Only</ion-select-option>
+                                    <ion-select-option value="Mens Only">Mens Only</ion-select-option>
+                                    <ion-select-option value="Other">Other</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+
+                            <ion-item *ngIf="commonData.ParentTypeID ==3">
+
+                                <ion-select okText="Okay" [value]="" cancelText="Dismiss" *ngIf="commonData.ParentTypeID ==3" [(ngModel)]="eventData.Wetsuit" [ngModelOptions]="{standalone: true}">
+                                    <ion-select-option value="Compulsory">Compulsory</ion-select-option>
+                                    <ion-select-option value="Optional">Optional</ion-select-option>
+                                    <ion-select-option value="Prohibited">Prohibited</ion-select-option>
+                                    <ion-select-option value="Temperature Dependant">Temperature Dependant</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+
+
+                        </div>
+
+                        <div *ngIf="commonData.EventType=='T'">
+                            <ion-item>
+
+                                <ion-input type="text" placeholder="Approx Speed (Time Per 100 Meters)*" [(ngModel)]="eventData.Speed" [ngModelOptions]="{standalone: true}"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>FoodStop*</ion-label>
+                                <ion-select okText="Okay" [value]="" cancelText="Dismiss" [(ngModel)]="trainingData.FoodStop" [ngModelOptions]="{standalone: true}">
+                                    <ion-select-option value="Y">Yes </ion-select-option>
+                                    <ion-select-option value="N">NO </ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>CanICome*</ion-label>
+                                <ion-select okText="Okay" [value]="" cancelText="Dismiss" [(ngModel)]="trainingData.CanICome" [ngModelOptions]="{standalone: true}">
+                                    <ion-select-option value="Y">Yes </ion-select-option>
+                                    <ion-select-option value="N">NO </ion-select-option>
+                                    <ion-select-option value="R">REQUEST </ion-select-option>
+
+                                </ion-select>
+                            </ion-item>
+
+
+
+
+                        </div>
+                        <ion-button expand="block" color="orange" (click)="verify(3)">Add event
+                        </ion-button>
+                    </div>
+                    <!-- <div *ngIf="step==4">
+                      <img [src]="UrlImg" (click)="selectPhoto()" />
+                      <ion-button expand="block" shape="round" fill="outline" (click)="uploadImage()">upload by file</ion-button>
+                      <ion-button expand="block" shape="round" fill="outline" (click)="upload()">upload</ion-button>
+
+                  </div> -->
+
+                    <!--    
+                  <div class="clearder ">
+                      <div class="form-group ">
+                          <div class='input-group date' id='datetimepicker1'>
+                              <input type='text' class="form-control " placeholder="Start Date " />
+                              <span class="input-group-addon "><span class="glyphicon glyphicon-calendar "></span>
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="form-group ">
+                      <div class='input-group date' id='datetimepicker3'>
+                          <input type='text' class="form-control " placeholder="Start Time " />
+                          <span class="input-group-addon ">
+                              <span class="glyphicon glyphicon-time "></span>
+                          </span>
+                      </div>
+                  </div>
+                  <div class="form-group ">
+                      <div class='input-group date' id='datetimepicker3'>
+                          <input type='text' class="form-control " placeholder="End Time " />
+                          <span class="input-group-addon ">
+                              <span class="glyphicon glyphicon-time "></span>
+                          </span>
+                      </div>
+                  </div> -->
+                    <!-- <button type="submit" class="btn btn-defaults "><a href="create-new-event2.html ">Next</a></button> -->
+                </div>
+            </div>
+
+        </div>
+    </ion-row>
+</ion-content>

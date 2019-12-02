@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
+    <ion-title style="text-align: left !important">
       Joined Events
     </ion-title>
   </ion-toolbar>
@@ -14,6 +14,7 @@
     <ion-col>
         <div class="middle-box">
             <select class="mdb-select md-form colorful-select dropdown-primary">
+                <option value="-1">All </option>
                 <option value="0">Cycling</option>
                 <option value="0">Swimming</option>
                 <option value="0">Tribeathlon</option>
@@ -75,7 +76,7 @@
 </div>
  
 <div style="margin-top:35vh">
-    <h4 class="msg" *ngIf="events.length==0 && !loading"> No any data</h4>
+    <!--<h4 class="msg" *ngIf="events.length==0 && !loading"> No any data</h4>-->
     <h4 class="msg" *ngIf="loading">
         <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
     </h4>

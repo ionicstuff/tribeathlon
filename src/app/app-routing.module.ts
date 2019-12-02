@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'landing',
+    redirectTo: 'slider',
     pathMatch: 'full'
   },
   {
@@ -35,7 +35,11 @@ const routes: Routes = [
   { path: 'forgotpassword', loadChildren: './forgotpassword/forgotpassword.module#ForgotpasswordPageModule' },
   { path: 'landing', loadChildren: './landing/landing.module#LandingPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
-  { path: 'support-page', loadChildren: './support-page/support-page.module#SupportPagePageModule' },  { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordPageModule' },
+  { path: 'support-page', loadChildren: './support-page/support-page.module#SupportPagePageModule' },
+  { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordPageModule' },
+  { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventPageModule' },
+  { path: 'search-page', loadChildren: './search-page/search-page.module#SearchPagePageModule' },
+
 
 ];
 

@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>
+        <ion-title style="text-align: left !important">
             All Events
         </ion-title>
         <ion-buttons slot="end" (click)="openFilter()">
@@ -68,7 +68,7 @@
     </div>
 
     <div style="margin-top:35vh">
-        <h4 class="msg" *ngIf="events.length==0 && !loading">No Events Available At The Moment</h4>
+        <!--<h4 class="msg" *ngIf="events.length==0 && !loading">No Events Available At The Moment</h4>-->
         <h4 class="msg" *ngIf="loading">
             <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
         </h4>

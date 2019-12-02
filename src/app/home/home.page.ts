@@ -129,6 +129,7 @@ export class HomePage implements OnInit {
       this.dataService.getAllEvents().then(res => {
         this.loading = false;
         if (typeof res.data === 'string') {
+          
           res.data = JSON.parse(res.data);
         }
         if (res.data.data.length > 0) {

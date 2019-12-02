@@ -1,0 +1,84 @@
+<ion-content padding=10>
+
+    <ion-row>
+
+        <img class="img-responsive" style="margin: 0 auto;" src="./assets/images/logo.jpg" alt="logo" />
+
+    </ion-row>
+    <ion-row>
+        <ion-item>
+            <ion-label>Select day</ion-label>
+            <ion-select okText="Okay" [value]="" cancelText="Dismiss">
+                <ion-select-option value="1">Today</ion-select-option>
+                <ion-select-option value="2">Monday</ion-select-option>
+                <ion-select-option value="3">Tuesday</ion-select-option>
+                <ion-select-option value="4">Wednesday</ion-select-option>
+                <ion-select-option value="5">Thursday</ion-select-option>
+                <ion-select-option value="5">Friday</ion-select-option>
+                <ion-select-option value="5">Saturday</ion-select-option>
+                <ion-select-option value="5">Sunday</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+    </ion-row>
+    <div class="clearfix"></div>
+
+    <ion-row>
+        <ion-col><span class="radio">
+                    Running
+                    <input type="radio" checked="checked" name="is_company">
+                    <span class="checkround"></span>
+            </span>
+        </ion-col>
+        <ion-col> <label class="radio">
+                    Cycling
+                    <input type="radio" name="is_company">
+                    <span class="checkround"></span>
+                </label></ion-col>
+
+    </ion-row>
+    <ion-row>
+        <ion-col><label class="radio">
+                    Swimming
+                    <input type="radio" name="is_company">
+                    <span class="checkround"></span>
+                </label>
+        </ion-col>
+        <ion-col> <label class="radio">
+                    Tribeathlon
+                    <input type="radio" name="is_company">
+                    <span class="checkround"></span>
+                </label></ion-col>
+
+    </ion-row>
+    <div class="clearfix"></div>
+    <ion-row>
+
+    </ion-row>
+    <ion-row>
+        <div class="clearder" style=" width: 100%">
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" placeholder="2019/11/02" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </ion-row>
+    <ion-row>
+        <div class="clearder" style=" width: 100%">
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type='text' class="form-control" placeholder="2019/11/02" />
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </ion-row>
+
+    <ion-button color="orange" expand="block" (click)="gotoHome()"> Search</ion-button>
+
+
+</ion-content>

@@ -40,7 +40,7 @@ export class AddeventPage implements OnInit {
     private webview: WebView,
     private androidPermissions: AndroidPermissions
   ) {
-    console.log(this.androidPermissions.PERMISSION);
+
     this.androidPermissions.requestPermissions(
       [this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
       this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE]).then(res => { console.log(res) }, err => console.log(err));

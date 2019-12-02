@@ -13,7 +13,7 @@ export class SliderPage implements OnInit {
   ngOnInit() {
   }
   complete(){
-    localStorage.slideInto="done";
+    // localStorage.slideInto="done";
     this.router.navigateByUrl('/landing');
 
   }

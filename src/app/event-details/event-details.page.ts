@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EventDetailsPage implements OnInit {
   event: any;
-  participates: any;
+  participates=[];
   constructor(private activatedRoute: ActivatedRoute, public dataservice: DataServiceService, public Ui: UiserviceService) {
     this.event = {
       image: "https://www.agora-gallery.com/advice/wp-content/uploads/2015/10/image-placeholder-300x200.png"
@@ -57,6 +57,7 @@ export class EventDetailsPage implements OnInit {
       console.log(res);
       if (typeof res.data === "string") {
         res.data = JSON.parse(res.data);
+        console.log("eventData", res.data);
       }
 
       this.event = res.data.data;

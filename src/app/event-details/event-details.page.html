@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>
+        <ion-title style="text-align: left !important">
             Events
         </ion-title>
     </ion-toolbar>
@@ -14,26 +14,30 @@
         <div>
             <div class="cycling-runners">
                 <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" /></a>
-                <div class="Race">
-                    <span>{{event.Title}}</span> <b (click)="joinEvent('J')">Join</b> <b (click)="joinEvent('I')">INRESTED</b>
 
-                </div>
+            </div>
+            <div>
+                <h3>{{event.Title}}</h3>
+                <h5>Created By: Nitesh Bhundia</h5>
+
             </div>
             <div class="shadow-box">
-                <ion-row>
+                <ion-row class="topMargin">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> {{event.Date | date: 'dd,MMMM yyyy'}}</a></div>
+                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i>
+                                    {{event.Date | date: 'dd, MMMM yyyy'}}</a></div>
                         </div>
                     </ion-col>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"><i class="far fa-clock"></i> {{event.StartTime}}</a></div>
+                            <div class="calendar"><a href="#!"><i class="far fa-clock"></i> {{event.StartTime}}</a>
+                            </div>
                         </div>
                     </ion-col>
 
                 </ion-row>
-                <ion-row>
+                <ion-row class="topMargin">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="calendar">
@@ -45,55 +49,96 @@
                     </ion-col>
                 </ion-row>
                 <div class="clearfix"></div>
-                <hr />
-                <ion-row>
+                <hr style="margin-top: 0px !important; height: 0.2px !important;" />
+
+                <ion-row class="topmargin">
+                    <ion-col>
+
+                        <p class="ion-text-justify">{{event.Description}}</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="topMargin">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!">{{event.TotalJoined}} joined already!</a></div>
+                            <div class="calendar"><a href="#!">Location: {{event.Location}}</a></div>
                         </div>
                     </ion-col>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"> {{event.TotalInterested}} interested</a></div>
+                            <div class="calendar"><a href="#!"> Decipline: Runnig</a></div>
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+                <ion-row class="topMargin">
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!">Start Date: {{event.Date}}</a></div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"> End Date: {{event.Date}}</a></div>
                         </div>
                     </ion-col>
                 </ion-row>
-                <ion-row>
+                <ion-row class="topMargin">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar">
-                                <div class="Race">
-                                    <b (click)="joinEvent('J')">Join</b>
-
-                                </div>
-                            </div>
+                            <div class="calendar"><a href="#!">Time Slot: 27-11-2019</a></div>
                         </div>
                     </ion-col>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar">
-                                <div class="Race">
-
-                                    <b (click)="joinEvent('I')">INRESTED</b>
-                                </div>
-                            </div>
+                            <div class="calendar"><a href="#!"> Total Distance: {{event.Distance}}</a></div>
                         </div>
                     </ion-col>
                 </ion-row>
+                <ion-row class="topMargin">
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!">Average Speed: 10km/hr</a></div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"> Visibility: {{event.Visibility}}</a></div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <!--<ion-row class="topMargin">
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!">Start Date: 27-11-2019</a></div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"> End Date: 27-11-2019</a></div>
+                        </div>
+                    </ion-col>
+                </ion-row>-->
                 <div class="clearfix"></div>
             </div>
         </div>
-        <h4>
-            Intrested
-        </h4>
-        <ion-list>
-            <ion-item *ngFor="let item of participates">
+        <ion-row class="topMargin">
+            <ion-button expand="block" fill="outline">Join</ion-button>
+            <ion-button expand="block" fill="outline">Interested</ion-button>
+        </ion-row>
+        <ion-row class="topmargin" *ngIf="participates.length > 0">
+            <h4>
+                Intrested
+            </h4>
+            <ion-list>
+                <ion-item *ngFor="let item of participates">
 
-                {{item.UserName}}
-                <div class="item-note" slot="end">
-                    <button ion-button expand="block" (click)="Addfriend(item.UserID)">{{item.IsFriend == "1"?'friends':'Add Friend'}}</button>
-                </div>
-            </ion-item>
-        </ion-list>
+                    {{item.UserName}}
+                    <div class="item-note" slot="end">
+                        <button ion-button expand="block" (click)="Addfriend(item.UserID)">{{item.IsFriend == "1"?'friends':'Add Friend'}}</button>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-row>
+
     </div>
 </ion-content>
