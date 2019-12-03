@@ -122,8 +122,8 @@
             </div>
         </div>
         <ion-row class="topMargin">
-            <ion-button expand="block" fill="outline">Join</ion-button>
-            <ion-button expand="block" fill="outline">Interested</ion-button>
+            <ion-button expand="block" fill="outline" (click)="joinEvent('J')">Join</ion-button>
+            <ion-button expand="block" fill="outline" (click)="joinEvent('I')">Interested</ion-button>
         </ion-row>
         <ion-row class="topmargin" *ngIf="participates.length > 0">
             <h4>
