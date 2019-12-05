@@ -158,12 +158,23 @@ button:focus {
 
 .title {
     position: absolute;
-    bottom: 5%;
+    bottom: 10%;
     left: 30px;
     font-size: 40px;
     color: #fff;
     text-align: left;
     font-family: ebrima;
+}
+
+.smallTitle {
+    position: absolute;
+    bottom: 6%;
+    left: 30px;
+    font-size: 25px;
+    color: #fff;
+    text-align: left;
+    font-family: ebrima;
+    
 }
 
 .middle {
@@ -433,7 +444,7 @@ button:focus {
     border-color: #979797;
     border-style: solid;
     border-width: 3px;
-    border-radius: 50%;
+    
 }
 
 .checkround:after {
@@ -1070,7 +1081,7 @@ button:focus {
         border-color: #979797;
         border-style: solid;
         border-width: 3px;
-        border-radius: 50%;
+        
     }
     .checkround:after {
         content: "";
@@ -1413,7 +1424,7 @@ button:focus {
     }
     .title {
         position: absolute;
-        bottom: 5%;
+        bottom: 10%;
         left: 30px;
         font-size: 40px;
         color: #fff;
@@ -1644,6 +1655,53 @@ button:focus {
         opacity: 0;
         cursor: pointer;
     }
+
+    .checkbox {
+        display: block;
+        position: relative;
+        padding-left: 26px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        font-size: 16px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .checkbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkroundcheck {
+        position: absolute;
+        top: -2px;
+        left: 0;
+        height: 22px;
+        width: 22px;
+        background-color: #fff;
+        border-color: #979797;
+        border-style: solid;
+        border-width: 3px;
+       
+    }
+    .checkroundcheck:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+    .checkbox input:checked~.checkroundcheck:after {
+        display: block;
+    }
+    .checkbox .checkroundcheck:after {
+        left: 4px;
+        top: 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fc5102;
+    }
     .checkround {
         position: absolute;
         top: -2px;
@@ -1654,7 +1712,7 @@ button:focus {
         border-color: #979797;
         border-style: solid;
         border-width: 3px;
-        border-radius: 50%;
+       
     }
     .checkround:after {
         content: "";

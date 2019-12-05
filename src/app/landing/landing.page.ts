@@ -22,8 +22,10 @@ export class LandingPage implements OnInit {
     if(command === "view"){
       this.router.navigateByUrl("/search-page");
 
-    }else{
-      this.router.navigateByUrl("/addevent");
+    }else if(command==='training'){
+      this.router.navigateByUrl("/all-training");
+    }else if(command==='tribe'){
+      this.router.navigateByUrl("/tribes");
     }
   }
 }

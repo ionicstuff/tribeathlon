@@ -158,9 +158,9 @@ export class HomePage implements OnInit {
     });
   }
   public getevents() {
-    if (typeof AuthConstants.authenticateData['token'] === "undefined") {
-      this.router.navigateByUrl("/login");
-    } else {
+    // if (typeof AuthConstants.authenticateData['token'] === "undefined") {
+    //   this.router.navigateByUrl("/login");
+    // } else {
       this.dataService.getAllEvents().then(res => {
         this.loading = false;
         if (typeof res.data === 'string') {
@@ -187,6 +187,6 @@ export class HomePage implements OnInit {
         console.error(err);
       });
     }
-  }
+  //}
 
 }

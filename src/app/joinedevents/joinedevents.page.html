@@ -26,7 +26,7 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div *ngFor="let event of events">
         <div class="cycling-runners">
-            <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" /></a>
+            <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" width="380" height="240"/></a>
             <div class="Race">
                 <span>{{event.Title}}</span> <b (click)="getDetails(event.EventID)"> View</b>
             </div>
