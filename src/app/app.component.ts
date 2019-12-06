@@ -29,12 +29,12 @@ export class AppComponent {
       icon: 'walk'
     },
     {
-      title: 'Joined Events/Trainings',
+      title: 'Joined Events/Training',
       url: '/joinedevents',
       icon: 'contract'
     },
     {
-      title: 'My Events/Trainings',
+      title: 'My Events/Training',
       url: '/myevents',
       icon: 'archive'
     },
@@ -42,6 +42,11 @@ export class AppComponent {
       title: 'Add Event/Training',
       url: '/addevent',
       icon: 'add'
+    },
+    {
+      title: 'Tribes',
+      url: '/tribes',
+      icon: 'briefcase'
     },
     {
       title: 'View My Friends',
@@ -59,11 +64,7 @@ export class AppComponent {
       url: '/notifications',
       icon: 'notifications-outline'
     },
-    {
-      title: 'Tribes',
-      url: '/tribes',
-      icon: 'briefcase'
-    },
+    
     {
       title: 'Support',
       url: '/support-page',
