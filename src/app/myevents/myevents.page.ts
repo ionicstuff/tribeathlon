@@ -18,8 +18,8 @@ export class MyeventsPage implements OnInit {
   originalData;
   filterParams;
   loading = true;
-  eventStyle = { 'border-bottom': '2px solid #fff' };
-  trainingStyle = { 'border-bottom': '0px solid #fff' };
+  eventStyle = { 'border-bottom': '2px solid #767be5' };
+  trainingStyle = { 'border-bottom': '0px solid #767be5' };
   filterCategory = -1;
   trainingparent;
   constructor(

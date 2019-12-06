@@ -4,7 +4,7 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title style="text-align: left !important">
-            Events
+                {{event.Title}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -16,9 +16,9 @@
                 <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" width="380" height="240"/></a>
 
             </div>
-            <div>
-                <h3>{{event.Title}}</h3>
-                <h5>Created By: Nitesh Bhundia</h5>
+            <div class="topMarginplus">
+                <h3 class="purple">{{event.Title}}</h3>
+                <p>Nitesh Bhundia created on 10 Nove, 2019</p>
 
             </div>
             <div class="shadow-box">
@@ -58,6 +58,7 @@
                     </ion-col>
                 </ion-row>
                 <ion-row class="topMargin">
+                    <p class="purple">Event Details</p>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="calendar"><a href="#!">Location: {{event.Location}}</a></div>

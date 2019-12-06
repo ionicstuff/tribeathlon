@@ -38,7 +38,8 @@ const routes: Routes = [
   { path: 'support-page', loadChildren: './support-page/support-page.module#SupportPagePageModule' },
   { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordPageModule' },
   { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventPageModule' },
-  { path: 'search-page', loadChildren: './search-page/search-page.module#SearchPagePageModule' },
+  { path: 'search-page', loadChildren: './search-page/search-page.module#SearchPagePageModule' },  { path: 'view-participant', loadChildren: './view-participant/view-participant.module#ViewParticipantPageModule' },
+
 
 
 ];
