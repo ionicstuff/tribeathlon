@@ -55,4 +55,8 @@ export class TribesPage implements OnInit {
     })
   }
 
+  goToTribe(){
+    this.router.navigateByUrl("/tribe-detail");
+  }
+
 }

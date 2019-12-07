@@ -38,8 +38,11 @@ const routes: Routes = [
   { path: 'support-page', loadChildren: './support-page/support-page.module#SupportPagePageModule' },
   { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordPageModule' },
   { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventPageModule' },
-  { path: 'search-page', loadChildren: './search-page/search-page.module#SearchPagePageModule' },  { path: 'view-participant', loadChildren: './view-participant/view-participant.module#ViewParticipantPageModule' },
-  { path: 'view-participants', loadChildren: './view-participants/view-participants.module#ViewParticipantsPageModule' },
+  { path: 'search-page', loadChildren: './search-page/search-page.module#SearchPagePageModule' },
+  { path: 'view-participant', loadChildren: './view-participant/view-participant.module#ViewParticipantPageModule' },
+  { path: 'view-participants/:id', loadChildren: './view-participants/view-participants.module#ViewParticipantsPageModule' },  { path: 'tribe-detail', loadChildren: './tribe-detail/tribe-detail.module#TribeDetailPageModule' },
+  { path: 'tribeinvite', loadChildren: './tribeinvite/tribeinvite.module#TribeinvitePageModule' },
+
 
 
 

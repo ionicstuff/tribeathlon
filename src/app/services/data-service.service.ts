@@ -62,8 +62,8 @@ export class DataServiceService {
   public getNotifications(pageno = 0) {
     return this.httpService.get('user/notifications/' + AuthConstants.authenticateData['id'] + '/' + pageno)
   }
-  public getEventsUsers(eveid) {
-    return this.httpService.get("event/eventusers/" + eveid)
+  public getEventsUsers(data) {
+    return this.httpService.post("event/eventusers", data)
   }
   public getChildTypes(parentId) {
     return this.httpService.get('event/childtypes/' + parentId);

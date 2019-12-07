@@ -187,6 +187,10 @@ export class HomePage implements OnInit {
         console.error(err);
       });
     }
+
+    viewparticipants(id){
+      this.router.navigateByUrl("/view-participants/" + id);
+    }
   //}
 
 }

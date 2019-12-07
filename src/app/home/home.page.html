@@ -53,14 +53,14 @@
                 <ion-row class="topMargin">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!">{{event.TotalJoined}} joined already!</a></div>
+                            <span (click)='viewparticipants(event.EventID)'>{{event.TotalJoined}} joined already!</span>
                             
                             
                         </div>
                     </ion-col>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"> {{event.TotalInterested}} interested</a></div>
+                            <span (click)='viewparticipants(event.EventID)'>{{event.TotalInterested}} interested</span>
                         </div>
                     </ion-col>
                 </ion-row>

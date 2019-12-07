@@ -126,13 +126,13 @@
             </div>
         </div>
         <ion-row class="topMargin">
-            <ion-button expand="block" fill="outline" (click)="joinEvent('J')">Join</ion-button>
-            <ion-button expand="block" fill="outline" (click)="joinEvent('I')">Interested</ion-button>
+            <ion-button expand="block" fill="outline" (click)="joinEvent('J')">{{event.IsJoined == "1"?'Joined':'Join'}}</ion-button>
+            <ion-button expand="block" fill="outline" (click)="joinEvent('I')">{{event.IsInterested == "1"?'Not Interested':'Interested'}}</ion-button>
         </ion-row>
-        <!-- <ion-row class="topMarginplus">
-            <a href="#" class="purple" (click)="viewparticipants(event.EventID)">View participants</a>
-        </ion-row> -->
-        <ion-row class="topmargin" *ngIf="participates.length > 0">
+        <ion-row class="topMarginplus topMargindown">
+            <span (click)="viewparticipants(event.EventID)" class="purple">View participants</span>
+        </ion-row>
+        <!-- <ion-row class="topmargin" *ngIf="participates.length > 0">
             <h4>
                 Intrested
             </h4>
@@ -144,7 +144,7 @@
                     </div>
                 </ion-item>
             </ion-list>
-        </ion-row>
+        </ion-row> -->
 
     </div>
 </ion-content>

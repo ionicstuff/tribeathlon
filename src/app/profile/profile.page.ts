@@ -1,5 +1,6 @@
 import { AuthConstants } from './../config/auth-constants';
 import { Component, OnInit, enableProdMode } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,7 @@ export class ProfilePage implements OnInit {
     Email: undefined
   }
   constructor() {
+    console.log(AuthConstants.authenticateData);
     this.User = {
       Image: AuthConstants.authenticateData['Image'],
       Name: AuthConstants.authenticateData['Name'],

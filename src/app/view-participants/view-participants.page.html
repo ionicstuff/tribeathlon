@@ -1,24 +1,24 @@
 <ion-header>
-  <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title style="text-align: left !important">
-          Participants
-      </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title style="text-align: left !important">
+            Participants
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
-<ion-row>
-  <ion-col size="6" style="padding: 15px;" (click)="toggle('joined')" [ngStyle]="eventStyle">
-      <span> Joined</span>
-  </ion-col>
-  <ion-col size="6" style="padding: 15px;" (click)="toggle('interested')" [ngStyle]="trainingStyle">
-      <span>Interested</span>
-  </ion-col>
-</ion-row>
+<ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="joined">
+        <ion-label>Joined</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="interested">
+        <ion-label>Interested</ion-label>
+    </ion-segment-button>
 
+</ion-segment>
 <ion-content>
-  <!-- <ion-row>
+    <!-- <ion-row>
       <ion-col>
           <div class="middle-box">
               <select class="mdb-select md-form colorful-select dropdown-primary" (change)="selectNew()" [(ngModel)]="filterCategory">
@@ -81,12 +81,12 @@
       </div>
   </div> -->
 
-  <div style="margin-top:35vh">
-      <!--<h4 class="msg" *ngIf="events.length==0 && !loading"> No any data</h4>-->
-      <h4 class="msg" *ngIf="loading">
-          <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
-      </h4>
+    <div style="margin-top:35vh">
+        <!--<h4 class="msg" *ngIf="events.length==0 && !loading"> No any data</h4>-->
+        <h4 class="msg" *ngIf="loading">
+            <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
+        </h4>
 
 
-  </div>
+    </div>
 </ion-content>
