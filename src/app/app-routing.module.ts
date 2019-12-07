@@ -39,6 +39,7 @@ const routes: Routes = [
   { path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordPageModule' },
   { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventPageModule' },
   { path: 'search-page', loadChildren: './search-page/search-page.module#SearchPagePageModule' },  { path: 'view-participant', loadChildren: './view-participant/view-participant.module#ViewParticipantPageModule' },
+  { path: 'view-participants', loadChildren: './view-participants/view-participants.module#ViewParticipantsPageModule' },
 
 
 

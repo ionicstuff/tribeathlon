@@ -18,7 +18,7 @@
             </div>
             <div class="topMarginplus">
                 <h3 class="purple">{{event.Title}}</h3>
-                <p>Nitesh Bhundia created on 10 Nove, 2019</p>
+                <p>{{event.UserName}} created on {{event.Date}}, 2019</p>
 
             </div>
             <div class="shadow-box">
@@ -57,8 +57,11 @@
                         <p class="ion-text-justify">{{event.Description}}</p>
                     </ion-col>
                 </ion-row>
-                <ion-row class="topMargin">
+                <ion-row>
                     <p class="purple">Event Details</p>
+                </ion-row>
+                <ion-row class="topMargin">
+                    
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="calendar"><a href="#!">Location: {{event.Location}}</a></div>
@@ -126,13 +129,15 @@
             <ion-button expand="block" fill="outline" (click)="joinEvent('J')">Join</ion-button>
             <ion-button expand="block" fill="outline" (click)="joinEvent('I')">Interested</ion-button>
         </ion-row>
+        <!-- <ion-row class="topMarginplus">
+            <a href="#" class="purple" (click)="viewparticipants(event.EventID)">View participants</a>
+        </ion-row> -->
         <ion-row class="topmargin" *ngIf="participates.length > 0">
             <h4>
                 Intrested
             </h4>
             <ion-list>
                 <ion-item *ngFor="let item of participates">
-
                     {{item.UserName}}
                     <div class="item-note" slot="end">
                         <button ion-button expand="block" (click)="Addfriend(item.UserID)">{{item.IsFriend == "1"?'friends':'Add Friend'}}</button>

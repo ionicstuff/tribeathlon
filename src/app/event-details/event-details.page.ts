@@ -2,7 +2,7 @@ import { UiserviceService } from './../services/uiservice.service';
 import { AuthConstants } from './../config/auth-constants';
 import { DataServiceService } from './../services/data-service.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-details',
@@ -15,7 +15,8 @@ export class EventDetailsPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute, 
     public dataservice: DataServiceService, 
-    public Ui: UiserviceService
+    public Ui: UiserviceService,
+    private router: Router
     ) {
     this.event = {
       image: "https://www.agora-gallery.com/advice/wp-content/uploads/2015/10/image-placeholder-300x200.png"
@@ -80,6 +81,10 @@ export class EventDetailsPage implements OnInit {
     }, err => {
       console.log(err);
     })
+  }
+
+  viewparticipants(id){
+    this.router.navigateByUrl("/view-participants/" +id);
   }
 
 }

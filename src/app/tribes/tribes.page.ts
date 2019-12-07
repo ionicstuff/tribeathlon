@@ -16,13 +16,26 @@ export class TribesPage implements OnInit {
     public dataservice: DataServiceService,
     public Ui: UiserviceService,
 
-  ) { this.tribes=[];}
+  ) { 
+    this.tribes=[];
+    this.segmentChanged('mytribes');
+  }
 
   ngOnInit() {
 
   }
 
   ionViewWillEnter() {
+    
+  }
+  navigateToaddtribe() {
+    this.router.navigateByUrl("/addtribe");
+  }
+  OnDestroy() {
+
+  }
+
+  segmentChanged(event){
     this.dataservice.getTribes().then(res => {
       this.loading= false;
       
@@ -40,12 +53,6 @@ export class TribesPage implements OnInit {
       this.loading= false;
       this.Ui.showAlert('Something Went wrong');
     })
-  }
-  navigateToaddtribe() {
-    this.router.navigateByUrl("/addtribe");
-  }
-  OnDestroy() {
-
   }
 
 }
