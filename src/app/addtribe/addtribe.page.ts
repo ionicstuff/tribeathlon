@@ -21,7 +21,10 @@ export class AddtribePage implements OnInit {
     public router:Router
   ) {
     this.tribesData = {
-      Name: undefined
+      Name: undefined,
+      Description: undefined,
+      Visibility: undefined,
+      RegionID:1
     };
     this.getFriends();
   }

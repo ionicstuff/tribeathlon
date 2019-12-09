@@ -15,7 +15,7 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Home',
-      url: '/home',
+      url: '/landing',
       icon: 'home'
     },
     {
@@ -29,6 +29,16 @@ export class AppComponent {
       icon: 'walk'
     },
     {
+      title: 'Tribes',
+      url: '/tribes',
+      icon: 'briefcase'
+    },
+    {
+      title: 'Add Event/Training',
+      url: '/addevent',
+      icon: 'add'
+    },
+    {
       title: 'Joined Events/Training',
       url: '/joinedevents',
       icon: 'contract'
@@ -37,17 +47,7 @@ export class AppComponent {
       title: 'My Events/Training',
       url: '/myevents',
       icon: 'archive'
-    },
-    {
-      title: 'Add Event/Training',
-      url: '/addevent',
-      icon: 'add'
-    },
-    {
-      title: 'Tribes',
-      url: '/tribes',
-      icon: 'briefcase'
-    },
+    },    
     {
       title: 'View My Friends',
       url: '/viewfriends',

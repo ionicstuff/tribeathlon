@@ -43,6 +43,7 @@ export class TribesPage implements OnInit {
         res.data = JSON.parse(res.data);
       }
       if(res.data.success==="1"){
+        console.log(res.data);
         this.tribes = res.data.data;
 
       }else{

@@ -13,6 +13,9 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
   }
   gotoChangePassword(){
-    this.router.navigateByUrl("/change-password")
+    this.router.navigateByUrl("/change-password");
+  }
+  myprofile(){
+    this.router.navigateByUrl("/profile");
   }
 }

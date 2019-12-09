@@ -85,7 +85,7 @@
             <ion-col size="2"></ion-col>
 
             <ion-col style="text-align: center;color:white">
-                <h6 color="light">Filter</h6>
+                <h6 color="light">Search Events</h6>
             </ion-col>
             <ion-col size="2">
                 <ion-button fill="clear" (click)="openFilter()" color="light">
@@ -97,7 +97,7 @@
             <span style="color: white;
             padding: 5px;">Category</span>
             <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Parent Category" [(ngModel)]="filterData.parentType" [ngModelOptions]="{standalone: true}">
-                <option value="-1" selected="selected">Please Select Parent Category</option>
+                <option value="-1" selected="selected">Select Event Type</option>
                 <option *ngFor="let parentType of parentTypes " value="{{parentType.TypeID}}">
                     {{parentType.TypeName}}</option>
 
@@ -105,27 +105,27 @@
         </ion-row>
         <ion-row style="margin-top: 20px;">
             <ion-item color="purple" style="width:100%">
-                <ion-label position="floating">Start Date</ion-label>
+                <ion-label position="floating">Start date</ion-label>
                 <ion-input type="date" [(ngModel)]="filterData.StartDate"></ion-input>
             </ion-item>
         </ion-row>
         <ion-row>
 
         </ion-row>
-        <ion-row align-items-center style="margin-top: 20px;">
+        <!-- <ion-row align-items-center style="margin-top: 20px;">
             <ion-col></ion-col>
             <ion-col style="text-align: center;color:white">
                 <h5>TO</h5>
             </ion-col>
             <ion-col></ion-col>
-        </ion-row>
+        </ion-row> -->
 
         <ion-row>
 
         </ion-row>
         <ion-row>
             <ion-item color="purple" style="width:100%">
-                <ion-label position="floating">End Date</ion-label>
+                <ion-label position="floating">End date</ion-label>
                 <ion-input type="date" [(ngModel)]="filterData.EndDate"></ion-input>
             </ion-item>
         </ion-row>

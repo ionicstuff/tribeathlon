@@ -4,7 +4,7 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title style="text-align: left !important">
-            Add Events
+            Add Events/Training
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -38,25 +38,25 @@
                         <input type="text" class="form-control" placeholder="Location id" name="first_name">
                     </div> -->
                         <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Event Types" [(ngModel)]="commonData.EventType" [ngModelOptions]="{standalone: true}" (change)=" getParentTypes(commonData.EventType) ">
-                            <option value="-1" selected>Please Select Event type</option>
+                            <option value="-1" selected>Event type</option>
                             <option *ngFor="let eventType of eventTypes " value="{{eventType.value}}">{{eventType.name}}
                             </option>
                         </select>
                         <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Parent Category" [(ngModel)]="commonData.ParentTypeID" [ngModelOptions]="{standalone: true}" (change)=" getchildTypes(commonData.ParentTypeID) ">
-                            <option value="-1" selected>Please Select Parent Category</option>
+                            <option value="-1" selected>Discipline</option>
                             <option *ngFor="let parentType of parentTypes " value="{{parentType.TypeID}}">
                                 {{parentType.TypeName}}</option>
 
                         </select>
                         <select class="mdb-select md-form colorful-select dropdown-primary2 " placeholder="Child Category" [(ngModel)]="commonData.ChildTypeID" [ngModelOptions]="{standalone: true}">
-                            <option value="-1" selected>Please Select child Category</option>
+                            <option value="-1" selected>Athlons</option>
 
                             <option *ngFor="let childType of childTypes " value="{{childType.TypeID}}">
                                 {{childType.TypeName}}</option>
 
                         </select>
                         <select class="mdb-select md-form colorful-select dropdown-primary2 " placeholder="Region*" [(ngModel)]="commonData.RegionID" [ngModelOptions]="{standalone: true}">
-                            <option value="-1" selected>Please Select region</option>
+                            <option value="-1" selected>Region</option>
 
                             <option *ngFor="let region of regions " value="{{region.TypeID}}">
                                 {{region.TypeName}}</option>
@@ -105,7 +105,7 @@
                         <div class="upload_img">
                             <label for="file-input">
                                             <img [src]="MapImg" alt="" width="120" height="120" (click)="selectPhoto('Map')" />
-                                            <h4>Upload Map Image</h4>
+                                            <h4>Upload map file</h4>
                                         </label>
 
                         </div>
@@ -117,7 +117,7 @@
                         <div class="upload_img">
                             <label for="file-input">
                                         <img [src]="UrlImg" alt="" width="120" height="120" (click)="selectPhoto('banner')" />
-                                        <h4>Upload Banner Image</h4>
+                                        <h4>Upload event image</h4>
                                     </label>
 
                         </div>

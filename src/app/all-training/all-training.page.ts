@@ -70,12 +70,12 @@ export class AllTrainingPage implements OnInit {
 
       }
       if (this.filterData.StartDate !== undefined) {
-        JsonObj["StartDate"] = this.filterData.parentType;
+        JsonObj["StartDate"] = this.filterData.StartDate;
 
       }
 
       if (this.filterData.EndDate !== undefined) {
-        JsonObj["EndDate"] = this.filterData.parentType;
+        JsonObj["EndDate"] = this.filterData.EndDate;
 
       }
       JsonObj['EventType'] = "T";
@@ -116,34 +116,36 @@ export class AllTrainingPage implements OnInit {
     this.router.navigateByUrl("/event-details/"+id);
   }
   public gettrainings() {
-    if (typeof AuthConstants.authenticateData['token'] === "undefined") {
-      this.router.navigate(['login']);
-    } else {
-      this.dataService.getAllTrainings().then(res => {
-        this.loading = false;
-        if (typeof res.data === 'string') {
-          res.data = JSON.parse(res.data);
-        }
-        if (res.data.data.length > 0) {
+    // if (typeof AuthConstants.authenticateData['token'] === "undefined") {
+    //   this.router.navigate(['login']);
+    // } else {
+      //dataservice code will come here if you want to put this page for logged in member only
+    // }
 
-          this.trainings = res.data.data;
+    this.dataService.getAllTrainings().then(res => {
+      this.loading = false;
+      if (typeof res.data === 'string') {
+        res.data = JSON.parse(res.data);
+      }
+      if (res.data.data.length > 0) {
 
-        }
+        this.trainings = res.data.data;
 
-        console.log(res);
+      }
 
-      }, err => {
-        this.loading=false;
-        console.error(err);
-        if (typeof err.error === 'string') {
-          err.error = JSON.parse(err.error);
-        }
-        if (err.error.data.message === "Your session has been expired.") {
-          this.router.navigate(['login']);
+      console.log(res);
 
-        }
-        console.error(err);
-      });
-    }
+    }, err => {
+      this.loading=false;
+      console.error(err);
+      if (typeof err.error === 'string') {
+        err.error = JSON.parse(err.error);
+      }
+      if (err.error.data.message === "Your session has been expired.") {
+        this.router.navigate(['login']);
+
+      }
+      console.error(err);
+    });
   }
 }

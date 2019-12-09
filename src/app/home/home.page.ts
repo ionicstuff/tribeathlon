@@ -87,6 +87,7 @@ export class HomePage implements OnInit {
     });
   }
   getFilter(cmd) {
+    console.log(this.filterData);
     this.openFilter() ;
     var JsonObj = {};
     if (cmd === "clear") {
@@ -97,12 +98,12 @@ export class HomePage implements OnInit {
 
       }
       if (this.filterData.StartDate !== undefined) {
-        JsonObj["StartDate"] = this.filterData.parentType;
+        JsonObj["StartDate"] = this.filterData.StartDate;
 
       }
 
       if (this.filterData.EndDate !== undefined) {
-        JsonObj["EndDate"] = this.filterData.parentType;
+        JsonObj["EndDate"] = this.filterData.EndDate;
 
       }
       JsonObj['EventType'] = "E";

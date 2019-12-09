@@ -48,7 +48,7 @@ export class AddeventPage implements OnInit {
 
     this.step = 1;
     this.eventTypes = [{
-      name: 'Events',
+      name: 'Event',
       value: 'E'
     }, {
       name: 'Training',
