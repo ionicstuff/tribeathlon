@@ -81,12 +81,23 @@
         </div>
     </div>
 
-    <div style="margin-top:35vh">
-        <!--<h4 class="msg" *ngIf="events.length==0 && !loading"> No any data</h4>-->
-        <h4 class="msg" *ngIf="loading">
-            <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
-        </h4>
-
-
-    </div>
+    <ion-row>
+            <ion-col>
+                <div style="margin-top:20vh">
+                    <div *ngIf="events.length==0 && !loading" class="col-md-6 col-sm-6 col-xs-6" text-center>
+                        <h6 class="msg">
+                            You have not created any event yet, create your first event now.
+                        </h6>
+                        <p>
+                            <ion-button expand="block" fill="outline" (click)="goToCreate()">
+                                Create Event
+                            </ion-button>
+                        </p>
+                    </div>
+                    <h4 class="msg" *ngIf="loading">
+                        <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
+                    </h4>
+                </div>
+            </ion-col>
+        </ion-row>
 </ion-content>

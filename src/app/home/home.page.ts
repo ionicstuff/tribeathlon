@@ -115,6 +115,7 @@ export class HomePage implements OnInit {
         if (res.data.data.length > 0) {
           this.originalData = res.data.data;
           this.events = res.data.data;
+          console.log(this.events);
         }
       }, err => {
         this.loading = false;
@@ -136,6 +137,7 @@ export class HomePage implements OnInit {
     this.dataService.getParentTypes(eventType).then((res: any) => {
       if (typeof res.data === 'string') {
         res.data = JSON.parse(res.data);
+        console.log(res.data);
       }
       if (res.data.data.length > 0) {
         this.parentTypes = res.data.data;
@@ -191,6 +193,9 @@ export class HomePage implements OnInit {
 
     viewparticipants(id){
       this.router.navigateByUrl("/view-participants/" + id);
+    }
+    goToCreate(){
+      this.router.navigateByUrl("/addevent");
     }
   //}
 

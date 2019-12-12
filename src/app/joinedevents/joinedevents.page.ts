@@ -57,4 +57,8 @@ loading =true;
       });
     }
   }
+
+  goToEvent(){
+    this.router.navigateByUrl("/home");
+  }
 }

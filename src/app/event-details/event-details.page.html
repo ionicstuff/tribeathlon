@@ -4,7 +4,7 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title style="text-align: left !important">
-                {{event.Title}}
+            {{event.Title}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -13,7 +13,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div>
             <div class="cycling-runners">
-                <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" width="380" height="240"/></a>
+                <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" width="380" height="240" /></a>
 
             </div>
             <div class="topMarginplus">
@@ -53,15 +53,22 @@
 
                 <ion-row class="topmargin">
                     <ion-col>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <p class="ion-text-justify">{{event.Description}}</p>
+                        </div>
 
-                        <p class="ion-text-justify">{{event.Description}}</p>
                     </ion-col>
                 </ion-row>
                 <ion-row>
-                    <p class="purple">Event Details</p>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <p class="purple">Event Details</p>
+                        </div>
+                    </ion-col>
+
                 </ion-row>
                 <ion-row class="topMargin">
-                    
+
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="calendar"><a href="#!">Location: {{event.Location}}</a></div>
@@ -126,11 +133,19 @@
             </div>
         </div>
         <ion-row class="topMargin">
-            <ion-button expand="block" fill="outline" (click)="joinEvent('J')">{{event.IsJoined == "1"?'Joined':'Join'}}</ion-button>
-            <ion-button expand="block" fill="outline" (click)="joinEvent('I')">{{event.IsInterested == "1"?'Not Interested':'Interested'}}</ion-button>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <ion-button expand="block" fill="outline" (click)="joinEvent('J')">
+                    {{event.IsJoined == "1"?'Joined':'Join'}}
+                </ion-button>
+                <ion-button expand="block" fill="outline" (click)="joinEvent('I')">
+                    {{event.IsInterested == "1"?'Not Interested':'Interested'}}</ion-button>
+            </div>
+
         </ion-row>
         <ion-row class="topMarginplus topMargindown">
-            <span (click)="viewparticipants(event.EventID)" class="purple">View participants</span>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <span (click)="viewparticipants(event.EventID)" class="purple">View participants</span>
+            </div>
         </ion-row>
         <!-- <ion-row class="topmargin" *ngIf="participates.length > 0">
             <h4>

@@ -164,4 +164,8 @@ export class MyeventsPage implements OnInit {
       });
     }
   }
+
+  goToCreate(){
+    this.router.navigateByUrl("/addevent");
+  }
 }

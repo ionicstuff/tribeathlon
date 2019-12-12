@@ -41,81 +41,87 @@ export class AddeventPage implements OnInit {
     private androidPermissions: AndroidPermissions
   ) {
 
-    this.androidPermissions.requestPermissions(
-      [this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
-      this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE]).then(res => { console.log(res) }, err => console.log(err));
+    if (typeof AuthConstants.authenticateData['token'] === "undefined") {
+      this.router.navigate(['login']);
+    }else{
+      this.androidPermissions.requestPermissions(
+        [this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+        this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE]).then(res => { console.log(res) }, err => console.log(err));
+  
+  
+      this.step = 1;
+      this.eventTypes = [{
+        name: 'Event',
+        value: 'E'
+      }, {
+        name: 'Training',
+        value: 'T'
+      }];
+      this.commonData = {
+        EventType: undefined,
+        UserID: undefined,
+        Title: undefined,
+        Description: undefined,
+        Location: undefined,
+        RegionID: undefined,
+        ParentTypeID: undefined,
+        ChildTypeID: undefined,
+        Distance: undefined,
+        StartDate: undefined,
+        StartTime: undefined,
+        EndTime: undefined,
+        Visibility: undefined,
+        InvitationType: undefined,
+  
+      };
+      this.eventData = {
+  
+        TotalDistance: undefined,
+        Duration: undefined,
+        CompetitorType: undefined,
+        RideType: undefined,
+        Wetsuit: undefined
+      };
+      this.trainingData = {
+        Speed: undefined,
+        FoodStop: undefined,
+        CanIcome: undefined
+      };
+  
+      this.dataService.getregions().then((res: any) => {
+        console.log(res);
+        if (typeof res.data === "string") {
+          res.data = JSON.parse(res.data);
+        }
+        if (res.data.success === "1") {
+          this.regions = res.data.data;
+        } else {
+  
+          this.Ui.showAlert(res.data.data.message, 0);
+        }
+  
+  
+  
+      }, err => {
+        console.error(err);
+        if (typeof err.error === 'string') {
+          err.error = JSON.parse(err.error);
+        }
+        if (err.error.data.message === "Your session has been expired.") {
+          this.Ui.showAlert("Your session has been expired", 0);
+  
+          this.router.navigate(['login']);
+  
+        } else {
+          this.Ui.showAlert("Something went wrong", 0);
+  
+        }
+  
+  
+      });
+    }
 
-
-    this.step = 1;
-    this.eventTypes = [{
-      name: 'Event',
-      value: 'E'
-    }, {
-      name: 'Training',
-      value: 'T'
-    }];
-    this.commonData = {
-      EventType: undefined,
-      UserID: undefined,
-      Title: undefined,
-      Description: undefined,
-      Location: undefined,
-      RegionID: undefined,
-      ParentTypeID: undefined,
-      ChildTypeID: undefined,
-      Distance: undefined,
-      StartDate: undefined,
-      StartTime: undefined,
-      EndTime: undefined,
-      Visibility: undefined,
-      InvitationType: undefined,
-
-    };
-    this.eventData = {
-
-      TotalDistance: undefined,
-      Duration: undefined,
-      CompetitorType: undefined,
-      RideType: undefined,
-      Wetsuit: undefined
-    };
-    this.trainingData = {
-      Speed: undefined,
-      FoodStop: undefined,
-      CanIcome: undefined
-    };
-
-    this.dataService.getregions().then((res: any) => {
-      console.log(res);
-      if (typeof res.data === "string") {
-        res.data = JSON.parse(res.data);
-      }
-      if (res.data.success === "1") {
-        this.regions = res.data.data;
-      } else {
-
-        this.Ui.showAlert(res.data.data.message, 0);
-      }
-
-
-
-    }, err => {
-      console.error(err);
-      if (typeof err.error === 'string') {
-        err.error = JSON.parse(err.error);
-      }
-      if (err.error.data.message === "Your session has been expired.") {
-        this.Ui.showAlert("Your session has been expired", 0);
-
-        this.router.navigate(['login']);
-
-      } else {
-        this.Ui.showAlert("Something went wrong", 0);
-
-      }
-
-
-    });
+    
   }
   async presentFriends(data) {
     var input = [];

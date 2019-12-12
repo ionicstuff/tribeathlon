@@ -38,23 +38,32 @@ export class EventDetailsPage implements OnInit {
     })
   }
   joinEvent(status) {
-    var jsonData = {
 
-      UserID: AuthConstants.authenticateData['id'],
-      EventID: this.event.EventID,
-      Status: status
+    if (typeof AuthConstants.authenticateData['token'] === "undefined") {
+      this.router.navigate(['login']);
+    }else{
+      var jsonData = {
 
-    }
-    console.log(jsonData);
-    this.dataservice.joinEvent(jsonData).then(res => {
-      console.log(res);
-      if (typeof res.data === "string") {
-        res.data = JSON.parse(res.data);
+        UserID: AuthConstants.authenticateData['id'],
+        EventID: this.event.EventID,
+        Status: status
+  
       }
-      this.Ui.showAlert(res.data.data.message);
-    }, err => {
-      console.log(err);
-    })
+      console.log(jsonData);
+      this.dataservice.joinEvent(jsonData).then(res => {
+        console.log(res);
+        if (typeof res.data === "string") {
+          res.data = JSON.parse(res.data);
+        }
+        this.Ui.showAlert(res.data.data.message);
+      }, err => {
+        console.log(err);
+      })
+    }
+
+
+
+    
   }
   ngOnInit() {
     let eventid = this.activatedRoute.snapshot.paramMap.get('id');

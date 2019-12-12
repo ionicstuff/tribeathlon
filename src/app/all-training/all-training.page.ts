@@ -148,4 +148,8 @@ export class AllTrainingPage implements OnInit {
       console.error(err);
     });
   }
+
+  goToCreate(){
+    this.router.navigateByUrl("/addevent");
+  }
 }

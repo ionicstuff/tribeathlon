@@ -18,7 +18,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div *ngFor="let event of events">
             <div class="cycling-runners">
-                <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" width="380" height="240"/></a>
+                <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" width="380" height="240" /></a>
                 <div class="Race">
                     <span>{{event.Title}}</span> <b (click)="getDetails(event.EventID)"> View</b>
                 </div>
@@ -27,12 +27,14 @@
                 <ion-row class="topMargin">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> {{event.Date | date: 'dd, MMMM yyyy'}}</a></div>
+                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i>
+                                    {{event.Date | date: 'dd, MMMM yyyy'}}</a></div>
                         </div>
                     </ion-col>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"><i class="far fa-clock"></i> {{event.StartTime}}</a></div>
+                            <div class="calendar"><a href="#!"><i class="far fa-clock"></i> {{event.StartTime}}</a>
+                            </div>
                         </div>
                     </ion-col>
 
@@ -49,18 +51,18 @@
                     </ion-col>
                 </ion-row>
                 <div class="clearfix"></div>
-                <hr style="margin-top: 0px !important; height: 0.2px !important;"/>
-                <ion-row class="topMargin">
+                <hr style="margin-top: 0px !important; height: 0.2px !important;" />
+                <ion-row class="topMarginp">
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <span (click)='viewparticipants(event.EventID)'>{{event.TotalJoined}} joined already!</span>
-                            
-                            
+                            <span (click)='viewparticipants(event.EventID)'
+                                *ngIf="event.TotalJoined !=0 ">{{event.TotalJoined}} joined already!</span>
                         </div>
                     </ion-col>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <span (click)='viewparticipants(event.EventID)'>{{event.TotalInterested}} interested</span>
+                            <span (click)='viewparticipants(event.EventID)'
+                                *ngIf="event.TotalInterested !=0 ">{{event.TotalInterested}} interested</span>
                         </div>
                     </ion-col>
                 </ion-row>
@@ -69,21 +71,36 @@
         </div>
     </div>
 
-    <div style="margin-top:35vh">
-        <!--<h4 class="msg" *ngIf="events.length==0 && !loading">No Events Available At The Moment</h4>-->
+    <ion-row>
+        <ion-col>
+            <div style="margin-top:35vh">
+                <div *ngIf="events.length==0 && !loading" class="col-md-6 col-sm-6 col-xs-6" text-center>
+                    <h6 class="msg">
+                        No training events available in your region, create your first training instead.
+                    </h6>
+                    <p>
+                        <ion-button expand="block" fill="outline" (click)="goToCreate()">
+                            Create Event
+                        </ion-button>
+                    </p>
+                </div>
+                <h4 class="msg" *ngIf="loading">
+                    <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
+                </h4>
+            </div>
+        </ion-col>
+    </ion-row>
+    <!-- <div style="margin-top:35vh">
+        <h4 class="msg" *ngIf="events.length==0 && !loading">No Events Available At The Moment</h4
         <h4 class="msg" *ngIf="loading">
             <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
         </h4>
-
-
-    </div>
+    </div> -->
 </ion-content>
-
 <div class="filterPane slideInRight animated" *ngIf="filterPane">
     <ion-grid padding="10">
         <ion-row align-items-center>
             <ion-col size="2"></ion-col>
-
             <ion-col style="text-align: center;color:white">
                 <h6 color="light">Search Events</h6>
             </ion-col>
@@ -93,14 +110,14 @@
                 </ion-button>
             </ion-col>
         </ion-row>
+        <div class="clearfix"></div>
         <ion-row style="margin-top:20px ">
             <span style="color: white;
-            padding: 5px;">Category</span>
-            <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Parent Category" [(ngModel)]="filterData.parentType" [ngModelOptions]="{standalone: true}">
-                <option value="-1" selected="selected">Select Event Type</option>
+            padding: 5px;">Select Discipline</span>
+            <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Parent Category"
+                [(ngModel)]="filterData.parentType" [ngModelOptions]="{standalone: true}">
                 <option *ngFor="let parentType of parentTypes " value="{{parentType.TypeID}}">
                     {{parentType.TypeName}}</option>
-
             </select>
         </ion-row>
         <ion-row style="margin-top: 20px;">
@@ -110,18 +127,8 @@
             </ion-item>
         </ion-row>
         <ion-row>
-
         </ion-row>
-        <!-- <ion-row align-items-center style="margin-top: 20px;">
-            <ion-col></ion-col>
-            <ion-col style="text-align: center;color:white">
-                <h5>TO</h5>
-            </ion-col>
-            <ion-col></ion-col>
-        </ion-row> -->
-
         <ion-row>
-
         </ion-row>
         <ion-row>
             <ion-item color="purple" style="width:100%">

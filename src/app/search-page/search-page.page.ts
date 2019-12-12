@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataServiceService } from '../services/data-service.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-search-page',
@@ -8,13 +10,101 @@ import { Router } from '@angular/router';
 })
 export class SearchPagePage implements OnInit {
   searchData: any;
-  constructor(public router:Router) { 
+  parentTypes: any;
+  loading = true;
+  filterData: any;
+  public events=[];
+  originalData: any
+  disciplines=[
+    {name: 'Running', }
+  ];
+  constructor(
+    
+    public router: Router,
+    public dataService: DataServiceService,
+    public platform: Platform,) { 
 
+       this.getParentTypes('E');
   }
 
   ngOnInit() {
   }
   gotoHome(){
-this.router.navigateByUrl("/home");
+    this.router.navigateByUrl("/home");
+  }
+  getParentTypes(eventType) {
+
+    this.dataService.getParentTypes(eventType).then((res: any) => {
+      if (typeof res.data === 'string') {
+        res.data = JSON.parse(res.data);
+        console.log(res.data);
+      }
+      if (res.data.data.length > 0) {
+        this.parentTypes = res.data.data;
+      } else {
+        console.log('no any parents types');
+      }
+
+    }, err => {
+      console.error(err);
+      this.loading = false;
+
+      if (typeof err.error === 'string') {
+        err.error = JSON.parse(err.error);
+      }
+      if (err.error.data.message === "Your session has been expired.") {
+        this.router.navigate(['login']);
+
+      }
+      console.error(err);
+
+    });
+  }
+
+  getFilter(cmd) {
+    console.log(this.filterData);
+    
+    var JsonObj = {};
+    if (cmd === "clear") {
+      this.events = this.originalData;
+    } else {
+      if (this.filterData.parentType !== undefined || this.filterData.parentType !== -1) {
+        JsonObj["PTypeID"] = this.filterData.parentType;
+
+      }
+      if (this.filterData.StartDate !== undefined) {
+        JsonObj["StartDate"] = this.filterData.StartDate;
+
+      }
+
+      if (this.filterData.EndDate !== undefined) {
+        JsonObj["EndDate"] = this.filterData.EndDate;
+
+      }
+      JsonObj['EventType'] = "E";
+      JsonObj['pageno'] = 0;
+      this.dataService.getFilterData(JsonObj).then(res => {
+        if (typeof res.data === 'string') {
+          res.data = JSON.parse(res.data);
+        }
+        if (res.data.data.length > 0) {
+          this.originalData = res.data.data;
+          this.events = res.data.data;
+          console.log(this.events);
+        }
+      }, err => {
+        this.loading = false;
+        console.error(err);
+        if (typeof err.error === 'string') {
+          err.error = JSON.parse(err.error);
+        }
+        if (err.error.data.message === "Your session has been expired.") {
+          this.router.navigate(['login']);
+
+        }
+        console.error(err);
+      })
+    }
+
   }
 }
