@@ -1,3 +1,4 @@
+import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataServiceService } from '../services/data-service.service';
@@ -13,24 +14,39 @@ export class SearchPagePage implements OnInit {
   parentTypes: any;
   loading = true;
   filterData: any;
-  public events=[];
-  originalData: any
-  disciplines=[
-    {name: 'Running', }
+  public events = [];
+  originalData: any;
+
+
+  disciplines = [
+    { name: 'Running', }
   ];
   constructor(
-    
+
     public router: Router,
     public dataService: DataServiceService,
-    public platform: Platform,) { 
+    public routedataService: DataService,
+    public platform: Platform, ) {
 
-       this.getParentTypes('E');
+    this.getParentTypes('E');
+    this.searchData = {
+      Running: undefined,
+      Cycling: undefined,
+      Swimming: undefined,
+      Tribethlon: undefined,
+      Searchfor: undefined,
+      StartDate: undefined,
+      EndDate: undefined
+    };
   }
 
   ngOnInit() {
   }
-  gotoHome(){
-    this.router.navigateByUrl("/home");
+  gotoHome() {
+
+    this.routedataService.setData(42, this.searchData);
+
+    this.router.navigateByUrl('/home/42');
   }
   getParentTypes(eventType) {
 
@@ -63,7 +79,7 @@ export class SearchPagePage implements OnInit {
 
   getFilter(cmd) {
     console.log(this.filterData);
-    
+
     var JsonObj = {};
     if (cmd === "clear") {
       this.events = this.originalData;

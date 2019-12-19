@@ -54,10 +54,13 @@ export class DataServiceService {
     return this.httpService.get('event/parenttypes/' + EventType);
   }
   public getTribes(pageno = 0) {
-    return this.httpService.get('user/tribes/' + AuthConstants.authenticateData['id'] + '/' + pageno);
+    return this.httpService.post('user/tribes', {'pageno':pageno});
   }
   public getEventDetails(evId) {
     return this.httpService.get('event/detail/' + evId);
+  }
+  public getTribeDetails(tribeId) {
+    return this.httpService.get('user/tribedetail/' + tribeId);
   }
   public getNotifications(pageno = 0) {
     return this.httpService.get('user/notifications/' + AuthConstants.authenticateData['id'] + '/' + pageno)
@@ -75,6 +78,9 @@ export class DataServiceService {
   }
   public getMyEvents(pageno = 0) {
     return this.httpService.post('myevent', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'] });
+  }
+  public getMyTribes(pageno = 0){
+    return this.httpService.post('user/mytribes', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'] });
   }
   public getregions() {
     return this.httpService.get('event/regions/');

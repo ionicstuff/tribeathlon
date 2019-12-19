@@ -16,13 +16,13 @@
         <ion-col>
             <label class="checkbox">
                 Running
-                <input type="checkbox" name="is_company">
+                <input type="checkbox" [(ngModel)]='searchData.Running'  name="is_company">
                 <span class="checkroundcheck"></span>
             </label>
         </ion-col>
         <ion-col> <label class="checkbox">
                 Cycling
-                <input type="checkbox" name="is_company">
+                <input type="checkbox" [(ngModel)]='searchData.Cycling' name="is_company">
                 <span class="checkroundcheck"></span>
             </label></ion-col>
 
@@ -30,13 +30,13 @@
     <ion-row>
         <ion-col><label class="checkbox">
                 Swimming
-                <input type="checkbox" name="is_company">
+                <input type="checkbox" [(ngModel)]='searchData.Swimming' name="is_company">
                 <span class="checkroundcheck"></span>
             </label>
         </ion-col>
         <ion-col> <label class="checkbox">
                 Triathlon
-                <input type="checkbox" name="is_company">
+                <input type="checkbox" [(ngModel)]='searchData.Triathlon' name="is_company">
                 <span class="checkroundcheck"></span>
             </label></ion-col>
 
@@ -45,10 +45,10 @@
     <ion-row>
         <ion-item>
             <ion-label>Select</ion-label>
-            <ion-select okText="Okay" [value]="" cancelText="Dismiss">
-                <ion-select-option value="1">Today</ion-select-option>
-                <ion-select-option value="2">This Week</ion-select-option>
-                <ion-select-option value="3">This Month</ion-select-option>
+            <ion-select okText="Okay" [value]="" [(ngModel)]='searchData.Searchfor' cancelText="Dismiss">
+                <ion-select-option value="today">Today</ion-select-option>
+                <ion-select-option value="week">This Week</ion-select-option>
+                <ion-select-option value="month">This Month</ion-select-option>
 
             </ion-select>
         </ion-item>
@@ -65,7 +65,7 @@
         <div style="width: 49%">
             <div class="form-group">
                 <div class='date' id='datetimepicker1'>
-                    <input type='text' class="form-control" value="Start" onfocus="(this.type='date')" onblur="(this.type='text')" />
+                    <input type='text' class="form-control" [(ngModel)]='searchData.StartDate' value="Start" onclick="(this.type='date')" onblur="(this.type='text')" />
                     <span class="addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
@@ -74,7 +74,7 @@
         <div style=" width: 49%; margin-left: 5px !important;">
             <div class="form-group">
                 <div class=' date' id='datetimepicker2'>
-                    <input type='text' class="form-control" value="End" onfocus="(this.type='date')" onblur="(this.type='text')"/>
+                    <input type='text' class="form-control" value="End" [(ngModel)]='searchData.EndDate' onclick="(this.type='date')" onblur="(this.type='text')" />
                     <span class="addon"><span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>

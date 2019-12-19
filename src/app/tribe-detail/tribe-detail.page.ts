@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DataServiceService } from '../services/data-service.service';
 
 @Component({
   selector: 'app-tribe-detail',
@@ -9,13 +10,44 @@ import { Router } from '@angular/router';
   styleUrls: ['./tribe-detail.page.scss'],
 })
 export class TribeDetailPage implements OnInit {
-
+tribe:any;
+participates=[];
   constructor(
+    private activatedRoute: ActivatedRoute, 
+    public dataservice: DataServiceService, 
     private alertCtrl: AlertController,
     private router: Router
-  ) { }
+  ) {
+    this.tribe = {
+      image: "https://www.agora-gallery.com/advice/wp-content/uploads/2015/10/image-placeholder-300x200.png"
+    }
+   }
 
   ngOnInit() {
+    let tribeid = this.activatedRoute.snapshot.paramMap.get('id');
+    tribeid
+    this.dataservice.getTribeDetails(tribeid).then(res => {
+      console.log(res);
+      if (typeof res.data === "string") {
+        res.data = JSON.parse(res.data);
+        console.log("Tribedata", res.data);
+      }
+
+      this.tribe = res.data.data;
+    }, err => {
+      console.log(err);
+    });
+    // this.dataservice.getEventsUsers(tribeid).then(res => {
+    //   if (typeof res.data === "string") {
+    //     res.data = JSON.parse(res.data);
+    //     console.log("data", res.data);
+    //   }
+    //   if (res.data.data.length > 0) {
+    //     this.participates = res.data.data;
+    //   }
+    // }, err => {
+    //   console.log(err);
+    // })
   }
 
   inviteFriends(){

@@ -18,75 +18,14 @@
 
 </ion-segment>
 <ion-content>
-    <!-- <ion-row>
-      <ion-col>
-          <div class="middle-box">
-              <select class="mdb-select md-form colorful-select dropdown-primary" (change)="selectNew()" [(ngModel)]="filterCategory">
-                <option value="-1">All </option>
-            <option *ngFor="let category of categories" value="{{category.TypeID}}">{{category.TypeName}}</option>
-               
-            </select>
-          </div>
-      </ion-col>
-  </ion-row>
-  <div class="col-md-12 col-sm-12 col-xs-12">
-      <div *ngFor="let event of events">
-          <div class="cycling-runners">
-              <a href="#!"><img class="img-responsive" [src]="event.Image" alt="" width="380" height="240"/></a>
-              <div class="Race">
-                  <span>{{event.Title}}</span> <b (click)="getDetails(event.EventID)" style="margin-left: 10px;"> View</b> <span>&nbsp;</span><b (click)="editEvent(event.EventID)"> Edit</b>
-              </div>
-          </div>
-          <div class="shadow-box">
-              <ion-row class="topMargin">
-                  <ion-col>
-                      <div class="col-md-6 col-sm-6 col-xs-6">
-                          <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i> {{event.Date | date: 'dd,MMMM yyyy'}}</a></div>
-                      </div>
-                  </ion-col>
-                  <ion-col>
-                      <div class="col-md-6 col-sm-6 col-xs-6">
-                          <div class="calendar"><a href="#!"><i class="far fa-clock"></i> {{event.StartTime}}</a></div>
-                      </div>
-                  </ion-col>
+    <ion-list>
+        <ion-item *ngFor="let participant of participants">
+            <ion-label>{{ participant.UserName}}</ion-label>
+            <ion-label slot="end">
+                <small> Add Friend </small>
+            </ion-label>
+        </ion-item>
 
-              </ion-row>
-              <ion-row class="topMargin">
-                  <ion-col>
-                      <div class="col-md-6 col-sm-6 col-xs-6">
-                          <div class="calendar">
-                              <a href="#!">
-                                  <i class="fas fa-map-marker-alt"></i> {{event.Location}}
-                              </a>
-                          </div>
-                      </div>
-                  </ion-col>
-              </ion-row>
-              <div class="clearfix"></div>
-              <hr style="margin-top: 0px !important; height: 0.2px !important;" />
-              <ion-row class="topMargin">
-                  <ion-col>
-                      <div class="col-md-6 col-sm-6 col-xs-6">
-                          <div class="calendar"><a href="#!">{{event.TotalJoined}} joined already!</a></div>
-                      </div>
-                  </ion-col>
-                  <ion-col>
-                      <div class="col-md-6 col-sm-6 col-xs-6">
-                          <div class="calendar"><a href="#!"> {{event.TotalInterested}} interested</a></div>
-                      </div>
-                  </ion-col>
-              </ion-row>
-              <div class="clearfix"></div>
-          </div>
-      </div>
-  </div> -->
-
-    <div style="margin-top:35vh">
-        <!--<h4 class="msg" *ngIf="events.length==0 && !loading"> No any data</h4>-->
-        <h4 class="msg" *ngIf="loading">
-            <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
-        </h4>
-
-
-    </div>
+    </ion-list>
+    
 </ion-content>

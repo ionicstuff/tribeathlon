@@ -30,7 +30,7 @@ export class ViewParticipantsPage implements OnInit {
   ngOnInit() {
 
     let eventid = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(eventid);
+    //console.log(eventid);
     
   }
   segmentChanged(event){
@@ -42,17 +42,18 @@ export class ViewParticipantsPage implements OnInit {
 
         UserID: AuthConstants.authenticateData['id'],
         EventID: eventid,
-        Status: status,
+        Status: 'J',
         pageno:0
   
       }
-      console.log(jsonData);
+      //console.log('noddy',jsonData);
       this.dataservice.getEventsUsers(jsonData).then((res: any) => {
         if (typeof res.data === 'string') {
           res.data = JSON.parse(res.data);
         }
         if (res.data.data.length > 0) {
           this.participants = res.data.data;
+          console.log(this.participants);
         } else {
           console.log('No participants');
         }

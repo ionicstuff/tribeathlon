@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title style="text-align: left !important">
+          All Tribes
+      </ion-title>
+      <ion-buttons slot="end" (click)="openFilter()">
+          <ion-button fill="clear" color="light">
+              <ion-icon name="options"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+        <ion-list *ngFor="let tribe of tribes">
+            <ion-item>
+                <p>Tribename here</p>
+            </ion-item>
+        </ion-list>
+    </ion-col>
+</ion-row>
+<ion-row>
+    <ion-col>
+        <div style="margin-top:35vh">
+            <div *ngIf="tribes.length==0 && !loading" class="col-md-6 col-sm-6 col-xs-6" text-center>
+                <h6 class="msg">
+                    There are no Tribes at the moment, create the first one.
+                </h6>
+                <p>
+                    <ion-button expand="block" fill="outline" (click)="createTribe()">
+                        Create Tribe
+                    </ion-button>
+                </p>
+            </div>
+            <h4 class="msg" *ngIf="loading">
+                <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
+            </h4>
+        </div>
+    </ion-col>
+</ion-row>
+</ion-content>

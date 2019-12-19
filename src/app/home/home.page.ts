@@ -1,7 +1,7 @@
 import { Platform } from '@ionic/angular';
 import { AuthConstants } from './../config/auth-constants';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { DataServiceService } from '../services/data-service.service';
 import { OnDestroy, OnInit } from '@angular/core';
@@ -16,11 +16,14 @@ export class HomePage implements OnInit {
   filterPane = false;
   filterData: any;
   parentTypes: any;
-  originalData: any
+  originalData: any;
+  isFiltered: boolean = false;
   constructor(
     public router: Router,
     public dataService: DataServiceService,
     public platform: Platform,
+    private route: ActivatedRoute,
+
     private fcm: FCM
   ) {
 
@@ -79,23 +82,88 @@ export class HomePage implements OnInit {
   }
   ionViewWillEnter() {
     console.log("inithome");
-
-
+    var flag = false;
     this.platform.ready().then(() => {
       this.getParentTypes('E');
-      this.getevents();
+      if (this.route.snapshot.data['special']) {
+        console.log(this.route.snapshot.data['special']);
+        var filterData = { "PTypeID": [] };
+        var filterParams = this.route.snapshot.data['special']
+        if (filterParams.Running !== undefined && filterParams.Running) {
+          filterData["PTypeID"].push(1);
+          flag = true;
+        }
+        if (filterParams.Cycling !== undefined && filterParams.Cycling) {
+          filterData["PTypeID"].push(2);
+          flag = true;
+
+        }
+        if (filterParams.Swimming !== undefined && filterParams.Swimming) {
+          filterData["PTypeID"].push(3);
+          flag = true;
+
+        }
+        if (filterParams.Triathlon !== undefined && filterParams.Triathlon) {
+          filterData["PTypeID"].push(4);
+          flag = true;
+
+        }
+        if (filterParams.Searchfor !== undefined) {
+          filterData['SearchFor'] = filterParams.Searchfor;
+          flag = true;
+
+        } else if (filterParams.Searchfor !== undefined && filterParams.EndDate !== undefined) {
+          filterData['StartDate'] = filterParams.StartDate;
+          filterData['EndDate'] = filterParams.EndDate;
+          flag = true;
+
+        }
+        if (flag) {
+          filterData['EventType'] = "E";
+          filterData['pageno'] = 0;
+          this.dataService.getFilterData(filterData).then(res => {
+            if (typeof res.data === 'string') {
+              res.data = JSON.parse(res.data);
+            }
+            if (res.data.data.length > 0) {
+              //this.originalData = res.data.data;
+              this.events = res.data.data;
+              console.log(this.events);
+            }
+          }, err => {
+            this.loading = false;
+            console.error(err);
+            if (typeof err.error === 'string') {
+              err.error = JSON.parse(err.error);
+            }
+            if (err.error.data.message === "Your session has been expired.") {
+              this.router.navigate(['login']);
+
+            }
+            console.error(err);
+
+          });
+        } else {
+          this.getevents();
+        }
+      }
+      else {
+        this.getevents();
+      }
+
+
+
     });
   }
   getFilter(cmd) {
     console.log(this.filterData);
-    this.openFilter() ;
+    this.openFilter();
     var JsonObj = {};
     if (cmd === "clear") {
       this.events = this.originalData;
     } else {
       if (this.filterData.parentType !== undefined || this.filterData.parentType !== -1) {
-        JsonObj["PTypeID"] = this.filterData.parentType;
-
+        JsonObj["PTypeID[]"] = this.filterData.parentType;
       }
       if (this.filterData.StartDate !== undefined) {
         JsonObj["StartDate"] = this.filterData.StartDate;
@@ -164,39 +232,39 @@ export class HomePage implements OnInit {
     // if (typeof AuthConstants.authenticateData['token'] === "undefined") {
     //   this.router.navigateByUrl("/login");
     // } else {
-      this.dataService.getAllEvents().then(res => {
-        this.loading = false;
-        if (typeof res.data === 'string') {
-          
-          res.data = JSON.parse(res.data);
-        }
-        if (res.data.data.length > 0) {
-          this.originalData = res.data.data
-          this.events = res.data.data;
-        }
+    this.dataService.getAllEvents().then(res => {
+      this.loading = false;
+      if (typeof res.data === 'string') {
 
-        console.log(res);
+        res.data = JSON.parse(res.data);
+      }
+      if (res.data.data.length > 0) {
+        this.originalData = res.data.data
+        this.events = res.data.data;
+      }
 
-      }, err => {
-        this.loading = false;
-        console.error(err);
-        if (typeof err.error === 'string') {
-          err.error = JSON.parse(err.error);
-        }
-        if (err.error.data.message === "Your session has been expired.") {
-          this.router.navigate(['login']);
+      console.log(res);
 
-        }
-        console.error(err);
-      });
-    }
+    }, err => {
+      this.loading = false;
+      console.error(err);
+      if (typeof err.error === 'string') {
+        err.error = JSON.parse(err.error);
+      }
+      if (err.error.data.message === "Your session has been expired.") {
+        this.router.navigate(['login']);
 
-    viewparticipants(id){
-      this.router.navigateByUrl("/view-participants/" + id);
-    }
-    goToCreate(){
-      this.router.navigateByUrl("/addevent");
-    }
+      }
+      console.error(err);
+    });
+  }
+
+  viewparticipants(id) {
+    this.router.navigateByUrl("/view-participants/" + id);
+  }
+  goToCreate() {
+    this.router.navigateByUrl("/addevent");
+  }
   //}
 
 }

@@ -15,7 +15,8 @@ export class AddtribePage implements OnInit {
   tribesData: any;
   SelectedfrndList = [];
   frndlist: any;
-  constructor(public alertController: AlertController,
+  constructor(
+    public alertController: AlertController,
     public dataService: DataServiceService,
     public Ui: UiserviceService,
     public router:Router
@@ -26,7 +27,11 @@ export class AddtribePage implements OnInit {
       Visibility: undefined,
       RegionID:1
     };
+    if (typeof AuthConstants.authenticateData['token'] === 'undefined') {
+      this.router.navigate(['login']);
+    } else {
     this.getFriends();
+    }
   }
   initdata(frnd) {
     frnd["isChecked"] = false;

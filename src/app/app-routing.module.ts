@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { DataResolverService } from './resolver/data-resolver.service';
 
 const routes: Routes = [
   {
@@ -9,6 +10,13 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  },
+  {
+    path: 'home/:id',
+    resolve: {
+      special: DataResolverService
+    },
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
@@ -40,8 +48,11 @@ const routes: Routes = [
   { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventPageModule' },
   { path: 'search-page', loadChildren: './search-page/search-page.module#SearchPagePageModule' },
   { path: 'view-participant', loadChildren: './view-participant/view-participant.module#ViewParticipantPageModule' },
-  { path: 'view-participants/:id', loadChildren: './view-participants/view-participants.module#ViewParticipantsPageModule' },  { path: 'tribe-detail', loadChildren: './tribe-detail/tribe-detail.module#TribeDetailPageModule' },
+  { path: 'view-participants/:id', loadChildren: './view-participants/view-participants.module#ViewParticipantsPageModule' },
+  { path: 'tribe-detail/:id', loadChildren: './tribe-detail/tribe-detail.module#TribeDetailPageModule' },
   { path: 'tribeinvite', loadChildren: './tribeinvite/tribeinvite.module#TribeinvitePageModule' },
+  { path: 'commontribes', loadChildren: './commontribes/commontribes.module#CommontribesPageModule' },
+
 
 
 
