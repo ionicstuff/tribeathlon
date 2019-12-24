@@ -66,6 +66,8 @@ export class HomePage implements OnInit {
     this.fcm.unsubscribeFromTopic('enappd');
   }
   //
+
+
   openFilter() {
     if (this.filterPane) {
       this.filterPane = false;
@@ -75,12 +77,14 @@ export class HomePage implements OnInit {
     }
   }
   ngOnInit() {
-
+    console.log('I am in ngOnInit');
+    console.log(this.route.snapshot.data['special']);
   }
   getDetails(id) {
     this.router.navigateByUrl("/event-details/" + id);
   }
   ionViewWillEnter() {
+    
     console.log("inithome");
     var flag = false;
     this.platform.ready().then(() => {
@@ -121,6 +125,8 @@ export class HomePage implements OnInit {
         if (flag) {
           filterData['EventType'] = "E";
           filterData['pageno'] = 0;
+          console.log('I am in flag condition now');
+          console.log(filterData);
           this.dataService.getFilterData(filterData).then(res => {
             if (typeof res.data === 'string') {
               res.data = JSON.parse(res.data);
@@ -144,10 +150,11 @@ export class HomePage implements OnInit {
 
           });
         } else {
-          this.getevents();
+          console.log('I think the flag is not set');
         }
       }
       else {
+        console.log('I think the special is not set');
         this.getevents();
       }
 

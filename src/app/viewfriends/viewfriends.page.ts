@@ -40,4 +40,8 @@ export class ViewfriendsPage implements OnInit {
     });
   }
 
+  goToInviteFriends(){
+    console.log('redirect to [all users] list');
+  }
+
 }

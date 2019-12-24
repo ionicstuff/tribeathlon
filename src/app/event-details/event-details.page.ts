@@ -3,6 +3,7 @@ import { AuthConstants } from './../config/auth-constants';
 import { DataServiceService } from './../services/data-service.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-event-details',
@@ -16,7 +17,8 @@ export class EventDetailsPage implements OnInit {
     private activatedRoute: ActivatedRoute, 
     public dataservice: DataServiceService, 
     public Ui: UiserviceService,
-    private router: Router
+    private router: Router,
+    public alertController: AlertController
     ) {
     this.event = {
       image: "https://www.agora-gallery.com/advice/wp-content/uploads/2015/10/image-placeholder-300x200.png"
@@ -95,5 +97,37 @@ export class EventDetailsPage implements OnInit {
   viewparticipants(id){
     this.router.navigateByUrl("/view-participants/" +id);
   }
+  async LeaveEvent(eId){
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Message <strong>text</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.sendLeave();
+          }
+        }
+      ]
+    });
 
+    await alert.present();
+    
+  }
+  sendLeave(){
+    console.log('leave event');
+    this.router.navigateByUrl("/home");
+  }
+  inviteFriends(){
+    console.log("go to invite friends page");
+    this.router.navigateByUrl("/invite");
+  }
 }

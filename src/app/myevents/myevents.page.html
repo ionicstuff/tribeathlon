@@ -5,7 +5,7 @@
         </ion-buttons>
         <ion-title style="text-align: left !important">
             My Events/Training
-        </ion-title>
+        </ion-title> 
     </ion-toolbar>
 </ion-header>
 <ion-row style="text-align: center; background: #eeeeef; color: rgb(0, 0, 0);">
@@ -86,7 +86,7 @@
                 <div style="margin-top:20vh">
                     <div *ngIf="events.length==0 && !loading" class="col-md-6 col-sm-6 col-xs-6" text-center>
                         <h6 class="msg">
-                            You have not created any event yet, create your first event now.
+                            You have not created any {{pageTitle}} yet, create your first {{pageTitle}} now.
                         </h6>
                         <p>
                             <ion-button expand="block" fill="outline" (click)="goToCreate()">

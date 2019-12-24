@@ -34,16 +34,36 @@
     </ion-segment-button>
 </ion-segment>
 <ion-content>
-    
-    <ion-row>
-        <ion-col>
-            <ion-list *ngFor="let tribe of tribes">
-                <ion-item>
-                    <p>Tribename here</p>
-                </ion-item>
-            </ion-list>
-        </ion-col>
-    </ion-row>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div *ngFor="let tribe of tribes">
+            <div class="cycling-runners">
+                <a href="#!"><img class="img-responsive" [src]="tribe.Image" alt="" width="380" height="240" /></a>
+                <div class="Race">
+                    <span>{{tribe.Name}}</span> <b (click)="goToTribe(tribe.TribeID)"> View</b>
+                </div>
+            </div>
+            <div class="shadow-box">
+                <ion-row class="topMargin">
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i>
+                                    {{tribe.CreateDate | date: 'dd, MMMM yyyy'}}</a></div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="calendar">&nbsp;</div>
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+    </div>
     <ion-row>
         <ion-col>
             <div style="margin-top:35vh">

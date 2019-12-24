@@ -37,9 +37,10 @@
                         <!-- <div class="form-group">
                         <input type="text" class="form-control" placeholder="Location id" name="first_name">
                     </div> -->
+                    
                         <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Event Types" [(ngModel)]="commonData.EventType" [ngModelOptions]="{standalone: true}" (change)=" getParentTypes(commonData.EventType) ">
-                            <option value="-1" selected>Event type</option>
-                            <option *ngFor="let eventType of eventTypes " value="{{eventType.value}}">{{eventType.name}}
+                            <option value="-1" >Event type</option>
+                            <option *ngFor="let eventType of eventTypes" value="{{eventType.value}}">{{eventType.name}}
                             </option>
                         </select>
                         <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Parent Category" [(ngModel)]="commonData.ParentTypeID" [ngModelOptions]="{standalone: true}" (change)=" getchildTypes(commonData.ParentTypeID) ">
@@ -121,11 +122,11 @@
                                     </label>
 
                         </div>
-                        <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Invitation to* " [(ngModel)]="commonData.InvitationType" [ngModelOptions]="{standalone: true}" (change)="selectinviteData(commonData.InvitationType)">
+                        <!-- <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Invitation to* " [(ngModel)]="commonData.InvitationType" [ngModelOptions]="{standalone: true}" (change)="selectinviteData(commonData.InvitationType)">
                             <option value="-1">Invitation to </option>
                             <option value="F">Friends </option>
                             <option value="T">Tribes </option>
-                        </select>
+                        </select> -->
                         <div *ngIf="commonData.EventType=='E'">
                             <div class="form-group ">
                                 <input type="text " class="form-control " placeholder="Total Distance (Meters)* " [(ngModel)]="eventData.TotalDistance" [ngModelOptions]="{standalone: true}">
@@ -137,7 +138,7 @@
                             <div class="form-group ">
 
                                 <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Competitor Type*  " *ngIf="commonData.ParentTypeID ==='1' || commonData.ParentTypeID ==='2'" [(ngModel)]="eventData.CompetitorType" [ngModelOptions]="{standalone: true}">
-                                    <option value="">-Select Competitor Type-</option>
+                                    <option value="-1">Select Competitor Type</option>
                                     <option value="Amatuer">Amatuer</option>
                                     <option value="Professional">Professional</option>
                                     <option value="Family Friendly">Family Friendly</option>
@@ -145,8 +146,13 @@
                             </div>
                             <div class="form-group ">
 
-                                <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Ride type*   " *ngIf="commonData.ParentTypeID ==='2'" [(ngModel)]="eventData.RideType" [ngModelOptions]="{standalone: true}">
-                                    <option value="">-select-</option>
+                                <select 
+                                class="mdb-select md-form colorful-select dropdown-primary2" 
+                                placeholder="Ride type*   " *ngIf="commonData.ParentTypeID ==='2'" 
+                                [(ngModel)]="eventData.RideType" 
+                                [ngModelOptions]="{standalone: true}"
+                                >
+                                    <option value="-1">Select Ride Type</option>
                                     <option value="Beginner or Family Ride">Beginner or Family Ride</option>
                                     <option value="Campaigning Event">Campaigning Event</option>
                                     <option value="Road">Road</option>
@@ -162,8 +168,14 @@
                             <div class="form-group ">
 
 
-                                <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Wet suit*  " *ngIf="commonData.ParentTypeID ==3" [(ngModel)]="eventData.Wetsuit" [ngModelOptions]="{standalone: true}">
-                                    <option value="">-select-</option>
+                                <select 
+                                class="mdb-select md-form colorful-select dropdown-primary2" 
+                                placeholder="Wet suit*  " 
+                                *ngIf="commonData.ParentTypeID ==3" 
+                                [(ngModel)]="eventData.Wetsuit" 
+                                [ngModelOptions]="{standalone: true}"
+                                >
+                                    <option value="-1">Wet Suit</option>
                                     <option value="Compulsory">Compulsory</option>
                                     <option value="Optional">Optional</option>
                                     <option value="Prohibited">Prohibited</option>
@@ -176,11 +188,21 @@
                             <div class="form-group ">
                                 <input type="text " class="form-control " placeholder="Approx Speed (Time Per 100 Meters)* " [(ngModel)]="trainingData.Speed" [ngModelOptions]="{standalone: true}">
                             </div>
-                            <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="FoodStop* " [(ngModel)]="trainingData.FoodStop" [ngModelOptions]="{standalone: true}">
+                            <select 
+                            class="mdb-select md-form colorful-select dropdown-primary2" 
+                            placeholder="FoodStop* " 
+                            [(ngModel)]="trainingData.FoodStop"
+                            [ngModelOptions]="{standalone: true}"
+                            >
                                 <option value="Y">Yes </option>
                                 <option value="N">NO </option>
                             </select>
-                            <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="CanICome* " [(ngModel)]="trainingData.CanICome" [ngModelOptions]="{standalone: true}">
+                            <select 
+                            class="mdb-select md-form colorful-select dropdown-primary2" 
+                            placeholder="CanICome* " 
+                            [(ngModel)]="trainingData.CanICome" 
+                            [ngModelOptions]="{standalone: true}"
+                            >
                                 <option value="Y">Yes </option>
                                 <option value="N">NO </option>
                                 <option value="R">REQUEST </option>

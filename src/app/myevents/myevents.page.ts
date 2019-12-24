@@ -22,6 +22,7 @@ export class MyeventsPage implements OnInit {
   trainingStyle = { 'border-bottom': '0px solid #767be5' };
   filterCategory = -1;
   trainingparent;
+  pageTitle = 'Event/Training';
   constructor(
     public dataService: DataServiceService,
     public Ui: UiserviceService,
@@ -75,26 +76,29 @@ export class MyeventsPage implements OnInit {
   }
   toggle(page) {
     this.selected = page;
-    if (page === 'event') {
-
-      this.eventStyle = { 'border-bottom': '2px solid #fff' };
+    
+    if (page == 'event') {
+      console.log(this.selected);
+      this.eventStyle = { 'border-bottom': '2px solid #767be5' };
       this.trainingStyle = { 'border-bottom': '0px solid #fff' };
       this.categories = this.eventParent;
       this.filterParams.eventType = 'E';
+      this.pageTitle = 'Events';
+      //this.filterData(this.filterParams);
 
-      this.filterData(this.filterParams);
-
-
+      //calling api for myEvents here
+      this.getMyevents();
     } else {
-
-
       this.eventStyle = { 'border-bottom': '0px solid #fff' };
-      this.trainingStyle = { 'border-bottom': '2px solid #fff' };
+      this.trainingStyle = { 'border-bottom': '2px solid #767be5' };
       this.categories = this.trainingParent;
       this.filterParams.eventType = 'T';
-      this.filterData(this.filterParams);
-
-
+      this.pageTitle = 'Training';
+      //this.filterData(this.filterParams);
+      console.log(this.selected);
+      
+      //Calling api for Trainings here
+      this.getMyevents();
     }
 
   }

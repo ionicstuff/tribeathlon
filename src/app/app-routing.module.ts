@@ -51,7 +51,8 @@ const routes: Routes = [
   { path: 'view-participants/:id', loadChildren: './view-participants/view-participants.module#ViewParticipantsPageModule' },
   { path: 'tribe-detail/:id', loadChildren: './tribe-detail/tribe-detail.module#TribeDetailPageModule' },
   { path: 'tribeinvite', loadChildren: './tribeinvite/tribeinvite.module#TribeinvitePageModule' },
-  { path: 'commontribes', loadChildren: './commontribes/commontribes.module#CommontribesPageModule' },
+  { path: 'commontribes', loadChildren: './commontribes/commontribes.module#CommontribesPageModule' },  { path: 'invite', loadChildren: './invite/invite.module#InvitePageModule' },
+
 
 
 

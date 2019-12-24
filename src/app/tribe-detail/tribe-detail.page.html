@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
   </ion-buttons>
     <ion-title style="text-align: left !important">
-      Tribe Name
+      {{tribe.Name}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,14 +13,13 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <div>
       <div class="cycling-runners">
-        <a href="#!"><img class="img-responsive" src="../../assets/images/running01.jpg" alt="" width="380"
-            height="240" /></a>
+        <a href="#!"><img class="img-responsive" [src]="tribe.Image" alt="" width="380" height="240" /></a>
 
       </div>
       <div class="topMarginplus">
-        <h3 class="purple">Tribe Title</h3>
-        <p>Sam created on 07 December, 2019</p>
-        <p>232 Members Joined</p>
+        <h3 class="purple">{{tribe.Name}}</h3>
+        <p>{{tribe.UserName}} created on {{tribe.CreateDate}}</p>
+        <p>{{tribe.TotalJoined}} Members Joined</p>
 
       </div>
       <div class="shadow-box">       
@@ -31,16 +30,13 @@
         <ion-row class="topmargin">
           <ion-col>
 
-            <p class="ion-text-justify">It is a long established fact that a reader will be distracted
-              by the readable content of a page when looking at its layout. The point of using Lorem Ipsum
-              is that it has a more-or-less normal distribution of letters,
-              as opposed to using 'Content here, content here', making it look like readable English.</p>
+            <p class="ion-text-justify">{{ tribe.Description }}</p>
           </ion-col>
         </ion-row>
         <div class="clearfix"></div>
       </div>
     </div>
-    <ion-row class="topMargin">
+    <!-- <ion-row class="topMargin">
       <ion-col class="col-md-12">
         <ion-item>
           <ion-label>
@@ -64,7 +60,7 @@
           <ion-icon name="close-circle" slot="end"></ion-icon>
         </ion-item>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row class="topMarginplus topMargindown">
       <ion-col class="col-md-12">
         <ion-button expand="block" fill="outline" (click)="inviteFriends()">Invite Friends</ion-button>
@@ -73,7 +69,5 @@
         <ion-button expand="block" fill="outline" (click)="presentAlertConfirm()">Leave Tribe</ion-button>
       </ion-col>
     </ion-row>
-
-
   </div>
 </ion-content>

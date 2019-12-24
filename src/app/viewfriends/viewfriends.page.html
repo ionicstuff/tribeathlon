@@ -20,6 +20,26 @@
                     </div>
                 </div>
             </div>
+
+            <ion-row>
+                <ion-col>
+                    <div style="margin-top:20vh">
+                        <div *ngIf="friends.length==0 && !loading" class="col-md-6 col-sm-6 col-xs-6" text-center>
+                            <h6 class="msg">
+                                You have no friends at the moment, click here to add few.
+                            </h6>
+                            <p>
+                                <ion-button expand="block" fill="outline" (click)="goToInviteFriends()">
+                                    Invite friends
+                                </ion-button>
+                            </p>
+                        </div>
+                        <h4 class="msg" *ngIf="loading">
+                            <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
+                        </h4>
+                    </div>
+                </ion-col>
+            </ion-row>
         
     </ion-row>
 </ion-content>

@@ -76,7 +76,7 @@
                     </ion-col>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"> Decipline: Runnig</a></div>
+                            <div class="calendar"><a href="#!"> Decipline: Running</a></div>
                         </div>
                     </ion-col>
 
@@ -134,8 +134,11 @@
         </div>
         <ion-row class="topMargin">
             <div class="col-md-6 col-sm-6 col-xs-6">
-                <ion-button expand="block" fill="outline" (click)="joinEvent('J')">
-                    {{event.IsJoined == "1"?'Joined':'Join'}}
+                <ion-button expand="block" fill="outline" (click)="joinEvent('J')" *ngIf="event.IsJoined !=1">
+                    Join
+                </ion-button>
+                <ion-button expand="block" fill="outline" (click)="LeaveEvent(event.EventID)" *ngIf="event.IsJoined ==1">
+                    Leave
                 </ion-button>
                 <ion-button expand="block" fill="outline" (click)="joinEvent('I')">
                     {{event.IsInterested == "1"?'Not Interested':'Interested'}}</ion-button>
@@ -143,9 +146,16 @@
 
         </ion-row>
         <ion-row class="topMarginplus topMargindown">
-            <div class="col-md-6 col-sm-6 col-xs-6">
+            <ion-col>
+             <div class="col-md-6 col-sm-6 col-xs-6">
                 <span (click)="viewparticipants(event.EventID)" class="purple">View participants</span>
             </div>
+        </ion-col>
+        <ion-col>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <span (click)="inviteFriends()" class="purple">Invite Friends</span>
+            </div>
+        </ion-col>
         </ion-row>
         <!-- <ion-row class="topmargin" *ngIf="participates.length > 0">
             <h4>

@@ -13,3 +13,4 @@ export class DataResolverService implements Resolve<any> {
     return this.dataService.getData(id);
   }
 }
+ 

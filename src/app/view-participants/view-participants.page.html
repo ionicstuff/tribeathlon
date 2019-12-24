@@ -9,7 +9,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-segment (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="joined">
+    <ion-segment-button value="joined" [ngStyle]="eventStyle">
         <ion-label>Joined</ion-label>
     </ion-segment-button>
     <ion-segment-button value="interested">
@@ -20,10 +20,12 @@
 <ion-content>
     <ion-list>
         <ion-item *ngFor="let participant of participants">
-            <ion-label>{{ participant.UserName}}</ion-label>
-            <ion-label slot="end">
-                <small> Add Friend </small>
-            </ion-label>
+            <ion-label>{{ participant.UserName }}</ion-label>
+            <ion-buttons slot="end" (click)="addFriend(participant.UserID)" *ngIf="participant.IsFriend!=0">
+                <ion-button fill="clear">
+                    <ion-icon name="person-add"></ion-icon>
+                </ion-button>
+            </ion-buttons>
         </ion-item>
 
     </ion-list>

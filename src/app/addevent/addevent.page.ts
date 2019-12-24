@@ -74,6 +74,7 @@ export class AddeventPage implements OnInit {
         InvitationType: undefined,
   
       };
+      this.commonData.EventType='-1';
       this.eventData = {
   
         TotalDistance: undefined,
@@ -87,6 +88,16 @@ export class AddeventPage implements OnInit {
         FoodStop: undefined,
         CanIcome: undefined
       };
+
+      this.commonData.ParentTypeID = '-1';
+      this.commonData.ChildTypeID='-1';
+      this.commonData.RegionID='-1';
+      this.commonData.Visibility='O';
+      this.commonData.InvitationType='-1';
+      this.eventData.CompetitorType='-1';
+      this.eventData.RideType = '-1';
+      this.eventData.Wetsuit = '-1';
+      this.trainingData.FoodStop = 'N';
   
       this.dataService.getregions().then((res: any) => {
         console.log(res);

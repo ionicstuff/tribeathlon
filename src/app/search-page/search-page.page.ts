@@ -80,47 +80,11 @@ export class SearchPagePage implements OnInit {
   getFilter(cmd) {
     console.log(this.filterData);
 
-    var JsonObj = {};
-    if (cmd === "clear") {
-      this.events = this.originalData;
-    } else {
-      if (this.filterData.parentType !== undefined || this.filterData.parentType !== -1) {
-        JsonObj["PTypeID"] = this.filterData.parentType;
-
-      }
-      if (this.filterData.StartDate !== undefined) {
-        JsonObj["StartDate"] = this.filterData.StartDate;
-
-      }
-
-      if (this.filterData.EndDate !== undefined) {
-        JsonObj["EndDate"] = this.filterData.EndDate;
-
-      }
-      JsonObj['EventType'] = "E";
-      JsonObj['pageno'] = 0;
-      this.dataService.getFilterData(JsonObj).then(res => {
-        if (typeof res.data === 'string') {
-          res.data = JSON.parse(res.data);
-        }
-        if (res.data.data.length > 0) {
-          this.originalData = res.data.data;
-          this.events = res.data.data;
-          console.log(this.events);
-        }
-      }, err => {
-        this.loading = false;
-        console.error(err);
-        if (typeof err.error === 'string') {
-          err.error = JSON.parse(err.error);
-        }
-        if (err.error.data.message === "Your session has been expired.") {
-          this.router.navigate(['login']);
-
-        }
-        console.error(err);
-      })
+    if(cmd=='search'){
+      console.log('I am in search now and can perform search here');
     }
+
+    
 
   }
 }

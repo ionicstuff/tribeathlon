@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../services/data-service.service';
 import { Platform } from '@ionic/angular';
 import { AuthConstants } from '../config/auth-constants';
+import { UiserviceService } from '../services/uiservice.service';
 
 @Component({
   selector: 'app-view-participants',
@@ -22,6 +23,7 @@ export class ViewParticipantsPage implements OnInit {
     public router: Router,
     public dataservice: DataServiceService,
     public platform: Platform,
+    public Ui: UiserviceService,
     private activatedRoute: ActivatedRoute 
   ) { 
     this.segmentChanged('joined');
@@ -58,7 +60,7 @@ export class ViewParticipantsPage implements OnInit {
           console.log('No participants');
         }
       }, err => {
-        console.log(err);
+        
         console.error(err);
         if (typeof err.error === 'string') {
           err.error = JSON.parse(err.error);
@@ -71,6 +73,23 @@ export class ViewParticipantsPage implements OnInit {
       });
     }
     
+  }
+
+  addFriend(otherUserId){
+    console.log(otherUserId);
+    var JsonData = {
+      FriendUserID: otherUserId,
+      UserID: AuthConstants.authenticateData['id']
+    }
+
+    this.dataservice.addFriend(JsonData).then(res => {
+      console.log(res);
+      this.Ui.showAlert("Friend Reuest sent");
+    }, err => {
+      console.log(err);
+      this.Ui.showAlert("Something went wrong", 0);
+
+    })
   }
 
 }
