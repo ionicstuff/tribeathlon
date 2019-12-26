@@ -1,67 +1,51 @@
 <ion-header>
-  <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title style="text-align: left !important">
-          Invite Friends / Tribes
-      </ion-title> 
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title style="text-align: left !important">
+            Invite Friends / Tribes
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
-<ion-row style="text-align: center; background: #eeeeef; color: rgb(0, 0, 0);">
-  <ion-col size="6" style="padding: 15px;" (click)="toggle('event')" [ngStyle]="eventStyle">
-      <span> Friends</span>
-  </ion-col>
-  <ion-col size="6" style="padding: 15px;" (click)="toggle('training')" [ngStyle]="trainingStyle">
-      <span>Tribes</span>
-  </ion-col>
-</ion-row>
+<ion-segment color="purple" [(ngModel)]="inviteFT">
+    <ion-segment-button value="Friends">
+        <ion-label>
+            Friends
+        </ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Tribes">
+        <ion-label>
+            Tribes
+        </ion-label>
+    </ion-segment-button>
+</ion-segment>
 
 <ion-content>
-  <ion-list>
-    <ion-item text-wrap *ngFor="let item of friends" >
-        <ion-label>
-            {{ item.Name }} 
-            <button class="item-cover disable-hover" ion-button="item-cover" type="button" (click)="edit()">
-                <span class="button-inner"></span>
-                <div class="button-effect"></div>
-            </button>
-        </ion-label>
-        <ion-checkbox color="royal" checked="false"></ion-checkbox>
-    </ion-item>
-    <ion-item text-wrap *ngFor="let item of tribes">
-      <ion-label>
-          {{ item.Name }} 
-          <button class="item-cover disable-hover" ion-button="item-cover" type="button" (click)="edit()">
-              <span class="button-inner"></span>
-              <div class="button-effect"></div>
-          </button>
-      </ion-label>
-      <ion-checkbox color="royal" checked="false"></ion-checkbox>
-  </ion-item>
-</ion-list>
-<ion-row class="topMargin">
-  <div class="col-md-6 col-sm-6 col-xs-6">
-      <ion-button expand="block" fill="outline">
-          Invite
-      </ion-button>
-     
-  </div>
+    <div [ngSwitch]="inviteFT">
+        <div *ngSwitchCase="'Friends'">
+            <ion-list>
+                <ion-item *ngFor="let f of friends">
+                    {{f.Name}}
+                </ion-item>
 
-</ion-row>
-  <!-- <ion-row>
-          <ion-col>
-              <div style="margin-top:20vh">
-                  <div *ngIf="events.length==0 && !loading" class="col-md-6 col-sm-6 col-xs-6" text-center>
-                      <h6 class="msg">
-                          You have no Friends.
-                      </h6>
-                     
-                  </div>
-                  <h4 class="msg" *ngIf="loading">
-                      <ion-spinner color="purple" *ngIf="loading" name="crescent"></ion-spinner>
-                  </h4>
-              </div>
-          </ion-col>
-      </ion-row> -->
+            </ion-list>
+        </div>
+        <div *ngSwitchCase="'Tribes'">
+            <ion-list>
+                <ion-item *ngFor="let tribe of tribes">
+                    {{tribe.Name}}
+                </ion-item>
+            </ion-list>
+        </div>
+        <div *ngSwitchDefault>
+            <ion-list>
+                <ion-item *ngFor="let f of friends">
+                    {{f.Name}}
+                </ion-item>
+
+            </ion-list>
+        </div>
+
+    </div>
 </ion-content>

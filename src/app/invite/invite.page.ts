@@ -12,49 +12,58 @@ export class InvitePage implements OnInit {
   selected = 'event';
   eventStyle = { 'border-bottom': '2px solid #767be5' };
   trainingStyle = { 'border-bottom': '0px solid #767be5' };
+  inviteFT:string;
   
-  friends:any;
+  //friends:any;
+  friends=[
+    {Name:'John'},
+    {Name:'Kevin'},
+    {Name:'Anand'},
+    {Name:'Mike'},
+    {Name:'Henry'},
+  ];
   
   tribes:any;
+  loading=true;
   constructor(
     public dataService: DataServiceService,
     public Ui: UiserviceService,
     public router: Router,
     public activatedRoute: ActivatedRoute
-  ) { }
+  ) { 
+    this.inviteFT = 'Friends';
+    this.getTribes();
+  }
+
+  ionVieWillEnter(){
+    console.log('I am in default view');
+    
+  }
 
   ngOnInit() {
   }
 
-  toggle(page) {
-    this.selected = page;
-    
-    if (page == 'event') {
+  getTribes(){
+    this.dataService.getTribes().then(res => {
+      this.loading= false;
+      //console.log(res);
       
-      console.log(this.selected);
-      this.eventStyle = { 'border-bottom': '2px solid #767be5' };
-      this.trainingStyle = { 'border-bottom': '0px solid #fff' };
-     this.friends=[
-        {Name:'John'},
-        {Name:'Kevin'},
-        {Name:'Anand'},
-        {Name:'Mike'},
-        {Name:'Henry'},
-      ];
-      
-    } else {
-      
-      this.eventStyle = { 'border-bottom': '0px solid #fff' };
-      this.trainingStyle = { 'border-bottom': '2px solid #767be5' };
-      this.tribes=[
-        {Name:'Tribe 1'},
-        {Name:'Tribe 2'},
-        {Name:'Tribe 3'},
-        {Name:'Tribe 4'},
-        {Name:'Tribe 5'},
-      ];
-    }
-
+      if (typeof res.data === 'string') {
+        res.data = JSON.parse(res.data);
+      }
+      if(res.data.success==="1"){
+        console.log(res.data);
+        this.tribes = res.data.data;
+        console.log(this.tribes);
+      }else{
+        //this.Ui.showAlert("No data found",0)
+        console.log('No data found');
+      }
+    }, err => {
+      console.log(err);
+      this.loading= false;
+      this.Ui.showAlert('Something Went wrong');
+    })
   }
 
 }
