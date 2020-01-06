@@ -15,15 +15,16 @@ export class InvitePage implements OnInit {
   inviteFT:string;
   
   //friends:any;
-  friends=[
-    {Name:'John'},
-    {Name:'Kevin'},
-    {Name:'Anand'},
-    {Name:'Mike'},
-    {Name:'Henry'},
-  ];
+  // friends=[
+  //   {Name:'John'},
+  //   {Name:'Kevin'},
+  //   {Name:'Anand'},
+  //   {Name:'Mike'},
+  //   {Name:'Henry'},
+  // ];
   
   tribes:any;
+  friends:any;
   loading=true;
   constructor(
     public dataService: DataServiceService,
@@ -33,6 +34,7 @@ export class InvitePage implements OnInit {
   ) { 
     this.inviteFT = 'Friends';
     this.getTribes();
+    this.getFriends();
   }
 
   ionVieWillEnter(){
@@ -54,10 +56,32 @@ export class InvitePage implements OnInit {
       if(res.data.success==="1"){
         console.log(res.data);
         this.tribes = res.data.data;
-        console.log(this.tribes);
+        console.log(this.tribes.length);
       }else{
         //this.Ui.showAlert("No data found",0)
         console.log('No data found');
+      }
+    }, err => {
+      console.log(err);
+      this.loading= false;
+      this.Ui.showAlert('Something Went wrong');
+    })
+  }
+  getFriends(){
+    this.dataService.getMyFriends().then(res => {
+      this.loading= false;
+      //console.log(res);
+      
+      if (typeof res.data === 'string') {
+        res.data = JSON.parse(res.data);
+      }
+      if(res.data.success==="1"){
+        console.log(res.data);
+        this.friends = res.data.data;
+        console.log(this.friends.length);
+      }else{
+        //this.Ui.showAlert("No data found",0)
+        console.log(res.data.success);
       }
     }, err => {
       console.log(err);

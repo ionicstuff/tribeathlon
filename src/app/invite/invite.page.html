@@ -27,25 +27,49 @@
             <ion-list>
                 <ion-item *ngFor="let f of friends">
                     {{f.Name}}
+                    <ion-checkbox slot="start"></ion-checkbox>
                 </ion-item>
-
             </ion-list>
+            <div class="col-md-12">
+                <ion-button 
+                    expand="block" 
+                    fill="outline" 
+                    class="md button button-block button-outline ion-activatable ion-focusable hydrated">
+                    Invite Friends
+                </ion-button>
+            </div>
         </div>
         <div *ngSwitchCase="'Tribes'">
             <ion-list>
                 <ion-item *ngFor="let tribe of tribes">
                     {{tribe.Name}}
+                    <ion-checkbox slot="start"></ion-checkbox>
                 </ion-item>
             </ion-list>
+            <div class="col-md-12">
+                <ion-button 
+                    expand="block" 
+                    fill="outline" 
+                    class="md button button-block button-outline ion-activatable ion-focusable hydrated">
+                    Invite Tribes
+                </ion-button>
+                </div>         
         </div>
         <div *ngSwitchDefault>
             <ion-list>
                 <ion-item *ngFor="let f of friends">
                     {{f.Name}}
-                </ion-item>
-
+                    <ion-checkbox slot="start"></ion-checkbox>
+                </ion-item>                
             </ion-list>
+            <div class="col-md-12">
+                <ion-button 
+                    expand="block" 
+                    fill="outline" 
+                    class="md button button-block button-outline ion-activatable ion-focusable hydrated">
+                    Invite Friends
+                </ion-button>
+            </div>          
         </div>
-
     </div>
 </ion-content>

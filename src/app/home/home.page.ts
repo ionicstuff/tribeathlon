@@ -32,9 +32,9 @@ export class HomePage implements OnInit {
       .then(() => {
         this.fcm.onNotification().subscribe(data => {
           if (data.wasTapped) {
-            console.log("Received in background");
+            //console.log("Received in background");
           } else {
-            console.log("Received in foreground");
+            //console.log("Received in foreground");
           };
         });
 
@@ -77,41 +77,45 @@ export class HomePage implements OnInit {
     }
   }
   ngOnInit() {
-    console.log('I am in ngOnInit');
-    console.log(this.route.snapshot.data['special']);
+    //console.log('I am in ngOnInit');
+    //console.log(this.route.snapshot.data['special']);
   }
   getDetails(id) {
     this.router.navigateByUrl("/event-details/" + id);
   }
   ionViewWillEnter() {
     
-    console.log("inithome");
+    //console.log("inithome");
     var flag = false;
     this.platform.ready().then(() => {
       this.getParentTypes('E');
       if (this.route.snapshot.data['special']) {
-        console.log(this.route.snapshot.data['special']);
-        var filterData = { "PTypeID": [] };
-        var filterParams = this.route.snapshot.data['special']
-        if (filterParams.Running !== undefined && filterParams.Running) {
-          filterData["PTypeID"].push(1);
+        //console.log(this.route.snapshot.data['special']);
+        var filterData = { };
+        var filterParams = this.route.snapshot.data['special'];
+        if (filterParams.parentType !== undefined || filterParams.parentType !== -1) {
+          filterData["PTypeID[]"] = filterParams.parentType;
           flag = true;
         }
-        if (filterParams.Cycling !== undefined && filterParams.Cycling) {
-          filterData["PTypeID"].push(2);
-          flag = true;
+        // if (filterParams.Running !== undefined && filterParams.Running) {
+        //   filterData["PTypeID"].push(1);
+        //   flag = true;
+        // }
+        // if (filterParams.Cycling !== undefined && filterParams.Cycling) {
+        //   filterData["PTypeID"].push(2);
+        //   flag = true;
 
-        }
-        if (filterParams.Swimming !== undefined && filterParams.Swimming) {
-          filterData["PTypeID"].push(3);
-          flag = true;
+        // }
+        // if (filterParams.Swimming !== undefined && filterParams.Swimming) {
+        //   filterData["PTypeID"].push(3);
+        //   flag = true;
 
-        }
-        if (filterParams.Triathlon !== undefined && filterParams.Triathlon) {
-          filterData["PTypeID"].push(4);
-          flag = true;
+        // }
+        // if (filterParams.Triathlon !== undefined && filterParams.Triathlon) {
+        //   filterData["PTypeID"].push(4);
+        //   flag = true;
 
-        }
+        // }
         if (filterParams.Searchfor !== undefined) {
           filterData['SearchFor'] = filterParams.Searchfor;
           flag = true;
@@ -132,7 +136,7 @@ export class HomePage implements OnInit {
               res.data = JSON.parse(res.data);
             }
             if (res.data.data.length > 0) {
-              //this.originalData = res.data.data;
+              this.originalData = res.data.data;
               this.events = res.data.data;
               console.log(this.events);
             }
@@ -157,13 +161,10 @@ export class HomePage implements OnInit {
         console.log('I think the special is not set');
         this.getevents();
       }
-
-
-
     });
   }
   getFilter(cmd) {
-    console.log(this.filterData);
+    //console.log(this.filterData);
     this.openFilter();
     var JsonObj = {};
     if (cmd === "clear") {
@@ -171,6 +172,7 @@ export class HomePage implements OnInit {
     } else {
       if (this.filterData.parentType !== undefined || this.filterData.parentType !== -1) {
         JsonObj["PTypeID[]"] = this.filterData.parentType;
+        //JsonObj["PTypeID[]"] = 3;
       }
       if (this.filterData.StartDate !== undefined) {
         JsonObj["StartDate"] = this.filterData.StartDate;
@@ -190,7 +192,7 @@ export class HomePage implements OnInit {
         if (res.data.data.length > 0) {
           this.originalData = res.data.data;
           this.events = res.data.data;
-          console.log(this.events);
+          //console.log(this.events);
         }
       }, err => {
         this.loading = false;
@@ -212,12 +214,12 @@ export class HomePage implements OnInit {
     this.dataService.getParentTypes(eventType).then((res: any) => {
       if (typeof res.data === 'string') {
         res.data = JSON.parse(res.data);
-        console.log(res.data);
+        //console.log(res.data);
       }
       if (res.data.data.length > 0) {
         this.parentTypes = res.data.data;
       } else {
-        console.log('no any parents types');
+        //console.log('no any parents types');
       }
 
     }, err => {
@@ -250,7 +252,7 @@ export class HomePage implements OnInit {
         this.events = res.data.data;
       }
 
-      console.log(res);
+      //console.log(res);
 
     }, err => {
       this.loading = false;

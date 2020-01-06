@@ -16,8 +16,6 @@ export class SearchPagePage implements OnInit {
   filterData: any;
   public events = [];
   originalData: any;
-
-
   disciplines = [
     { name: 'Running', }
   ];
@@ -30,10 +28,7 @@ export class SearchPagePage implements OnInit {
 
     this.getParentTypes('E');
     this.searchData = {
-      Running: undefined,
-      Cycling: undefined,
-      Swimming: undefined,
-      Tribethlon: undefined,
+      parentType: undefined,
       Searchfor: undefined,
       StartDate: undefined,
       EndDate: undefined
@@ -43,13 +38,11 @@ export class SearchPagePage implements OnInit {
   ngOnInit() {
   }
   gotoHome() {
-
+    console.log(this.searchData);
     this.routedataService.setData(42, this.searchData);
-
     this.router.navigateByUrl('/home/42');
   }
   getParentTypes(eventType) {
-
     this.dataService.getParentTypes(eventType).then((res: any) => {
       if (typeof res.data === 'string') {
         res.data = JSON.parse(res.data);

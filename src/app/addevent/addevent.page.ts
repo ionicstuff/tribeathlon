@@ -109,9 +109,7 @@ export class AddeventPage implements OnInit {
         } else {
   
           this.Ui.showAlert(res.data.data.message, 0);
-        }
-  
-  
+        } 
   
       }, err => {
         console.error(err);
@@ -215,7 +213,15 @@ export class AddeventPage implements OnInit {
 
     //var data = { 'EventID': eventID };
     var data = { 'EventID': eventID+'' };
-    return this.dataService.getUploadImage(data, [this.URLImgOrginal, this.MapOriginal], ["BannerImage", "MapFile"]);
+    console.log(data);
+    var images=[this.URLImgOrginal];
+    var imgVar=['BannerImage'];
+    if(typeof this.MapOriginal!=='undefined')
+    {
+      images.push(this.MapOriginal);
+      imgVar.push('MapFile');
+    }
+    return this.dataService.getUploadImage(data,images, imgVar);
 
 
   }
@@ -325,6 +331,7 @@ export class AddeventPage implements OnInit {
       this.step = 2;
     }
     if (page === 2) {
+     
       if (this.commonData.Distance === undefined) {
         this.Ui.showAlert('Please add Distance.', 0);
         return false;
@@ -345,10 +352,10 @@ export class AddeventPage implements OnInit {
         this.Ui.showAlert('Please select Visibility', 0);
         return false;
       }
-      if (this.MapOriginal === undefined) {
-        this.Ui.showAlert('Please select map file', 0);
-        return false;
-      }
+      // if (this.MapOriginal === undefined) {
+      //   this.Ui.showAlert('Please select map file', 0);
+      //   return false;
+      // }
       this.commonData.StartTime = this.commonData.StartTime + ':00';
       this.commonData.EndTime = this.commonData.EndTime + ':00';
       this.page2 = true;
@@ -422,21 +429,20 @@ export class AddeventPage implements OnInit {
               resupload.data = JSON.parse(resupload.data);
             }
             this.Ui.showAlert("Event has been created.");
-            this.router.navigateByUrl('/myevents');
+            this.router.navigateByUrl('/invite');
           }, err => {
             console.log(err);
-            this.Ui.showAlert("Something went wrong", 0);
+            this.Ui.showAlert("Something went wrong1", 0);
 
           });
 
         } else {
-          this.Ui.showAlert("Something went wrong", 0);
+          this.Ui.showAlert("Something went wrong2", 0);
 
         }
-
       }, err => {
         console.log(err);
-        this.Ui.showAlert("Something went wrong", 0);
+        this.Ui.showAlert("Something went wrong3", 0);
 
       });
     }

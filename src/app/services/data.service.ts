@@ -11,7 +11,7 @@ export class DataService {
   }
  
   getData(id) {
-    console.log('I am in getData function right now' + this.data);
+    
     return this.data[id];
   }
 }

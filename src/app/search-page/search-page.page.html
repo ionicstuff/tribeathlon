@@ -16,13 +16,13 @@
         <ion-col>
             <label class="checkbox">
                 Running
-                <input type="checkbox" [(ngModel)]='searchData.Running'  name="is_company">
+                <input type="radio" [(ngModel)]='searchData.parentType'  name="is_company" value="1">
                 <span class="checkroundcheck"></span>
             </label>
         </ion-col>
         <ion-col> <label class="checkbox">
                 Cycling
-                <input type="checkbox" [(ngModel)]='searchData.Cycling' name="is_company">
+                <input type="radio" [(ngModel)]='searchData.parentType' name="is_company" value="2">
                 <span class="checkroundcheck"></span>
             </label></ion-col>
 
@@ -30,13 +30,13 @@
     <ion-row>
         <ion-col><label class="checkbox">
                 Swimming
-                <input type="checkbox" [(ngModel)]='searchData.Swimming' name="is_company">
+                <input type="radio" [(ngModel)]='searchData.parentType' name="is_company" value="3">
                 <span class="checkroundcheck"></span>
             </label>
         </ion-col>
         <ion-col> <label class="checkbox">
                 Triathlon
-                <input type="checkbox" [(ngModel)]='searchData.Triathlon' name="is_company">
+                <input type="radio" [(ngModel)]='searchData.parentType' name="is_company" value="4">
                 <span class="checkroundcheck"></span>
             </label></ion-col>
 
