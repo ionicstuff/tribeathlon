@@ -4,8 +4,10 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { StorageService } from './services/storage.service';
 import { AuthConstants } from './config/auth-constants';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
+//import { FCM } from '@ionic-native/fcm/ngx';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -47,7 +49,7 @@ export class AppComponent {
       title: 'My Events/Training',
       url: '/myevents',
       icon: 'archive'
-    },    
+    },
     {
       title: 'View My Friends',
       url: '/viewfriends',
@@ -64,7 +66,7 @@ export class AppComponent {
       url: '/notifications',
       icon: 'notifications-outline'
     },
-    
+
     {
       title: 'Support',
       url: '/support-page',
@@ -82,7 +84,9 @@ export class AppComponent {
     private statusBar: StatusBar,
     private storageSevice: StorageService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private firebase: FirebaseX
+    
   ) {
 
     this.initializeApp();
@@ -105,6 +109,15 @@ export class AppComponent {
       this.statusBar.backgroundColorByHexString('#767be5');
       this.splashScreen.hide();
 
+      //FCM
+      this.firebase.getToken().then(token => {
+        console.log(`The token is ${token}`);
+      })
+      this.firebase.onMessageReceived().subscribe(data => {
+        console.log(`FCM message: ${data}`)
+      });
+      //FCM ends
+      
       this.storageSevice.get(AuthConstants.AUTH).then(res => {
         if (typeof res === 'string') {
           res = JSON.parse(res);

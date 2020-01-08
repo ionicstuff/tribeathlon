@@ -69,6 +69,9 @@ export class HttpService {
       case 'myevent':
         serviceName = 'event/myevents';
         break;
+        case 'joinedevents':
+        serviceName = 'event/joinedevents';
+        break;
     }
     this.http.setDataSerializer('urlencoded');
     const url = environment.apiUrl + serviceName;

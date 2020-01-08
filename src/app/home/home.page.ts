@@ -2,7 +2,7 @@ import { Platform } from '@ionic/angular';
 import { AuthConstants } from './../config/auth-constants';
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FCM } from '@ionic-native/fcm/ngx';
+
 import { DataServiceService } from '../services/data-service.service';
 import { OnDestroy, OnInit } from '@angular/core';
 @Component({
@@ -17,33 +17,14 @@ export class HomePage implements OnInit {
   filterData: any;
   parentTypes: any;
   originalData: any;
+  backend: any;
   isFiltered: boolean = false;
   constructor(
     public router: Router,
     public dataService: DataServiceService,
     public platform: Platform,
-    private route: ActivatedRoute,
-
-    private fcm: FCM
-  ) {
-
-    //
-    this.platform.ready()
-      .then(() => {
-        this.fcm.onNotification().subscribe(data => {
-          if (data.wasTapped) {
-            //console.log("Received in background");
-          } else {
-            //console.log("Received in foreground");
-          };
-        });
-
-        this.fcm.onTokenRefresh().subscribe(token => {
-          // Register your new token in your back-end if you want
-          // backend.registerToken(token);
-        });
-      })
-    //
+    private route: ActivatedRoute,   
+  ) {    
     this.getParentTypes('E');
     this.filterData = {
       parentType: undefined,
@@ -52,21 +33,8 @@ export class HomePage implements OnInit {
     }
   }
 
+ 
   //PUSH notificatins functions
-  subscribeToTopic() {
-    this.fcm.subscribeToTopic('enappd');
-  }
-  getToken() {
-    this.fcm.getToken().then(token => {
-      // Register your new token in your back-end if you want
-      // backend.registerToken(token);
-    });
-  }
-  unsubscribeFromTopic() {
-    this.fcm.unsubscribeFromTopic('enappd');
-  }
-  //
-
 
   openFilter() {
     if (this.filterPane) {
@@ -84,14 +52,14 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl("/event-details/" + id);
   }
   ionViewWillEnter() {
-    
+
     //console.log("inithome");
     var flag = false;
     this.platform.ready().then(() => {
       this.getParentTypes('E');
       if (this.route.snapshot.data['special']) {
         //console.log(this.route.snapshot.data['special']);
-        var filterData = { };
+        var filterData = {};
         var filterParams = this.route.snapshot.data['special'];
         if (filterParams.parentType !== undefined || filterParams.parentType !== -1) {
           filterData["PTypeID[]"] = filterParams.parentType;

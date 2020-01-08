@@ -25,6 +25,7 @@
     "@ionic-native/android-permissions": "^5.17.1",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/fcm": "^5.17.1",
+    "@ionic-native/firebase-x": "^5.19.1",
     "@ionic-native/http": "^5.16.0",
     "@ionic-native/image-picker": "^5.17.1",
     "@ionic-native/ionic-webview": "^5.17.1",

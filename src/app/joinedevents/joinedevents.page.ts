@@ -28,7 +28,7 @@ loading =true;
     if (typeof AuthConstants.authenticateData['token'] === "undefined") {
       this.router.navigate(['login']);
     } else {
-      this.dataService.getMyEvents().then(res => {
+      this.dataService.getJoinedEvents().then(res => {
         this.loading=false;
 
         if (typeof res.data === 'string') {
@@ -44,7 +44,6 @@ loading =true;
 
       }, err => {
         this.loading=false;
-
         console.error(err);
         if (typeof err.error === 'string') {
           err.error = JSON.parse(err.error);

@@ -77,7 +77,10 @@ export class DataServiceService {
 
   }
   public getMyEvents(pageno = 0) {
-    return this.httpService.post('myevent', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'] });
+    return this.httpService.post('myevent', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'], 'EventType': 'E' });
+  }
+  public getJoinedEvents(pageno = 0) {
+    return this.httpService.post('joinedevents', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'], 'EventType': 'E' });
   }
   public getMyTribes(pageno = 0){
     return this.httpService.post('user/mytribes', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'] });

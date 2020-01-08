@@ -71,20 +71,21 @@ export class EventDetailsPage implements OnInit {
     let eventid = this.activatedRoute.snapshot.paramMap.get('id');
     eventid
     this.dataservice.getEventDetails(eventid).then(res => {
-      console.log(res);
+     
       if (typeof res.data === "string") {
         res.data = JSON.parse(res.data);
-        console.log("eventData", res.data);
+        
       }
 
-      this.event = res.data.data;
+      this.event = res.data.data; 
+      console.log(this.event);     
     }, err => {
       console.log(err);
     });
     this.dataservice.getEventsUsers(eventid).then(res => {
       if (typeof res.data === "string") {
         res.data = JSON.parse(res.data);
-        console.log("data", res.data);
+        
       }
       if (res.data.data.length > 0) {
         this.participates = res.data.data;
@@ -99,8 +100,8 @@ export class EventDetailsPage implements OnInit {
   }
   async LeaveEvent(eId){
     const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'Message <strong>text</strong>!!!',
+      header: 'Please Confirm',
+      message: 'Are you sure to leave this event?',
       buttons: [
         {
           text: 'Cancel',

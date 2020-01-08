@@ -16,6 +16,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 import { FCM } from '@ionic-native/fcm/ngx';
+import { FirebaseX } from '@ionic-native/firebase-x/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
     StatusBar,
     SplashScreen, HTTP, ImagePicker, WebView, AndroidPermissions,
     FCM,
+    FirebaseX,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

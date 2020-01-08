@@ -76,7 +76,7 @@
                     </ion-col>
                     <ion-col>
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"> Decipline: Running</a></div>
+                            <div class="calendar"><a href="#!"> Decipline: {{ event.Decipline }}</a></div>
                         </div>
                     </ion-col>
 
@@ -140,7 +140,7 @@
                 <ion-button expand="block" fill="outline" (click)="LeaveEvent(event.EventID)" *ngIf="event.IsJoined ==1">
                     Leave
                 </ion-button>
-                <ion-button expand="block" fill="outline" (click)="joinEvent('I')">
+                <ion-button expand="block" fill="outline" (click)="joinEvent('I')" *ngIf="event.IsJoined !=1">
                     {{event.IsInterested == "1"?'Not Interested':'Interested'}}</ion-button>
             </div>
 
@@ -152,7 +152,7 @@
             </div>
         </ion-col>
         <ion-col>
-            <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="col-md-6 col-sm-6 col-xs-6 ion-text-end">
                 <span (click)="inviteFriends()" class="purple">Invite Friends</span>
             </div>
         </ion-col>
