@@ -62,7 +62,6 @@ export class MyeventsPage implements OnInit {
 
   ngOnInit() {
     let eventid = this.activatedRoute.snapshot.paramMap.get('id');
-
   }
   selectNew() {
     if (this.selected === 'event') {
@@ -104,7 +103,6 @@ export class MyeventsPage implements OnInit {
   }
   editEvent(id) {
     this.router.navigateByUrl('/edit-event/' + id);
-
   }
   getDetails(id) {
     this.router.navigateByUrl('/event-details/' + id);
@@ -168,7 +166,6 @@ export class MyeventsPage implements OnInit {
       });
     }
   }
-
   goToCreate(){
     this.router.navigateByUrl("/addevent");
   }

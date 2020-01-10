@@ -13,6 +13,7 @@ import { AlertController } from '@ionic/angular';
 export class EventDetailsPage implements OnInit {
   event: any;
   participates=[];
+  isCreator : boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute, 
     public dataservice: DataServiceService, 
@@ -70,22 +71,22 @@ export class EventDetailsPage implements OnInit {
   ngOnInit() {
     let eventid = this.activatedRoute.snapshot.paramMap.get('id');
     eventid
-    this.dataservice.getEventDetails(eventid).then(res => {
-     
+    this.dataservice.getEventDetails(eventid).then(res => {     
       if (typeof res.data === "string") {
-        res.data = JSON.parse(res.data);
-        
+        res.data = JSON.parse(res.data);        
       }
-
+      
       this.event = res.data.data; 
-      console.log(this.event);     
+      console.log(AuthConstants.authenticateData['id']);
+      if(this.event.UserID == AuthConstants.authenticateData['id']){
+        this.isCreator = true;
+      }
     }, err => {
       console.log(err);
     });
     this.dataservice.getEventsUsers(eventid).then(res => {
       if (typeof res.data === "string") {
-        res.data = JSON.parse(res.data);
-        
+        res.data = JSON.parse(res.data);        
       }
       if (res.data.data.length > 0) {
         this.participates = res.data.data;
@@ -130,5 +131,9 @@ export class EventDetailsPage implements OnInit {
   inviteFriends(){
     console.log("go to invite friends page");
     this.router.navigateByUrl("/invite");
+  }
+  deleteEvent(eId){
+    console.log(eId);
+    this.router.navigateByUrl("/home");
   }
 }

@@ -134,14 +134,28 @@
         </div>
         <ion-row class="topMargin">
             <div class="col-md-6 col-sm-6 col-xs-6">
-                <ion-button expand="block" fill="outline" (click)="joinEvent('J')" *ngIf="event.IsJoined !=1">
-                    Join
-                </ion-button>
-                <ion-button expand="block" fill="outline" (click)="LeaveEvent(event.EventID)" *ngIf="event.IsJoined ==1">
-                    Leave
-                </ion-button>
-                <ion-button expand="block" fill="outline" (click)="joinEvent('I')" *ngIf="event.IsJoined !=1">
-                    {{event.IsInterested == "1"?'Not Interested':'Interested'}}</ion-button>
+                <ng-container
+                *ngIf="isCreator; then logIn; else logOut">
+                </ng-container>
+
+                <ng-template #logIn>
+                    <ion-button expand="block" fill="outline" (click)="deleteEvent(event.EventID)"> 
+                        Delete
+                    </ion-button>
+                </ng-template>
+
+                <ng-template #logOut>
+                        <ion-button expand="block" fill="outline" (click)="joinEvent('J')" *ngIf="event.IsJoined !=1"> 
+                            Join
+                        </ion-button>
+                        <ion-button expand="block" fill="outline" (click)="LeaveEvent(event.EventID)" *ngIf="event.IsJoined ==1">
+                            Leave
+                        </ion-button>
+                        <ion-button expand="block" fill="outline" (click)="joinEvent('I')" *ngIf="event.IsJoined !=1">
+                            {{event.IsInterested == "1"?'Not Interested':'Interested'}}
+                        </ion-button>
+                </ng-template>
+                
             </div>
 
         </ion-row>
