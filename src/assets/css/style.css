@@ -744,13 +744,13 @@ button:focus {
 }
 
 .Race {
-    position: absolute;
+    /* position: absolute;
     bottom: 10px;
     left: 0px;
-    right: 0px;
+    right: 0px; */
     background: rgba(0, 0, 0, 0.6);
-    margin: 0px 15px;
-    padding: 10px 15px;
+    /* margin: 0px 15px;
+    padding: 10px 15px; */
 }
 
 .Race span {
@@ -1335,11 +1335,11 @@ button:focus {
     }
     .Race {
         position: absolute;
-        bottom: 10px;
+        bottom: 0px;
         left: 0px;
         right: 0px;
         background: rgba(0, 0, 0, 0.6);
-        margin: 0px 15px;
+        margin: 0px 0px;
         padding: 10px 15px;
     }
     .Race span {
@@ -1951,7 +1951,7 @@ button:focus {
     .john_name img {
         display: inline;
         padding-right: 7px;
-        width: 50px;
+        width:50px;
     }
     .john_name abbr {
         font-size: 18px;
@@ -1967,11 +1967,11 @@ button:focus {
     }
     .Race {
         position: absolute;
-        bottom: 10px;
+        bottom: 0px;
         left: 0px;
         right: 0px;
         background: rgba(0, 0, 0, 0.6);
-        margin: 0px 15px;
+        margin: 0px 0px;
         padding: 10px 15px;
     }
     .Race span {

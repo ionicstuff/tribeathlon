@@ -1,5 +1,5 @@
 <ion-content>
-    <ion-slides pager=true>
+    <ion-slides pager=true [options]="slideOptsOne">
 
         <ion-slide
             style="background: url('assets/images/running.jpg');height: 100vh;background-position: center;background-size:cover ;">
@@ -9,7 +9,7 @@
             <div class="smallTitle">
                 Find Your Next Event
             </div>
-            <div class="skip" (click)="complete()"><a style="color: white!important">Skip</a></div>
+            <div class="skip" (click)="complete()"><a style="color: white!important">Continue</a></div>
 
         </ion-slide>
 
@@ -21,7 +21,7 @@
             <div class="smallTitle">
                 Create training session
             </div>
-            <div class="skip" (click)="complete()"><a style="color: white!important">Skip</a></div>
+            <div class="skip" (click)="complete()"><a style="color: white!important">Continue</a></div>
         </ion-slide>
         <ion-slide
             style="background: url('assets/images/triathlon.jpg');height: 100vh;background-position: center;background-size:cover ;">
@@ -31,7 +31,7 @@
             <div class="smallTitle">
                 Create your tribe
             </div>
-            <div class="skip" (click)="complete()"><a style="color: white!important">Skip</a></div>
+            <div class="skip" (click)="complete()"><a style="color: white!important">Continue</a></div>
         </ion-slide>
         <!-- <div class="skip" (click)="complete()"><b>Skip</b></div> -->
 

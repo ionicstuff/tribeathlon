@@ -14,6 +14,10 @@ export class ViewParticipantsPage implements OnInit {
 
   selected = 'joined';
   public participants: any;
+  public interested:any;
+  inviteFT:string;
+  public isLoggedIn = AuthConstants.authenticateData['id'];
+  
  
   eventStyle = { 'border-bottom': '2px solid #767be5' };
   trainingStyle = { 'border-bottom': '0px solid #767be5' };
@@ -26,7 +30,10 @@ export class ViewParticipantsPage implements OnInit {
     public Ui: UiserviceService,
     private activatedRoute: ActivatedRoute 
   ) { 
-    this.segmentChanged('joined');
+    this.inviteFT = 'Joined';
+    this.getParticipants();
+    this.getInterested();
+    
   }
 
   ngOnInit() {
@@ -35,11 +42,9 @@ export class ViewParticipantsPage implements OnInit {
     //console.log(eventid);
     
   }
-  segmentChanged(event){
-    if (typeof AuthConstants.authenticateData['token'] === "undefined") {
-      this.router.navigate(['login']);
-    }else{
-      let eventid = this.activatedRoute.snapshot.paramMap.get('id');
+  getParticipants(){
+
+    let eventid = this.activatedRoute.snapshot.paramMap.get('id');
       var jsonData = {
 
         UserID: AuthConstants.authenticateData['id'],
@@ -48,13 +53,13 @@ export class ViewParticipantsPage implements OnInit {
         pageno:0
   
       }
-      //console.log('noddy',jsonData);
       this.dataservice.getEventsUsers(jsonData).then((res: any) => {
         if (typeof res.data === 'string') {
           res.data = JSON.parse(res.data);
         }
         if (res.data.data.length > 0) {
           this.participants = res.data.data;
+         
           console.log(this.participants);
         } else {
           console.log('No participants');
@@ -71,9 +76,81 @@ export class ViewParticipantsPage implements OnInit {
         }
         console.error(err);
       });
-    }
-    
   }
+  getInterested(){
+    let eventid = this.activatedRoute.snapshot.paramMap.get('id');
+      var jsonData = {
+
+        UserID: AuthConstants.authenticateData['id'],
+        EventID: eventid,
+        Status: 'I',
+        pageno:0
+  
+      }
+      this.dataservice.getEventsUsers(jsonData).then((res: any) => {
+        if (typeof res.data === 'string') {
+          res.data = JSON.parse(res.data);
+        }
+        if (res.data.data.length > 0) {
+          this.interested = res.data.data;
+         
+          console.log(this.participants);
+        } else {
+          console.log('No participants');
+        }
+      }, err => {
+        
+        console.error(err);
+        if (typeof err.error === 'string') {
+          err.error = JSON.parse(err.error);
+        }
+        if (err.error.data.message === 'Your session has been expired.') {
+          this.router.navigate(['login']);
+  
+        }
+        console.error(err);
+      });
+  }
+  // segmentChanged(event){
+  //   if (typeof AuthConstants.authenticateData['token'] === "undefined") {
+  //     this.router.navigate(['login']);
+  //   }else{
+  //     let eventid = this.activatedRoute.snapshot.paramMap.get('id');
+  //     var jsonData = {
+
+  //       UserID: AuthConstants.authenticateData['id'],
+  //       EventID: eventid,
+  //       Status: 'J',
+  //       pageno:0
+  
+  //     }
+  //     //console.log('noddy',jsonData);
+  //     this.dataservice.getEventsUsers(jsonData).then((res: any) => {
+  //       if (typeof res.data === 'string') {
+  //         res.data = JSON.parse(res.data);
+  //       }
+  //       if (res.data.data.length > 0) {
+  //         this.participants = res.data.data;
+         
+  //         console.log(this.participants);
+  //       } else {
+  //         console.log('No participants');
+  //       }
+  //     }, err => {
+        
+  //       console.error(err);
+  //       if (typeof err.error === 'string') {
+  //         err.error = JSON.parse(err.error);
+  //       }
+  //       if (err.error.data.message === 'Your session has been expired.') {
+  //         this.router.navigate(['login']);
+  
+  //       }
+  //       console.error(err);
+  //     });
+  //   }
+    
+  // }
 
   addFriend(otherUserId){
     console.log(otherUserId);

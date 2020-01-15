@@ -4,30 +4,62 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title style="text-align: left !important">
-            Participants
+            Participants 
         </ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-segment (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="joined" [ngStyle]="eventStyle">
-        <ion-label>Joined</ion-label>
+<ion-segment color="purple" [(ngModel)]="inviteFT">
+    <ion-segment-button value="Joined">
+        <ion-label>
+            Joined
+        </ion-label>
     </ion-segment-button>
-    <ion-segment-button value="interested">
-        <ion-label>Interested</ion-label>
+    <ion-segment-button value="Interested">
+        <ion-label>
+            Interested 
+        </ion-label>
     </ion-segment-button>
-
 </ion-segment>
-<ion-content>
-    <ion-list>
-        <ion-item *ngFor="let participant of participants">
-            <ion-label>{{ participant.UserName }}</ion-label>
-            <ion-buttons slot="end" (click)="addFriend(participant.UserID)" *ngIf="participant.IsFriend!=0">
-                <ion-button fill="clear">
-                    <ion-icon name="person-add"></ion-icon>
-                </ion-button>
-            </ion-buttons>
-        </ion-item>
 
-    </ion-list>
-    
+<ion-content>
+    <div [ngSwitch]="inviteFT">
+        <div *ngSwitchCase="'Joined'">
+            <ion-list>
+                <ion-item *ngFor="let p of participants">
+                    {{p.UserName}}
+                    <ion-buttons slot="end" (click)="addFriend(p.UserID)" *ngIf="p.IsFriend!=0 && p.UserID != isLoggedIn">
+                        <ion-button fill="clear">
+                            <ion-icon name="person-add"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-item>
+            </ion-list>
+           
+        </div>
+        <div *ngSwitchCase="'Interested'">
+            <ion-list>
+                <ion-item *ngFor="let i of interested">
+                    {{i.UserName}}
+                    <ion-buttons slot="end" (click)="addFriend(i.UserID)" *ngIf="i.IsFriend!=0 && i.UserID != isLoggedIn">
+                        <ion-button fill="clear">
+                            <ion-icon name="person-add"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-item>
+            </ion-list>
+                
+        </div>
+        <div *ngSwitchDefault>
+            <ion-list>
+                <ion-item *ngFor="let p of participants">
+                    {{p.UserName}}
+                    <ion-buttons slot="end" (click)="addFriend(p.UserID)" *ngIf="p.IsFriend!=0 && p.UserID != isLoggedIn">
+                        <ion-button fill="clear">
+                            <ion-icon name="person-add"></ion-icon>
+                        </ion-button>
+                    </ion-buttons>
+                </ion-item>                
+            </ion-list>            
+        </div>
+    </div>
 </ion-content>

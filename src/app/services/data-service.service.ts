@@ -34,6 +34,10 @@ export class DataServiceService {
   public joinEvent(data) {
     return this.httpService.post("event/joinevent", data);
   }
+  public leaveEvent(data) {
+    return this.httpService.post("event/leaveevent", data);
+  }
+  
   public createTribe(data) {
     return this.httpService.post('user/createtribe', data);
   }

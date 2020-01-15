@@ -12,7 +12,7 @@ import { OnDestroy, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
   public events = [];
-  loading = true;
+  loading = false;
   filterPane = false;
   filterData: any;
   parentTypes: any;

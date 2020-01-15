@@ -148,7 +148,7 @@
                         <ion-button expand="block" fill="outline" (click)="joinEvent('J')" *ngIf="event.IsJoined !=1"> 
                             Join
                         </ion-button>
-                        <ion-button expand="block" fill="outline" (click)="LeaveEvent(event.EventID)" *ngIf="event.IsJoined ==1">
+                        <ion-button expand="block" fill="outline" (click)="LeaveEvent('J')" *ngIf="event.IsJoined ==1">
                             Leave
                         </ion-button>
                         <ion-button expand="block" fill="outline" (click)="joinEvent('I')" *ngIf="event.IsJoined !=1">
@@ -171,19 +171,7 @@
             </div>
         </ion-col>
         </ion-row>
-        <!-- <ion-row class="topmargin" *ngIf="participates.length > 0">
-            <h4>
-                Intrested
-            </h4>
-            <ion-list>
-                <ion-item *ngFor="let item of participates">
-                    {{item.UserName}}
-                    <div class="item-note" slot="end">
-                        <button ion-button expand="block" (click)="Addfriend(item.UserID)">{{item.IsFriend == "1"?'friends':'Add Friend'}}</button>
-                    </div>
-                </ion-item>
-            </ion-list>
-        </ion-row> -->
+        
 
     </div>
 </ion-content>
