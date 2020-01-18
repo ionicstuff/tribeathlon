@@ -24,20 +24,25 @@
         </ion-item>
         <ion-item>
             <ion-label position="floating">Visibility</ion-label>
-            <div class="middle-box">
+            <div class="middle-box col-md-12">
                 <select class="mdb-select md-form colorful-select dropdown-primary col-md-12" [(ngModel)]="tribesData.Visibility">
                     <option value="-1" selected='selected'>Visibility</option>
                     <option value="P">Private </option>
                     <option value="O">Public</option>
-
-
                 </select>
             </div>
         </ion-item>
         <div class="space10"></div>
+        <div class="upload_img">
+            <label for="file-input">
+                <img [src]="UrlImg" alt="" width="120" height="120" (click)="selectPhoto('banner')" />
+                <h4>Upload tribe image</h4>
+            </label>
+
+        </div>
         <!-- <ion-button shape="round" ion-button expand="block" fill="outline" (click)="selectInviteData()"> Select Friends
             <ion-icon slot="end" color="success" [name]="frndlist.length==0?'':'checkmark'"></ion-icon>
-        </ion-button> -->
+        </ion-button> 
         <div class="space10"></div>
         <ion-list>
             <ion-list-header>
@@ -47,7 +52,10 @@
                 <ion-label>{{frnd.UserName}}</ion-label>
                 <ion-checkbox slot="end" [(ngModel)]="frnd.isChecked"></ion-checkbox>
             </ion-item>
-        </ion-list>
+            <div *ngIf="frndlist.length==0">
+                <p>You do not have any friends at the moment</p>
+            </div>
+        </ion-list>-->
     </div>
 
 

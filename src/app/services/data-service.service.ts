@@ -89,6 +89,9 @@ export class DataServiceService {
   public getMyTribes(pageno = 0){
     return this.httpService.post('user/mytribes', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'] });
   }
+  public joinedtribes(pageno = 0){
+    return this.httpService.post('user/joinedtribes', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'] });
+  }
   public getregions() {
     return this.httpService.get('event/regions/');
   }

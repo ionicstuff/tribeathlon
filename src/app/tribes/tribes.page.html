@@ -11,56 +11,149 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<!-- <ion-row style="text-align: center; background: #eeeeef; color: rgb(0, 0, 0);">
-    <ion-col size="4" style="padding: 15px;" (click)="toggle('event')" [ngStyle]="eventStyle">
-        <span> Events</span>
-    </ion-col>
-    <ion-col size="4" style="padding: 15px;" (click)="toggle('training')" [ngStyle]="trainingStyle">
-        <span>Training</span>
-    </ion-col>
-    <ion-col size="4" style="padding: 15px;" (click)="toggle('training')" [ngStyle]="trainingStyle">
-        <span>Training</span>
-    </ion-col>
-</ion-row> -->
-<ion-segment (ionChange)="segmentChanged($event)" value='mytribes'>
+<ion-segment color="purple" [(ngModel)]="inviteFT">
     <ion-segment-button value="mytribes">
-        <ion-label>My Tribes</ion-label>
+        <ion-label>
+            My Tribes
+        </ion-label>
     </ion-segment-button>
     <ion-segment-button value="joined">
-        <ion-label>Joined Tribes</ion-label>
+        <ion-label>
+            Joined Tribes
+        </ion-label>
     </ion-segment-button>
     <ion-segment-button value="leaderboard">
-        <ion-label>Leaderboard</ion-label>
+        <ion-label>
+            Leaderboard
+        </ion-label>
     </ion-segment-button>
 </ion-segment>
 <ion-content>
-
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div *ngFor="let tribe of tribes">
-            <div class="cycling-runners">
-                <a href="#!"><img class="img-responsive" [src]="tribe.Image" alt="" width="380" height="240" /></a>
-                <div class="Race">
-                    <span>{{tribe.Name}}</span> <b (click)="goToTribe(tribe.TribeID)"> View</b>
+    <div [ngSwitch]="inviteFT" class="col-md-12 col-sm-12 col-xs-12">
+        <div *ngSwitchCase="'mytribes'">
+            <div *ngFor="let t of tribes">
+                <div class="cycling-runners">
+                    <img class="img-responsive" [src]="t.Image" alt="" width="380" height="240" />
+                    <div class="Race">
+                        <span>{{t.Name}}</span>
+                        <b (click)="goToTribe(t.TribeID)"> View</b>
+                    </div>
+                </div>
+                <div class="shadow-box">
+                    <ion-row class="topMargin">
+                        <ion-col>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="calendar">
+                                    <a href="#!">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        {{t.CreateDate | date: 'dd, MMMM yyyy'}}
+                                    </a>
+                                </div>
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="calendar">&nbsp;</div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <div class="clearfix"></div>
                 </div>
             </div>
-            <div class="shadow-box">
-                <ion-row class="topMargin">
-                    <ion-col>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar"><a href="#!"><i class="fas fa-calendar-alt"></i>
-                                    {{tribe.CreateDate | date: 'dd, MMMM yyyy'}}</a></div>
-                        </div>
-                    </ion-col>
-                    <ion-col>
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="calendar">&nbsp;</div>
-                        </div>
-                    </ion-col>
+        </div>
+        <div *ngSwitchCase="'joined'">
+            <div *ngFor="let j of joined">
+                <div class="cycling-runners">
+                    <img class="img-responsive" [src]="j.Image" alt="" width="380" height="240" />
+                    <div class="Race">
+                        <span>{{j.Name}}</span>
+                        <b (click)="goToTribe(j.TribeID)"> View</b>
+                    </div>
+                </div>
+                <div class="shadow-box">
+                    <ion-row class="topMargin">
+                        <ion-col>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="calendar">
+                                    <a href="#!">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        {{j.CreateDate | date: 'dd, MMMM yyyy'}}
+                                    </a>
+                                </div>
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="calendar">&nbsp;</div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
 
-                </ion-row>
+        </div>
+        <div *ngSwitchCase="'leaderboard'">
+            <div *ngFor="let t of tribes">
+                <div class="cycling-runners">
+                    <img class="img-responsive" [src]="t.Image" alt="" width="380" height="240" />
+                    <div class="Race">
+                        <span>{{t.Name}}</span>
+                        <b (click)="goToTribe(t.TribeID)"> View</b>
+                    </div>
+                </div>
+                <div class="shadow-box">
+                    <ion-row class="topMargin">
+                        <ion-col>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="calendar">
+                                    <a href="#!">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        {{t.CreateDate | date: 'dd, MMMM yyyy'}}
+                                    </a>
+                                </div>
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="calendar">&nbsp;</div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
 
-                <div class="clearfix"></div>
-
+        </div>
+        <div *ngSwitchDefault>
+            <div *ngFor="let t of tribes">
+                <div class="cycling-runners">
+                    <img class="img-responsive" [src]="t.Image" alt="" width="380" height="240" />
+                    <div class="Race">
+                        <span>{{t.Name}}</span>
+                        <b (click)="goToTribe(t.TribeID)"> View</b>
+                    </div>
+                </div>
+                <div class="shadow-box">
+                    <ion-row class="topMargin">
+                        <ion-col>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="calendar">
+                                    <a href="#!">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        {{t.CreateDate | date: 'dd, MMMM yyyy'}}
+                                    </a>
+                                </div>
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <div class="calendar">&nbsp;</div>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
     </div>

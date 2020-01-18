@@ -117,9 +117,14 @@
                     <div *ngIf="step==3">
                         <div class="upload_img">
                             <label for="file-input">
-                                        <img [src]="UrlImg" alt="" width="120" height="120" (click)="selectPhoto('banner')" />
-                                        <h4>Upload event image</h4>
-                                    </label>
+                                <img 
+                                [src]="UrlImg" 
+                                alt="" 
+                                width="120" 
+                                height="120" 
+                                (click)="selectPhoto('banner')" />
+                                <h4>Upload event image</h4>
+                            </label>
 
                         </div>
                         <!-- <select class="mdb-select md-form colorful-select dropdown-primary2" placeholder="Invitation to* " [(ngModel)]="commonData.InvitationType" [ngModelOptions]="{standalone: true}" (change)="selectinviteData(commonData.InvitationType)">

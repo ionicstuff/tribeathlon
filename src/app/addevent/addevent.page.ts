@@ -46,7 +46,8 @@ export class AddeventPage implements OnInit {
     }else{
       this.androidPermissions.requestPermissions(
         [this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
-        this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE]).then(res => { console.log(res) }, err => console.log(err));
+        this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE])
+        .then(res => { console.log(res) }, err => console.log(err));
   
   
       this.step = 1;

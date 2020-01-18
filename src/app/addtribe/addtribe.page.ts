@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
 import { UiserviceService } from '../services/uiservice.service';
 import { AuthConstants } from '../config/auth-constants';
 import { Router } from '@angular/router';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @Component({
   selector: 'app-addtribe',
@@ -15,11 +18,19 @@ export class AddtribePage implements OnInit {
   tribesData: any;
   SelectedfrndList = [];
   frndlist: any;
+  UrlImg = "./assets/images/upload_img.png"; 
+  MapImg=  "./assets/images/upload_img.png"; 
+  URLImgOrginal = undefined;
+  MapOriginal = undefined;
+
   constructor(
     public alertController: AlertController,
     public dataService: DataServiceService,
     public Ui: UiserviceService,
-    public router:Router
+    public router:Router,
+    public imagePicker: ImagePicker,
+    private webview: WebView,
+    private androidPermissions: AndroidPermissions
   ) {
     this.tribesData = {
       Name: undefined,
@@ -30,7 +41,11 @@ export class AddtribePage implements OnInit {
     if (typeof AuthConstants.authenticateData['token'] === 'undefined') {
       this.router.navigate(['login']);
     } else {
-    this.getFriends();
+      this.androidPermissions.requestPermissions(
+        [this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+        this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE])
+        .then(res => { console.log(res) }, err => console.log(err));
+      //this.getFriends();
     }
   }
   initdata(frnd) {
@@ -46,7 +61,7 @@ export class AddtribePage implements OnInit {
         this.frndlist.map(this.initdata);
 
       } else {
-        this.Ui.showAlert("No any friends", 0);
+        this.Ui.showAlert("You have no friends", 0);
       }
 
     }, err => {
@@ -57,14 +72,46 @@ export class AddtribePage implements OnInit {
   }
   ngOnInit() {
   }
+  selectPhoto(photoType) {
+    console.log(photoType)
+    this.imagePicker.getPictures({
+      maximumImagesCount: 1,
+      width: 800,
+      height: 800,
+      quality: 100,
+      outputType: 0
+    }).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+        if (photoType === "Map") {
 
+          this.MapOriginal = results[i];
+          this.MapImg = this.webview.convertFileSrc(results[i]);
+        } else {
+
+          this.URLImgOrginal = results[i];
+          this.UrlImg = this.webview.convertFileSrc(results[i]);
+
+        }
+
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
   AddTribe() {
 
-    this.tribesData["FriendUserID[]"] = this.selectedFriends();
+    console.log(this.tribesData);
+
+    //this.tribesData["FriendUserID[]"] = this.selectedFriends();
     this.tribesData.UserID = AuthConstants.authenticateData['id'];
     this.dataService.createTribe(this.tribesData).then((res:any)=>{
+
+      
       if (typeof res.data === 'string') {
         res.data = JSON.parse(res.data);
+      }else {
+
+        this.Ui.showAlert("Cannot add tribe123", 0);
       }
       console.log("add tribe",res);
       if (res.data.success == "1") {
