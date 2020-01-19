@@ -15,10 +15,13 @@ export class TribesPage implements OnInit {
   tribes:any;
   joined:any;
   leaderboard:any;
+  regions:any;
   loading =true;
   ifLogin:boolean;
   segmentValue:any;
   inviteFT:string;
+  filterRegion = -1;
+
   
   constructor(
     public router: Router,
@@ -205,6 +208,26 @@ export class TribesPage implements OnInit {
     
   }
   public getLeaderBoard(){
+    this.dataservice.getregions().then(res => {
+      this.loading= false;
+      //console.log(res);
+      
+      if (typeof res.data === 'string') {
+        res.data = JSON.parse(res.data);
+      }
+      if(res.data.success==="1"){
+        console.log(res.data);
+        this.regions = res.data.data;
+        console.log(this.regions);
+      }else{
+        //this.Ui.showAlert("No data found",0)
+        console.log('No data found');
+      }
+    }, err => {
+      console.log(err);
+      this.loading= false;
+      this.Ui.showAlert('Something Went wrong');
+    });
     this.dataservice.getMyTribes().then(res => {
       this.loading= false;
       //console.log(res);

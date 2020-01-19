@@ -94,6 +94,19 @@
 
         </div>
         <div *ngSwitchCase="'leaderboard'">
+            <ion-row>
+                <ion-col>
+                    <div class="middle-box">
+                        <select 
+                        class="mdb-select md-form colorful-select dropdown-primary" 
+                        (change)="selectNew()" 
+                        [(ngModel)]="filterRegion">
+                        <option value="-1">All </option>
+                        <option *ngFor="let r of regions">{{r.TypeName}}</option>                         
+                      </select>
+                    </div>
+                </ion-col>
+            </ion-row>
             <div *ngFor="let t of tribes">
                 <div class="cycling-runners">
                     <img class="img-responsive" [src]="t.Image" alt="" width="380" height="240" />
@@ -123,7 +136,6 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
-
         </div>
         <div *ngSwitchDefault>
             <div *ngFor="let t of tribes">

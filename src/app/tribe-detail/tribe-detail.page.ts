@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthConstants } from './../config/auth-constants';
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataServiceService } from '../services/data-service.service';
@@ -12,6 +12,7 @@ import { DataServiceService } from '../services/data-service.service';
 export class TribeDetailPage implements OnInit {
 tribe:any;
 participates=[];
+isCreator: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute, 
     public dataservice: DataServiceService, 
@@ -34,6 +35,9 @@ participates=[];
       }
 
       this.tribe = res.data.data;
+      if (this.tribe.UserID == AuthConstants.authenticateData['id']) {
+        this.isCreator = true;
+      }
     }, err => {
       console.log(err);
     });
@@ -79,11 +83,61 @@ participates=[];
     await alert.present();
   }
 
-  leaveTribe(){
+  async leaveTribe(){
     //api for leaving tribe here
 
-    console.log('Leaving tribe confirm here');
-    this.router.navigateByUrl("/tribes");
+    const alert = await this.alertCtrl.create({
+      header: 'Please Confirm',
+      message: 'Are you sure to leave this tribe?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.router.navigateByUrl('/tribes');
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  async deleteEvent(status) {
+
+    const alert = await this.alertCtrl.create({
+      header: 'Please Confirm',
+      message: 'Are you sure to delete this tribe?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.router.navigateByUrl('/tribes');
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+
+
   }
 
 }

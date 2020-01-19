@@ -62,12 +62,33 @@
       </ion-col>
     </ion-row> -->
     <ion-row class="topMarginplus topMargindown">
-      <ion-col class="col-md-12">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <ng-container
+        *ngIf="isCreator; then logIn; else logOut">
+        </ng-container>
+
+        <ng-template #logIn>
+          <ion-button expand="block" fill="outline" (click)="inviteFriends()">Invite Friends</ion-button>
+            <ion-button expand="block" fill="outline" (click)="deleteEvent(tribe.TribeID)"> 
+                Delete
+            </ion-button>
+        </ng-template>
+
+        <ng-template #logOut>
+                
+                <ion-button expand="block" fill="outline" (click)="leaveTribe()">
+                    Leave
+                </ion-button>
+                
+        </ng-template>
+        
+    </div>
+      <!-- <ion-col class="col-md-12">
         <ion-button expand="block" fill="outline" (click)="inviteFriends()">Invite Friends</ion-button>
       </ion-col>
       <ion-col class="col-md-12">
         <ion-button expand="block" fill="outline" (click)="presentAlertConfirm()">Leave Tribe</ion-button>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
   </div>
 </ion-content>
