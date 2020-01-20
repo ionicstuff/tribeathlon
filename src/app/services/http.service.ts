@@ -56,6 +56,7 @@ export class HttpService {
   }
   post(serviceName: string, data: any) {
     console.log(data);
+    this.http.setDataSerializer('json');
     const headers = {
       'Content-Type': 'application/json',
       'Client-Service': 'frontend-client',
@@ -73,9 +74,9 @@ export class HttpService {
         serviceName = 'event/joinedevents';
         break;
     }
-    this.http.setDataSerializer('urlencoded');
+    //this.http.setDataSerializer('urlencoded');
     const url = environment.apiUrl + serviceName;
-    debugger;
+    //debugger;
     return this.http.post(url, data, headers);
   }
 }

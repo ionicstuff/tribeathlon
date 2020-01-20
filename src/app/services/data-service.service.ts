@@ -19,20 +19,20 @@ export class DataServiceService {
   ) {
     console.log('Data Service init');
   }
-  public getAllEvents(pageno = 0) {
-    return this.httpService.post('event', { 'pageno': pageno, 'EventType': 'E' });
+  public getAllEvents(pageno = "0") {
+    return this.httpService.post('event', { "pageno": pageno, "EventType": "E" });
   }
   public createEvent(data) {
     return this.httpService.post('event/create', data);
   }
-  public getMyFriends(pageno = 0) {
+  public getMyFriends(pageno = "0") {
     return this.httpService.get('user/friends/' + AuthConstants.authenticateData['id'] + '/' + pageno);
   }
   public addFriend(data) {
     return this.httpService.post('user/addfriend', data);
   }
   public joinEvent(data) {
-    return this.httpService.post("event/joinevent", data);
+    return this.httpService.post('event/joinevent', data);
   }
   public leaveEvent(data) {
     return this.httpService.post("event/leaveevent", data);
@@ -57,8 +57,8 @@ export class DataServiceService {
   public getParentTypes(EventType) {
     return this.httpService.get('event/parenttypes/' + EventType);
   }
-  public getTribes(pageno = 0) {
-    return this.httpService.post('user/tribes', {'pageno':pageno});
+  public getTribes(pageno = "0") {
+    return this.httpService.post('user/tribes', {"pageno":pageno});
   }
   public getEventDetails(evId) {
     return this.httpService.get('event/detail/' + evId);
@@ -66,31 +66,31 @@ export class DataServiceService {
   public getTribeDetails(tribeId) {
     return this.httpService.get('user/tribedetail/' + tribeId);
   }
-  public getNotifications(pageno = 0) {
+  public getNotifications(pageno = "0") {
     return this.httpService.get('user/notifications/' + AuthConstants.authenticateData['id'] + '/' + pageno)
   }
   public getEventsUsers(data) {
-    return this.httpService.post("event/eventusers", data)
+    return this.httpService.post('event/eventusers', data)
   }
   public getChildTypes(parentId) {
     return this.httpService.get('event/childtypes/' + parentId);
 
   }
-  public getAllTrainings(pageno = 0) {
-    return this.httpService.post('event', { 'pageno': pageno, 'EventType': 'T' });
+  public getAllTrainings(pageno = "0") {
+    return this.httpService.post('event', { "pageno": pageno, "EventType": "T" });
 
   }
-  public getMyEvents(pageno = 0) {
-    return this.httpService.post('myevent', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'], 'EventType': 'E' });
+  public getMyEvents(pageno = "0") {
+    return this.httpService.post('myevent', { "pageno": pageno, 'UserID': AuthConstants.authenticateData['id'], "EventType": "E" });
   }
-  public getJoinedEvents(pageno = 0) {
-    return this.httpService.post('joinedevents', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'], 'EventType': 'E' });
+  public getJoinedEvents(pageno = "0") {
+    return this.httpService.post('joinedevents', { "pageno": pageno, 'UserID': AuthConstants.authenticateData['id'], "EventType": "E" });
   }
-  public getMyTribes(pageno = 0){
-    return this.httpService.post('user/mytribes', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'] });
+  public getMyTribes(pageno = "0"){
+    return this.httpService.post('user/mytribes', { "pageno": pageno, 'UserID': AuthConstants.authenticateData['id'] });
   }
-  public joinedtribes(pageno = 0){
-    return this.httpService.post('user/joinedtribes', { 'pageno': pageno, 'UserID': AuthConstants.authenticateData['id'] });
+  public joinedtribes(pageno = "0"){
+    return this.httpService.post('user/joinedtribes', { "pageno": pageno, 'UserID': AuthConstants.authenticateData['id'] });
   }
   public getregions() {
     return this.httpService.get('event/regions/');

@@ -96,7 +96,7 @@ export class HomePage implements OnInit {
         }
         if (flag) {
           filterData['EventType'] = "E";
-          filterData['pageno'] = 0;
+          filterData['pageno'] = "0";
           console.log('I am in flag condition now');
           console.log(filterData);
           this.dataService.getFilterData(filterData).then(res => {
