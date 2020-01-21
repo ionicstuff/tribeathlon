@@ -19,6 +19,9 @@ isCreator: boolean = false;
     private alertCtrl: AlertController,
     private router: Router
   ) {
+    if (typeof AuthConstants.authenticateData['token'] === 'undefined') {
+      this.router.navigate(['login']);      
+    }
     this.tribe = {
       image: "https://www.agora-gallery.com/advice/wp-content/uploads/2015/10/image-placeholder-300x200.png"
     }

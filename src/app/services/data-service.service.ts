@@ -58,7 +58,7 @@ export class DataServiceService {
     return this.httpService.get('event/parenttypes/' + EventType);
   }
   public getTribes(pageno = "0") {
-    return this.httpService.post('user/tribes', {"pageno":pageno});
+    return this.httpService.post('user/tribes', {"pageno":pageno, "RegionID":"0"});
   }
   public getEventDetails(evId) {
     return this.httpService.get('event/detail/' + evId);
@@ -87,7 +87,7 @@ export class DataServiceService {
     return this.httpService.post('joinedevents', { "pageno": pageno, 'UserID': AuthConstants.authenticateData['id'], "EventType": "E" });
   }
   public getMyTribes(pageno = "0"){
-    return this.httpService.post('user/mytribes', { "pageno": pageno, 'UserID': AuthConstants.authenticateData['id'] });
+    return this.httpService.post('user/mytribes', { "pageno": pageno, "UserID": AuthConstants.authenticateData['id'] });
   }
   public joinedtribes(pageno = "0"){
     return this.httpService.post('user/joinedtribes', { "pageno": pageno, 'UserID': AuthConstants.authenticateData['id'] });

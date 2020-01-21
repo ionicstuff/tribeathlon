@@ -49,8 +49,8 @@ export class ViewParticipantsPage implements OnInit {
 
         UserID: AuthConstants.authenticateData['id'],
         EventID: eventid,
-        Status: 'J',
-        pageno:0
+        Status: "J",
+        pageno:"0"
   
       }
       this.dataservice.getEventsUsers(jsonData).then((res: any) => {
@@ -83,8 +83,8 @@ export class ViewParticipantsPage implements OnInit {
 
         UserID: AuthConstants.authenticateData['id'],
         EventID: eventid,
-        Status: 'I',
-        pageno:0
+        Status: "I",
+        pageno:"0"
   
       }
       this.dataservice.getEventsUsers(jsonData).then((res: any) => {
