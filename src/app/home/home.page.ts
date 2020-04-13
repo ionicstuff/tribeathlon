@@ -60,9 +60,13 @@ export class HomePage implements OnInit {
       if (this.route.snapshot.data['special']) {
         //console.log(this.route.snapshot.data['special']);
         var filterData = {};
+        
         var filterParams = this.route.snapshot.data['special'];
+        console.log('data from snapshot');
+        console.log(filterParams);
         if (filterParams.parentType !== undefined || filterParams.parentType !== -1) {
-          filterData["PTypeID[]"] = filterParams.parentType;
+          filterData["PTypeID"] = [];
+          filterData["PTypeID"] = filterParams.parentType;
           flag = true;
         }
         // if (filterParams.Running !== undefined && filterParams.Running) {
@@ -102,6 +106,7 @@ export class HomePage implements OnInit {
           this.dataService.getFilterData(filterData).then(res => {
             if (typeof res.data === 'string') {
               res.data = JSON.parse(res.data);
+              console.log(res.data);
             }
             if (res.data.data.length > 0) {
               this.originalData = res.data.data;
@@ -139,8 +144,8 @@ export class HomePage implements OnInit {
       this.events = this.originalData;
     } else {
       if (this.filterData.parentType !== undefined || this.filterData.parentType !== -1) {
-        JsonObj["PTypeID[]"] = this.filterData.parentType;
-        //JsonObj["PTypeID[]"] = 3;
+        //JsonObj["PTypeID[]"] = this.filterData.parentType;
+        JsonObj["PTypeID"] = this.filterData.parentType;
       }
       if (this.filterData.StartDate !== undefined) {
         JsonObj["StartDate"] = this.filterData.StartDate;
@@ -160,7 +165,7 @@ export class HomePage implements OnInit {
         if (res.data.data.length > 0) {
           this.originalData = res.data.data;
           this.events = res.data.data;
-          //console.log(this.events);
+          console.log(this.events);
         }
       }, err => {
         this.loading = false;

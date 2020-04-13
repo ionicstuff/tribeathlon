@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { AuthConstants } from '../config/auth-constants';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: 'app-login',
@@ -18,18 +19,63 @@ export class LoginPage implements OnInit {
     password: ''
   }
 
+  isLoggedIn = false;
+  users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
+  
   constructor(
     private router: Router,
     private authServices: AuthService,
     private storageSevice: StorageService,
     private app: AppComponent,
-    public Ui: UiserviceService
+    public Ui: UiserviceService,
+    private fb: Facebook
   ) {
     if ("forgotPass" in localStorage) {
       this.postData.password = localStorage.forgotPass;
       delete localStorage.forgetPass;
     }
+
+    fb.getLoginStatus()
+  .then(res => {
+    console.log(res.status);
+    if (res.status === 'connect') {
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
+  })
+  .catch(e => console.log(e));
   }
+//FB login starts
+  fbLogin() {
+    this.fb.login(['public_profile', 'user_friends', 'email'])
+      .then(res => {
+        if (res.status === 'connected') {
+          this.isLoggedIn = true;
+          this.getUserDetail(res.authResponse.userID);
+        } else {
+          this.isLoggedIn = false;
+        }
+      })
+      .catch(e => console.log('Error logging into Facebook', e));
+  }
+  getUserDetail(userid: any) {
+    this.fb.api('/' + userid + '/?fields=id,email,name,picture', ['public_profile'])
+      .then(res => {
+        console.log(res);
+        this.users = res;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  logout() {
+    this.fb.logout()
+      .then( res => this.isLoggedIn = false)
+      .catch(e => console.log('Error logout from Facebook', e));
+  }
+//FB login ends
 
   ngOnInit() {
   }
