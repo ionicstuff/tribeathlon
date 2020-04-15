@@ -92,7 +92,7 @@ export class HomePage implements OnInit {
           filterData['SearchFor'] = filterParams.Searchfor;
           flag = true;
 
-        } else if (filterParams.Searchfor !== undefined && filterParams.EndDate !== undefined) {
+        } else if (filterParams.StartDate !== undefined && filterParams.EndDate !== undefined) {
           filterData['StartDate'] = filterParams.StartDate;
           filterData['EndDate'] = filterParams.EndDate;
           flag = true;
