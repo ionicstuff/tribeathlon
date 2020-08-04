@@ -14,35 +14,34 @@ export class RegistrationPage implements OnInit {
   public postData = {
     fullname: '',
     email: '',
-    password: ''
-  }
-  public userImage="assets/images/john_name.jpg";
+    password: '',
+  };
+  public userImage = 'assets/images/john_name.jpg';
   constructor(
     private router: Router,
     private authServices: AuthService,
     private storageSevice: StorageService,
-    private Ui:UiserviceService,
+    private Ui: UiserviceService,
     private imagePicker: ImagePicker
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
-  
+  ngOnInit() {}
+
   registerAction() {
     if (this.validateInputs()) {
       this.authServices.signup(this.postData).then(
         (res: any) => {
           console.log(res);
-          if (typeof res.data == "string") {
+          if (typeof res.data == 'string') {
             res.data = JSON.parse(res.data);
           }
-          if (res.data.success == "1") {
+          if (res.data.success == '1') {
             // Storing the User data.
             // this.storageSevice.store(AuthConstants.AUTH, res.userData);
-            this.Ui.showAlert("Thank you for registering with Tribeathlon");
+            this.Ui.showAlert('Thank you for registering with Tribeathlon');
             this.router.navigate(['login']);
           } else {
-            alert('incorrect password.');
+            //alert('incorrect password123.');
           }
         },
         (error: any) => {

@@ -13,15 +13,14 @@ import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   public postData = {
     email: '',
-    password: ''
-  }
+    password: '',
+  };
 
   isLoggedIn = false;
   users = { id: '', name: '', email: '', picture: { data: { url: '' } } };
-  
+
   constructor(
     private router: Router,
     private authServices: AuthService,
@@ -30,55 +29,57 @@ export class LoginPage implements OnInit {
     public Ui: UiserviceService,
     private fb: Facebook
   ) {
-    if ("forgotPass" in localStorage) {
+    if ('forgotPass' in localStorage) {
       this.postData.password = localStorage.forgotPass;
       delete localStorage.forgetPass;
     }
 
-    fb.getLoginStatus()
-  .then(res => {
-    console.log(res.status);
-    if (res.status === 'connect') {
-      this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
-    }
-  })
-  .catch(e => console.log(e));
+    // fb.getLoginStatus()
+    //   .then((res) => {
+    //     console.log(res.status);
+    //     if (res.status === 'connect') {
+    //       this.isLoggedIn = true;
+    //     } else {
+    //       this.isLoggedIn = false;
+    //     }
+    //   })
+    //   .catch((e) => console.log(e));
   }
-//FB login starts
-  fbLogin() {
-    this.fb.login(['public_profile', 'user_friends', 'email'])
-      .then(res => {
-        if (res.status === 'connected') {
-          this.isLoggedIn = true;
-          this.getUserDetail(res.authResponse.userID);
-        } else {
-          this.isLoggedIn = false;
-        }
-      })
-      .catch(e => console.log('Error logging into Facebook', e));
-  }
-  getUserDetail(userid: any) {
-    this.fb.api('/' + userid + '/?fields=id,email,name,picture', ['public_profile'])
-      .then(res => {
-        console.log(res);
-        this.users = res;
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
+  // //FB login starts
+  // fbLogin() {
+  //   this.fb
+  //     .login(['public_profile', 'user_friends', 'email'])
+  //     .then((res) => {
+  //       if (res.status === 'connected') {
+  //         this.isLoggedIn = true;
+  //         this.getUserDetail(res.authResponse.userID);
+  //       } else {
+  //         this.isLoggedIn = false;
+  //       }
+  //     })
+  //     .catch((e) => console.log('Error logging into Facebook', e));
+  // }
+  // getUserDetail(userid: any) {
+  //   this.fb
+  //     .api('/' + userid + '/?fields=id,email,name,picture', ['public_profile'])
+  //     .then((res) => {
+  //       console.log(res);
+  //       this.users = res;
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }
 
-  logout() {
-    this.fb.logout()
-      .then( res => this.isLoggedIn = false)
-      .catch(e => console.log('Error logout from Facebook', e));
-  }
-//FB login ends
+  // logout() {
+  //   this.fb
+  //     .logout()
+  //     .then((res) => (this.isLoggedIn = false))
+  //     .catch((e) => console.log('Error logout from Facebook', e));
+  // }
+  // //FB login ends
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   validateInputs() {
     let username = this.postData.email.trim();
@@ -93,39 +94,39 @@ export class LoginPage implements OnInit {
 
   loginAction() {
     if (this.validateInputs()) {
-
+      console.log('login data which is sent to server', this.postData);
       this.authServices.login(this.postData).then(
         (res: any) => {
           console.log(res);
           if (typeof res.data === 'string') {
             res.data = JSON.parse(res.data);
+            console.log(res.data);
           }
           if (res.data.success === '1') {
             // Storing the User data.
             AuthConstants.authenticateData = res.data.data;
             AuthConstants.authenticateData['isAuth'] = true;
-            this.storageSevice.store(AuthConstants.AUTH, JSON.stringify(res.data.data));
+            this.storageSevice.store(
+              AuthConstants.AUTH,
+              JSON.stringify(res.data.data)
+            );
             this.app.isAuth = true;
             this.app.userImage = res.data.data.Image;
             this.app.username = res.data.data.Name;
             this.router.navigate(['home'], { skipLocationChange: true });
           } else {
             alert('incorrect password.');
-            this.Ui.showAlert("incorrect password", 0);
+            this.Ui.showAlert('incorrect password', 0);
           }
         },
         (error: any) => {
           console.error(error);
           alert('Network Issue.');
           this.app.isAuth = false;
-
         }
       );
     } else {
       alert('Please enter email/username or password.');
     }
   }
-
 }
-
-

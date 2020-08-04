@@ -6,35 +6,34 @@ import { StorageService } from './storage.service';
 import { AuthConstants } from '../config/auth-constants';
 import { promise } from 'protractor';
 
-
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-    constructor(
-        private httpService: HttpService,
-        private storageService: StorageService,
-        private router: Router
-    ) {
-        console.log("Auth Service init");
-     }
+  constructor(
+    private httpService: HttpService,
+    private storageService: StorageService,
+    private router: Router
+  ) {
+    console.log('Auth Service init');
+  }
 
-    login(postData: any) {
-        //console.log(postData);
-        return this.httpService.post('auth/login', postData);
-    }
+  login(postData: any) {
+    console.log('when I am in auth service', postData);
+    return this.httpService.post('auth/login', postData);
+  }
 
-    signup(postData: any){
-        return this.httpService.post('auth/register', postData);
-    }
-    forgot(postData: any){
-        return this.httpService.post('auth/forgotpassword', postData);
-    }
+  signup(postData: any) {
+    return this.httpService.post('auth/register', postData);
+  }
+  forgot(postData: any) {
+    return this.httpService.post('auth/forgotpassword', postData);
+  }
 
-    logout() {
-        this.storageService.removeStorageItem(AuthConstants.AUTH).then(res => {
-            AuthConstants.authenticateData={};
-            this.router.navigate(['/login']);
-        });
-    }
+  logout() {
+    this.storageService.removeStorageItem(AuthConstants.AUTH).then((res) => {
+      AuthConstants.authenticateData = {};
+      this.router.navigate(['/login']);
+    });
+  }
 }
