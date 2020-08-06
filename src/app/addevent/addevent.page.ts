@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivationEnd } from '@angular/router';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
-
 @Component({
   selector: 'app-addevent',
   templateUrl: './addevent.page.html',
@@ -24,8 +23,8 @@ export class AddeventPage implements OnInit {
   regions: any;
   step: any;
   original: any;
-  UrlImg = "./assets/images/upload_img.png";
-  MapImg = "./assets/images/upload_img.png";
+  UrlImg = './assets/images/upload_img.png';
+  MapImg = './assets/images/upload_img.png';
   MapOriginal = undefined;
   URLImgOrginal = undefined;
   page1 = false;
@@ -40,24 +39,32 @@ export class AddeventPage implements OnInit {
     private webview: WebView,
     private androidPermissions: AndroidPermissions
   ) {
-
-    if (typeof AuthConstants.authenticateData['token'] === "undefined") {
+    if (typeof AuthConstants.authenticateData['token'] === 'undefined') {
       this.router.navigate(['login']);
-    }else{
-      this.androidPermissions.requestPermissions(
-        [this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
-        this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE])
-        .then(res => { console.log(res) }, err => console.log(err));
-  
-  
+    } else {
+      this.androidPermissions
+        .requestPermissions([
+          this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+          this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
+        ])
+        .then(
+          (res) => {
+            console.log(res);
+          },
+          (err) => console.log(err)
+        );
+
       this.step = 1;
-      this.eventTypes = [{
-        name: 'Event',
-        value: 'E'
-      }, {
-        name: 'Training',
-        value: 'T'
-      }];
+      this.eventTypes = [
+        {
+          name: 'Event',
+          value: 'E',
+        },
+        {
+          name: 'Training',
+          value: 'T',
+        },
+      ];
       this.commonData = {
         EventType: undefined,
         UserID: undefined,
@@ -73,75 +80,67 @@ export class AddeventPage implements OnInit {
         EndTime: undefined,
         Visibility: undefined,
         InvitationType: undefined,
-  
       };
-      this.commonData.EventType='-1';
+      this.commonData.EventType = '-1';
       this.eventData = {
-  
         TotalDistance: undefined,
         Duration: undefined,
         CompetitorType: undefined,
         RideType: undefined,
-        Wetsuit: undefined
+        Wetsuit: undefined,
       };
       this.trainingData = {
         Speed: undefined,
         FoodStop: undefined,
-        CanIcome: undefined
+        CanIcome: undefined,
       };
 
       this.commonData.ParentTypeID = '-1';
-      this.commonData.ChildTypeID='-1';
-      this.commonData.RegionID='-1';
-      this.commonData.Visibility='O';
-      this.commonData.InvitationType='-1';
-      this.eventData.CompetitorType='-1';
+      this.commonData.ChildTypeID = '-1';
+      this.commonData.RegionID = '-1';
+      this.commonData.Visibility = 'O';
+      this.commonData.InvitationType = '-1';
+      this.eventData.CompetitorType = '-1';
       this.eventData.RideType = '-1';
       this.eventData.Wetsuit = '-1';
       this.trainingData.FoodStop = 'N';
-  
-      this.dataService.getregions().then((res: any) => {
-        console.log(res);
-        if (typeof res.data === "string") {
-          res.data = JSON.parse(res.data);
-        }
-        if (res.data.success === "1") {
-          this.regions = res.data.data;
-        } else {
-  
-          this.Ui.showAlert(res.data.data.message, 0);
-        } 
-  
-      }, err => {
-        console.error(err);
-        if (typeof err.error === 'string') {
-          err.error = JSON.parse(err.error);
-        }
-        if (err.error.data.message === "Your session has been expired.") {
-          this.Ui.showAlert("Your session has been expired", 0);
-  
-          this.router.navigate(['login']);
-  
-        } else {
-          this.Ui.showAlert("Something went wrong", 0);
-  
-        }
-  
-  
-      });
-    }
 
-    
+      this.dataService.getregions().then(
+        (res: any) => {
+          console.log(res);
+          if (typeof res.data === 'string') {
+            res.data = JSON.parse(res.data);
+          }
+          if (res.data.success === '1') {
+            this.regions = res.data.data;
+          } else {
+            this.Ui.showAlert(res.data.data.message, 0);
+          }
+        },
+        (err) => {
+          console.error(err);
+          if (typeof err.error === 'string') {
+            err.error = JSON.parse(err.error);
+          }
+          if (err.error.data.message === 'Your session has been expired.') {
+            this.Ui.showAlert('Your session has been expired', 0);
+
+            this.router.navigate(['login']);
+          } else {
+            this.Ui.showAlert('Something went wrong', 0);
+          }
+        }
+      );
+    }
   }
   async presentFriends(data) {
     var input = [];
-    data.forEach(element => {
+    data.forEach((element) => {
       console.log(element);
       var json = {
-
         type: 'checkbox',
         label: element.UserName,
-        value: element.UserID
+        value: element.UserID,
       };
       input.push(json);
     });
@@ -155,119 +154,128 @@ export class AddeventPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             console.log('Confirm Cancel');
-          }
-        }, {
+          },
+        },
+        {
           text: 'Ok',
-          handler: data => {
+          handler: (data) => {
             console.log('Confirm Ok', data);
 
             this.commonData['InvitationUserID[]'] = data;
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await alert.present();
   }
   selectPhoto(photoType) {
-    console.log(photoType)
-    this.imagePicker.getPictures({
-      maximumImagesCount: 1,
-      width: 800,
-      height: 800,
-      quality: 100,
-      outputType: 0
-    }).then((results) => {
-      for (var i = 0; i < results.length; i++) {
-        if (photoType === "Map") {
-
-          this.MapOriginal = results[i];
-          this.MapImg = this.webview.convertFileSrc(results[i]);
-        } else {
-
-          this.URLImgOrginal = results[i];
-          this.UrlImg = this.webview.convertFileSrc(results[i]);
-
+    console.log(photoType);
+    this.imagePicker
+      .getPictures({
+        maximumImagesCount: 1,
+        width: 800,
+        height: 800,
+        quality: 100,
+        outputType: 0,
+      })
+      .then(
+        (results) => {
+          for (var i = 0; i < results.length; i++) {
+            if (photoType === 'Map') {
+              this.MapOriginal = results[i];
+              this.MapImg = this.webview.convertFileSrc(results[i]);
+            } else {
+              this.URLImgOrginal = results[i];
+              this.UrlImg = this.webview.convertFileSrc(results[i]);
+            }
+          }
+        },
+        (err) => {
+          console.log(err);
         }
-
-      }
-    }, (err) => {
-      console.log(err);
-    });
+      );
   }
 
-
   calcTime() {
-    if (this.commonData.StartTime !== undefined && this.commonData.EndTime !== undefined) {
-      this.eventData.Duration = this.timediff(new Date("2019-11-12 " + this.commonData.EndTime + ":00"), new Date("2019-11-12 " + this.commonData.StartTime + ":00"));
+    if (
+      this.commonData.StartTime !== undefined &&
+      this.commonData.EndTime !== undefined
+    ) {
+      this.eventData.Duration = this.timediff(
+        new Date('2019-11-12 ' + this.commonData.EndTime + ':00'),
+        new Date('2019-11-12 ' + this.commonData.StartTime + ':00')
+      );
     }
   }
   verifyupload(data) {
-    this.upload(data).then(res => {
-      console.log(res);
-    }, err => {
-      console.log(err);
-    })
-
+    this.upload(data).then(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
   upload(eventID) {
-
     //var data = { 'EventID': eventID };
-    var data = { 'EventID': eventID+'' };
+    var data = { EventID: eventID + '' };
     console.log(data);
-    var images=[this.URLImgOrginal];
-    var imgVar=['BannerImage'];
-    if(typeof this.MapOriginal!=='undefined')
-    {
+    var images = [this.URLImgOrginal];
+    var imgVar = ['BannerImage'];
+    if (typeof this.MapOriginal !== 'undefined') {
       images.push(this.MapOriginal);
       imgVar.push('MapFile');
     }
-    return this.dataService.getUploadImage(data,images, imgVar);
-
-
+    return this.dataService.getUploadImage(data, images, imgVar);
   }
   selectinviteData(data) {
     if (data === 'F') {
-      this.dataService.getMyFriends().then(res => {
-        if (typeof res.data === 'string') {
-          res.data = JSON.parse(res.data);
+      this.dataService.getMyFriends().then(
+        (res) => {
+          if (typeof res.data === 'string') {
+            res.data = JSON.parse(res.data);
+          }
+          if (res.data.data.length > 0) {
+            var friends = res.data.data;
+            this.presentFriends(friends);
+          } else {
+            console.log('no any friends');
+          }
+        },
+        (err) => {
+          console.error(err);
         }
-        if (res.data.data.length > 0) {
-          var friends = res.data.data;
-          this.presentFriends(friends);
-        } else {
-          console.log('no any friends');
-        }
-      }, err => {
-        console.error(err);
-      });
+      );
     } else if (data === 'T') {
-      this.dataService.getTribes().then(res => {
-        if (typeof res.data === 'string') {
-          res.data = JSON.parse(res.data);
+      this.dataService.getTribes().then(
+        (res) => {
+          if (typeof res.data === 'string') {
+            res.data = JSON.parse(res.data);
+          }
+          if (res.data.data.length > 0) {
+            var tribe = res.data.data;
+            this.presentTribes(tribe);
+          } else {
+            console.log('no any friends');
+          }
+        },
+        (err) => {
+          console.error(err);
         }
-        if (res.data.data.length > 0) {
-          var tribe = res.data.data;
-          this.presentTribes(tribe);
-        } else {
-          console.log('no any friends');
-        }
-      }, err => {
-        console.error(err);
-      });
-
+      );
     }
   }
   async presentTribes(data) {
     var input = [];
-    data.forEach(element => {
+    data.forEach((element) => {
       console.log(element);
       var json = {
-
         type: 'radio',
         label: element.Name,
-        value: element.TribeID
-      }
+        value: element.TribeID,
+      };
       input.push(json);
     });
     const alert = await this.alertController.create({
@@ -280,15 +288,16 @@ export class AddeventPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             console.log('Confirm Cancel');
-          }
-        }, {
+          },
+        },
+        {
           text: 'Ok',
-          handler: data => {
+          handler: (data) => {
             console.log('Confirm Ok', data);
             this.commonData['InvitationTribeID'] = data;
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
 
     await alert.present();
@@ -332,7 +341,6 @@ export class AddeventPage implements OnInit {
       this.step = 2;
     }
     if (page === 2) {
-     
       if (this.commonData.Distance === undefined) {
         this.Ui.showAlert('Please add Distance.', 0);
         return false;
@@ -364,7 +372,6 @@ export class AddeventPage implements OnInit {
       this.step = 3;
     }
     if (page === 3) {
-
       if (this.URLImgOrginal === undefined) {
         this.Ui.showAlert('Please select banner image', 0);
         return false;
@@ -379,15 +386,25 @@ export class AddeventPage implements OnInit {
           this.Ui.showAlert('Please add duration.', 0);
           return false;
         }
-        if (this.eventData.CompetitorType === undefined && (this.commonData.ParentTypeID === '1' || this.commonData.ParentTypeID === '2')) {
+        if (
+          this.eventData.CompetitorType === undefined &&
+          (this.commonData.ParentTypeID === '1' ||
+            this.commonData.ParentTypeID === '2')
+        ) {
           this.Ui.showAlert('Please add competitor type.', 0);
           return false;
         }
-        if (this.eventData.RideType === undefined && this.commonData.ParentTypeID === '2') {
+        if (
+          this.eventData.RideType === undefined &&
+          this.commonData.ParentTypeID === '2'
+        ) {
           this.Ui.showAlert('Please add ride type.', 0);
           return false;
         }
-        if (this.eventData.Wetsuit === undefined && this.commonData.ParentTypeID === '3') {
+        if (
+          this.eventData.Wetsuit === undefined &&
+          this.commonData.ParentTypeID === '3'
+        ) {
           this.Ui.showAlert('Please add wet suite', 0);
           return false;
         }
@@ -419,52 +436,53 @@ export class AddeventPage implements OnInit {
       } else if (this.commonData.EventType === 'T') {
         joined_data = this.jsonConcat(this.commonData, this.trainingData);
       }
-      this.dataService.createEvent(joined_data).then((res) => {
-        console.log(res);
+      this.dataService.createEvent(joined_data).then(
+        (res) => {
+          console.log(res);
+          if (typeof res.data === 'string') {
+            res.data = JSON.parse(res.data);
+          }
+          if (res.data.success === '1') {
+            this.upload(res.data.data.EventID).then(
+              (resupload: any) => {
+                if (typeof resupload.data === 'string') {
+                  resupload.data = JSON.parse(resupload.data);
+                }
+                this.Ui.showAlert('Event has been created.');
+                this.router.navigateByUrl('/invite');
+              },
+              (err) => {
+                console.log(err);
+                this.Ui.showAlert('Something went wrong1', 0);
+              }
+            );
+          } else {
+            this.Ui.showAlert('Something went wrong2', 0);
+          }
+        },
+        (err) => {
+          console.log(err);
+          this.Ui.showAlert('Something went wrong3', 0);
+        }
+      );
+    }
+  }
+  getParentTypes(eventType) {
+    this.dataService.getParentTypes(eventType).then(
+      (res: any) => {
         if (typeof res.data === 'string') {
           res.data = JSON.parse(res.data);
         }
-        if (res.data.success === "1") {
-          this.upload(res.data.data.EventID).then((resupload: any) => {
-            if (typeof resupload.data === 'string') {
-              resupload.data = JSON.parse(resupload.data);
-            }
-            this.Ui.showAlert("Event has been created.");
-            this.router.navigateByUrl('/invite');
-          }, err => {
-            console.log(err);
-            this.Ui.showAlert("Something went wrong1", 0);
-
-          });
-
+        if (res.data.data.length > 0) {
+          this.parentTypes = res.data.data;
         } else {
-          this.Ui.showAlert("Something went wrong2", 0);
-
+          console.log('no any parents types');
         }
-      }, err => {
-        console.log(err);
-        this.Ui.showAlert("Something went wrong3", 0);
-
-      });
-    }
-
-  }
-  getParentTypes(eventType) {
-
-    this.dataService.getParentTypes(eventType).then((res: any) => {
-      if (typeof res.data === 'string') {
-        res.data = JSON.parse(res.data);
+      },
+      (err) => {
+        console.error(err);
       }
-      if (res.data.data.length > 0) {
-        this.parentTypes = res.data.data;
-      } else {
-        console.log('no any parents types');
-      }
-
-    }, err => {
-      console.error(err);
-
-    });
+    );
   }
   jsonConcat(o1, o2) {
     for (var key in o2) {
@@ -473,22 +491,21 @@ export class AddeventPage implements OnInit {
     return o1;
   }
   getchildTypes(parentid) {
-
-    this.dataService.getChildTypes(parentid).then((res: any) => {
-      if (typeof res.data === 'string') {
-        res.data = JSON.parse(res.data);
+    this.dataService.getChildTypes(parentid).then(
+      (res: any) => {
+        if (typeof res.data === 'string') {
+          res.data = JSON.parse(res.data);
+        }
+        if (res.data.data.length > 0) {
+          this.childTypes = res.data.data;
+        } else {
+          console.log('no any child types');
+        }
+      },
+      (err) => {
+        console.error(err);
       }
-      if (res.data.data.length > 0) {
-        this.childTypes = res.data.data;
-      } else {
-        console.log('no any child types');
-      }
-
-    }, err => {
-      console.error(err);
-    });
+    );
   }
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
