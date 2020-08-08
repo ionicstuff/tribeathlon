@@ -16,6 +16,8 @@ export class LoginPage implements OnInit {
   public postData = {
     email: '',
     password: '',
+    DeviceType: 'a',
+    DeviceID: '123456',
   };
 
   isLoggedIn = false;
@@ -94,7 +96,6 @@ export class LoginPage implements OnInit {
 
   loginAction() {
     if (this.validateInputs()) {
-      console.log('login data which is sent to server', this.postData);
       this.authServices.login(this.postData).then(
         (res: any) => {
           console.log(res);
