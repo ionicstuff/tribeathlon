@@ -53,7 +53,8 @@ export class HttpService {
     console.log('when I am in http service', data);
     this.http.setDataSerializer('json');
     const headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      //'Content-Type': 'application/x-www-form-urlencoded',
+      //'Content-Type': 'application/json',
       'Client-Service': 'frontend-client',
       'Auth-Key': 'restapi2-2019',
     };

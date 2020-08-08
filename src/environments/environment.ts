@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   //apiUrl:'https://api2.tribeathlon.co.uk/'
   //apiUrl: 'http://localhost/api2/',
-  apiUrl: 'https://marinejobs.in/api2/',
+  apiUrl: 'https://marinejobs.in/api-v3/',
 };
 
 /*
