@@ -78,6 +78,7 @@ export class DataServiceService {
     );
   }
   public getEventsUsers(data) {
+    console.log(data);
     return this.httpService.post('event/eventusers', data);
   }
   public getChildTypes(parentId) {

@@ -16,68 +16,61 @@ export class SearchPagePage implements OnInit {
   filterData: any;
   public events = [];
   originalData: any;
-  disciplines = [
-    { name: 'Running', }
-  ];
+  disciplines = [{ name: 'Running' }];
   constructor(
-
     public router: Router,
     public dataService: DataServiceService,
     public routedataService: DataService,
-    public platform: Platform, ) {
-
+    public platform: Platform
+  ) {
     this.getParentTypes('E');
     this.searchData = {
       parentType: undefined,
       Searchfor: undefined,
       StartDate: undefined,
-      EndDate: undefined
+      EndDate: undefined,
     };
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   gotoHome() {
-    console.log(this.searchData);
+    console.log('this is when you click search button', this.searchData);
     this.routedataService.setData(42, this.searchData);
     this.router.navigateByUrl('/home/42');
   }
   getParentTypes(eventType) {
-    this.dataService.getParentTypes(eventType).then((res: any) => {
-      if (typeof res.data === 'string') {
-        res.data = JSON.parse(res.data);
-        console.log(res.data);
-      }
-      if (res.data.data.length > 0) {
-        this.parentTypes = res.data.data;
-      } else {
-        console.log('no any parents types');
-      }
+    this.dataService.getParentTypes(eventType).then(
+      (res: any) => {
+        if (typeof res.data === 'string') {
+          res.data = JSON.parse(res.data);
+          console.log(res.data);
+        }
+        if (res.data.data.length > 0) {
+          this.parentTypes = res.data.data;
+        } else {
+          console.log('no any parents types');
+        }
+      },
+      (err) => {
+        console.error(err);
+        this.loading = false;
 
-    }, err => {
-      console.error(err);
-      this.loading = false;
-
-      if (typeof err.error === 'string') {
-        err.error = JSON.parse(err.error);
+        if (typeof err.error === 'string') {
+          err.error = JSON.parse(err.error);
+        }
+        if (err.error.data.message === 'Your session has been expired.') {
+          this.router.navigate(['login']);
+        }
+        console.error(err);
       }
-      if (err.error.data.message === "Your session has been expired.") {
-        this.router.navigate(['login']);
-
-      }
-      console.error(err);
-
-    });
+    );
   }
 
   getFilter(cmd) {
     console.log(this.filterData);
 
-    if(cmd=='search'){
+    if (cmd == 'search') {
       console.log('I am in search now and can perform search here');
     }
-
-    
-
   }
 }
