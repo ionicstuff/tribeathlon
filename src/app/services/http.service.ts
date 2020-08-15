@@ -72,6 +72,8 @@ export class HttpService {
     }
     //this.http.setDataSerializer('urlencoded');
     const url = environment.apiUrl + serviceName;
+    //console.log(url);
+    //console.log(headers);
     //debugger;
     return this.http.post(url, data, headers);
   }

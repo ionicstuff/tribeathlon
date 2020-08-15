@@ -40,6 +40,7 @@ export class DataServiceService {
   }
 
   public createTribe(data) {
+    console.log('when I am data service', data);
     return this.httpService.post('user/createtribe', data);
   }
   public getUploadImage(data, files, names) {
